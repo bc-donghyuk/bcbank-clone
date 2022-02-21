@@ -1,0 +1,10 @@
+{
+  "/": {
+    "filename": "html/index.html",
+    "template": "src/html/index.ejs",
+    "templateParameters": {
+      "title": "Haru - Keep Your Crypto Asset Smart",
+      "description": "Earn up to 15.0% APR on your BTC/ETH/USDT/KRT. No lockup, No minimum deposit, Interest compounded daily"
+    }
+  }
+}

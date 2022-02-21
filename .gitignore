@@ -1,0 +1,33 @@
+# OSX
+.DS_Store
+
+# node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environments
+*.env
+*.env.staging
+*.env.development
+*.env.production
+*.env.storybook
+
+# Lerna
+lerna-debug.log
+
+# yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.js
+
+# VSCode
+.vscode
+
+#storybook
+storybook-static
+
+# webapp
+dist
