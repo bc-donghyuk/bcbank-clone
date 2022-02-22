@@ -28,7 +28,7 @@ const devBabelPlugins = [
   "@loadable/babel-plugin", // SSR 준비를 위한 플러그인
   "@babel/plugin-syntax-dynamic-import",
   "react-hot-loader/babel",
-  // "@babel/plugin-syntax-flow", // 바벨 흐름 구문 분석
+  "@babel/plugin-syntax-flow", // 바벨 흐름 구문 분석
 ];
 
 const prodBabelPlugins = [...devBabelPlugins, "transform-remove-console"];
@@ -109,11 +109,13 @@ const buildConfig = {
   devtool: "hidden-source-map",
   module: {
     rules: [
+      babelConfig,
       {
-        test: /\.(jsx?|tsx?)$/,
-        loader: "ts-loader",
+        test: /\.js$/,
+        include: /node_modules/,
+        loader: "babel-loader",
         options: {
-          transpileOnly: isStagingOrProduction ? false : true, // ❓
+          presets: ["@babel/preset-env"],
         },
       },
       {
@@ -130,6 +132,7 @@ const buildConfig = {
     ],
   },
   plugins: pluginList, // 번들파일 관련 설정
+  optimization: {},
   devServer: {
     host: "127.0.0.1",
     disableHostCheck: true,
@@ -151,5 +154,13 @@ module.exports = [
   {
     name: "devServer",
     ...buildConfig,
+    entry: [
+      "webpack/hot/only-dev-server", // only는 구문 에러시 리로드를 방지
+      "react-hot-loader/patch",
+      ...entries,
+    ],
+    devtool: "source-map",
+    optimization: {},
+    output: {},
   },
 ];
