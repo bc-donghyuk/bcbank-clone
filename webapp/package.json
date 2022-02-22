@@ -6,7 +6,6 @@
   "author": "",
   "license": "private",
   "scripts": {
-    "test": "env-cmd -f .env-cmd.json -e dev webpack serve",
     "dev": "env-cmd -f .env-cmd.json -e dev yarn",
     "start": "node server.js"
   },
