@@ -191,13 +191,6 @@ module.exports = [
   {
     name: "devServer",
     ...buildConfig,
-    entry: [
-      "webpack/hot/only-dev-server", // only는 구문 에러시 리로드를 방지
-      "react-hot-loader/patch",
-      ...entries,
-    ],
     devtool: "source-map",
-    optimization: {},
-    output: {},
   },
 ];
