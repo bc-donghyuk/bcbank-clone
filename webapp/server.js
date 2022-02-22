@@ -23,7 +23,7 @@ require("dotenv").config({ path: ".env" });
     }),
   );
 
-  //   app.use("/static", express.static("dist/static"));
+  app.use("/static", express.static("dist/static"));
 
   app.use("/", (req, res) => {
     fs.readFile("dist/static/html/index.html", (error, data) => {

@@ -28,7 +28,7 @@ const devBabelPlugins = [
   "@loadable/babel-plugin", // SSR 준비를 위한 플러그인
   "@babel/plugin-syntax-dynamic-import",
   "react-hot-loader/babel",
-  // "@babel/plugin-syntax-flow", // 바벨 흐름 구문 분석
+  "@babel/plugin-syntax-flow", // 바벨 흐름 구문 분석
 ];
 
 const prodBabelPlugins = [...devBabelPlugins, "transform-remove-console"];
@@ -101,6 +101,17 @@ const prodPlugins = [
 
 const pluginList = isStagingOrProduction ? [...defaultPlugins, ...prodPlugins] : [...defaultPlugins, ...devPlugins];
 
+const setFileLoaderOptions = fileCategory => ({
+  name: resourcePath => {
+    if (resourcePath.includes("fonts")) {
+      return "[name].[ext]";
+    }
+    return "[contenthash].[ext]";
+  },
+  publicPath: filename => `${output.publicPath}${fileCategory}/${filename}`,
+  outputPath: url => path.join(fileCategory, url),
+});
+
 const buildConfig = {
   context: __dirname, // 절대 경로 폴더
   mode: NODE_ENV,
@@ -109,11 +120,13 @@ const buildConfig = {
   devtool: "hidden-source-map",
   module: {
     rules: [
+      babelConfig,
       {
-        test: /\.(jsx?|tsx?)$/,
-        loader: "ts-loader",
+        test: /\.js$/,
+        include: /node_modules/,
+        loader: "babel-loader",
         options: {
-          transpileOnly: isStagingOrProduction ? false : true, // ❓
+          presets: ["@babel/preset-env"],
         },
       },
       {
@@ -121,15 +134,40 @@ const buildConfig = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              // eslint-disable-next-line global-require
+              implementation: require("node-sass"),
+            },
+          },
+        ],
+      },
+      {
         test: /\.(webp|jpg|png|jpeg)$/,
         loader: "url-loader",
         options: {
+          ...setFileLoaderOptions("images"),
           limit: 5000,
         },
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: setFileLoaderOptions("fonts"),
+          },
+        ],
       },
     ],
   },
   plugins: pluginList, // 번들파일 관련 설정
+  optimization: {},
   devServer: {
     host: "127.0.0.1",
     disableHostCheck: true,
@@ -151,5 +189,13 @@ module.exports = [
   {
     name: "devServer",
     ...buildConfig,
+    entry: [
+      "webpack/hot/only-dev-server", // only는 구문 에러시 리로드를 방지
+      "react-hot-loader/patch",
+      ...entries,
+    ],
+    devtool: "source-map",
+    optimization: {},
+    output: {},
   },
 ];
