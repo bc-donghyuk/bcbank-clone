@@ -101,6 +101,17 @@ const prodPlugins = [
 
 const pluginList = isStagingOrProduction ? [...defaultPlugins, ...prodPlugins] : [...defaultPlugins, ...devPlugins];
 
+const setFileLoaderOptions = fileCategory => ({
+  name: resourcePath => {
+    if (resourcePath.includes("fonts")) {
+      return "[name].[ext]";
+    }
+    return "[contenthash].[ext]";
+  },
+  publicPath: filename => `${output.publicPath}${fileCategory}/${filename}`,
+  outputPath: url => path.join(fileCategory, url),
+});
+
 const buildConfig = {
   context: __dirname, // 절대 경로 폴더
   mode: NODE_ENV,
@@ -123,11 +134,35 @@ const buildConfig = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              // eslint-disable-next-line global-require
+              implementation: require("node-sass"),
+            },
+          },
+        ],
+      },
+      {
         test: /\.(webp|jpg|png|jpeg)$/,
         loader: "url-loader",
         options: {
+          ...setFileLoaderOptions("images"),
           limit: 5000,
         },
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: setFileLoaderOptions("fonts"),
+          },
+        ],
       },
     ],
   },
