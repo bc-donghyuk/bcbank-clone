@@ -9,7 +9,7 @@ const Dotenv = require("dotenv-webpack");
 const path = require("path");
 const fs = require("fs");
 
-const { NODE_ENV, APP_ENV, APP_REV, API_ROOT, IS_KOREAN_SITE, PUBLIC_PATH } = process.env;
+const { NODE_ENV, APP_ENV, APP_REV, API_ROOT, PUBLIC_PATH, IS_KOREAN_SITE } = process.env;
 
 const isStagingOrProduction = NODE_ENV === "production";
 
@@ -53,13 +53,12 @@ const defaultPlugins = [
   }),
   new webpack.DefinePlugin({
     // 전역변수 사용 플러그인
-    "process.env": {
-      NODE_ENV: JSON.stringify(NODE_ENV),
-      APP_ENV: JSON.stringify(APP_ENV),
-      APP_REV: JSON.stringify(APP_REV),
-      API_ROOT: JSON.stringify(API_ROOT),
-      IS_KOREAN_SITE,
-    },
+    "process.env.NODE_ENV": JSON.stringify(NODE_ENV),
+    "process.env.APP_ENV": JSON.stringify(APP_ENV),
+    "process.env.APP_REV": JSON.stringify(APP_REV),
+    "process.env.API_ROOT": JSON.stringify(API_ROOT),
+    "process.env.PUBLIC_PATH": JSON.stringify(PUBLIC_PATH),
+    "process.env.IS_KOREAN_SITE": JSON.stringify(IS_KOREAN_SITE),
   }),
   ...Object.entries(templates).map(values => {
     const [, data] = values;
@@ -72,7 +71,10 @@ const defaultPlugins = [
   }),
 ];
 
-const devPlugins = [new webpack.HotModuleReplacementPlugin()];
+const devPlugins = [
+  // 모든 종류의 모듈들을 런타임 시점에 업데이트
+  new webpack.HotModuleReplacementPlugin(),
+];
 
 const prodPlugins = [
   new CleanWebpackPlugin({
