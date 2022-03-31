@@ -176,7 +176,32 @@ const buildConfig = {
     ],
   },
   plugins: pluginList, // 번들파일 관련 설정
-  optimization: {},
+  // optimization: {
+  //   // 최적화 관련
+  //   minimize: true, // minimizer에 지정된 플러그인을 사용하여 번들을 최소화
+  //   minimizer: [
+  //     new TerserPlugin({
+  //       extractComments: true, // 주석을 별도로 추출할지
+  //       terserOptions: {
+  //         output: {
+  //           comments: false, // 주석 제거
+  //         },
+  //       },
+  //     }),
+  //   ],
+  //   splitChunks: {
+  //     chunks: "all", // 최적화할 청크
+  //     maxInitialRequests: 20, // 엔트리 포인트의 최대 병렬 요청 수 for HTTP2
+  //     maxAsyncRequests: 20, // on-demand 로드 시의 최대 병렬 요청 수 for HTTP2
+  //     cacheGroups: {
+  //       defaultVendors: {
+  //         test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/, // 캐시 그룹에 의해 선택되는 모듈을 제어
+  //         name: "vendor",
+  //         chunks: "all",
+  //       },
+  //     },
+  //   },
+  // },
   devServer: {
     host: "127.0.0.1",
     disableHostCheck: true,
@@ -200,14 +225,14 @@ module.exports = [
     ...buildConfig,
     entry: [
       "webpack-hot-middleware/client?path=http://127.0.0.1:8080/__webpack_hmr&reload=true",
-      "webpack/hot/only-dev-server",
+      "webpack/hot/only-dev-server", // 구문 에러시 리로드를 방지
       "react-hot-loader/patch",
       ...entries,
     ],
     devtool: "source-map",
     optimization: {
-      removeAvailableModules: false,
-      removeEmptyChunks: false,
+      removeAvailableModules: false, // 모듈이 이미 모든 상위에 포함되어있는 경우 청크에서 해당 모듈을 감지하고 제거
+      removeEmptyChunks: false, // 빈 청크를 감지하고 제거
       splitChunks: false,
     },
     output: {

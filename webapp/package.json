@@ -12,13 +12,16 @@
   "dependencies": {
     "@loadable/component": "^5.15.2",
     "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.24",
     "babel-loader": "^8.2.3",
     "dotenv": "^16.0.0",
     "dotenv-webpack": "^7.1.0",
     "modernizr-esm": "^2.0.0",
     "react": "^18.0.0",
+    "react-div-100vh": "^0.7.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.2.2"
+    "react-router-dom": "^6.2.2",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
