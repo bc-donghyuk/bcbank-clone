@@ -134,6 +134,11 @@ const buildConfig = {
         },
       },
       {
+        test: /\.(jsx?|tsx?)$/,
+        include: /node_modules/,
+        use: ["react-hot-loader/webpack"],
+      },
+      {
         test: /\.css?$/,
         use: ["style-loader", "css-loader"],
       },
@@ -193,6 +198,21 @@ module.exports = [
   {
     name: "devServer",
     ...buildConfig,
+    entry: [
+      "webpack-hot-middleware/client?path=http://127.0.0.1:8080/__webpack_hmr&reload=true",
+      "webpack/hot/only-dev-server",
+      "react-hot-loader/patch",
+      ...entries,
+    ],
     devtool: "source-map",
+    optimization: {
+      removeAvailableModules: false,
+      removeEmptyChunks: false,
+      splitChunks: false,
+    },
+    output: {
+      ...buildConfig.output,
+      publicPath: `http://${process.env.LOCAL_IP || "127.0.0.1"}:8080/__webpack_hmr`,
+    },
   },
 ];
