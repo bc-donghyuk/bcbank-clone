@@ -1,13 +1,15 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import LoginContainer from "containers/LoginContainer";
-import HomeContainer from "containers/HomeContainer";
+import customLoadable from "./customLoadable";
 
+const LoginContainer = customLoadable(() => import("containers/LoginContainer"));
 interface iRoute {
   type: "public";
   path?: string;
   component: React.ComponentType;
+  fullscreen?: boolean;
+  routeProps?: { [key: string]: any };
 }
 
 const routeComponents = {
@@ -15,11 +17,6 @@ const routeComponents = {
 };
 
 const routes: iRoute[] = [
-  {
-    path: "/",
-    type: "public",
-    component: HomeContainer,
-  },
   {
     path: "/login",
     type: "public",

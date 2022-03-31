@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
+import * as ReactDOMClient from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "app";
@@ -7,11 +7,12 @@ import App from "app";
 import "css/reset.scss";
 import "css/global.scss";
 
-const rootElement = document.getElementById("root");
+const container = document.getElementById("app");
 
-render(
+const root = ReactDOMClient.createRoot(container);
+
+root.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
-  rootElement,
 );
