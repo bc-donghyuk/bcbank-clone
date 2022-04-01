@@ -1,10 +1,13 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+
+import LoginForm from "components/auto/LoginForm";
 
 const LoginContainer = () => {
   return (
-    <div>
-      <div>login</div>
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginForm />} />
+    </Routes>
   );
 };
 
