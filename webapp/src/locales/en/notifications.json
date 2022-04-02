@@ -1,0 +1,20 @@
+{
+  "<0>{{productName}}</0> has been renewed at <2>{{interestRate}}% / year</2>.": "<0>{{productName}}</0> has been renewed at <2>{{interestRate}}% / year</2>.",
+  "<0>{{productName}}</0> will be renewed on {{toBeRenewedAt}}. The interest rate to be applied is <4>{{interestRate}}% / year</4>.": "<0>{{productName}}</0> will be renewed on {{toBeRenewedAt}}. The interest rate to be applied is <4>{{interestRate}}% / year</4>.",
+  "<0>Upcoming Rates</0><1></1>Effective from {{effectiveDate}}": "<0>Upcoming Rates</0><1></1>Effective from {{effectiveDate}}",
+  "Check out the Haru Guidebook and get your crypto running!": "Check out the Haru Guidebook and get your crypto running!",
+  "It seems like you're up to date!": "It seems like you're up to date!",
+  "Mark all as read": "Mark all as read",
+  "Monthly<1></1>Deposits": "Monthly<1></1>Deposits",
+  "My<1></1>Account": "My<1></1>Account",
+  "No Notifications Found": "No Notifications Found",
+  "Notifications": "Notifications",
+  "Performance Update": "Performance Update",
+  "Renewal Complete": "Renewal Complete",
+  "Renewal Notice": "Renewal Notice",
+  "Return (%):": "Return (%):",
+  "Upcoming Interest Rates": "Upcoming Interest Rates",
+  "Upcoming Rate:": "Upcoming Rate:",
+  "Upcoming Rates": "Upcoming Rates",
+  "Welcome to Haru": "Welcome to Haru"
+}

@@ -1,0 +1,20 @@
+{
+  "<0>{{productName}}</0> has been renewed at <2>{{interestRate}}% / year</2>.": "<0> {{productName}}</0> is verlengd op <2> {{interestRate}} % / jaar</2> .",
+  "<0>{{productName}}</0> will be renewed on {{toBeRenewedAt}}. The interest rate to be applied is <4>{{interestRate}}% / year</4>.": "<0> {{productName}}</0> wordt verlengd op {{toBeRenewedAt}} . Het toe te passen rentepercentage is <4> {{interestRate}} % / jaar</4> .",
+  "<0>Upcoming Rates</0><1></1>Effective from {{effectiveDate}}": "<0>Aankomende tarieven</0> <1></1> Van kracht vanaf {{effectiveDate}}",
+  "Check out the Haru Guidebook and get your crypto running!": "Bekijk de Haru Guidebook en laat je crypto draaien!",
+  "It seems like you're up to date!": "Het lijkt alsof je up-to-date bent!",
+  "Mark all as read": "Markeer alles als gelezen",
+  "Monthly<1></1>Deposits": "Maandelijks<1></1> deposito's",
+  "My<1></1>Account": "Mijn<1></1> Rekening",
+  "No Notifications Found": "Geen meldingen gevonden",
+  "Notifications": "Kennisgevingen",
+  "Performance Update": "Prestatie-update",
+  "Renewal Complete": "Verlenging voltooid",
+  "Renewal Notice": "Kennisgeving van verlenging",
+  "Return (%):": "Opbrengst (%):",
+  "Upcoming Interest Rates": "Aankomende rentetarieven",
+  "Upcoming Rate:": "Aankomend tarief:",
+  "Upcoming Rates": "Aankomende tarieven",
+  "Welcome to Haru": "Welkom in Haru"
+}

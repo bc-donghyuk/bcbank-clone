@@ -1,0 +1,20 @@
+{
+  "<0>{{productName}}</0> has been renewed at <2>{{interestRate}}% / year</2>.": "<0>{{productName}}</0> ha sido renovado a <2>{{interestRate}}% / año</2>.",
+  "<0>{{productName}}</0> will be renewed on {{toBeRenewedAt}}. The interest rate to be applied is <4>{{interestRate}}% / year</4>.": "<0>{{productName}}</0> será renovado en {{toBeRenewedAt}}. La tasa de interés a aplicar es <4>{{interestRate}}% / año</4>.",
+  "<0>Upcoming Rates</0><1></1>Effective from {{effectiveDate}}": "<0>Próximas Tasas</0><1></1>Efectivas desde {{effectiveDate}}",
+  "Check out the Haru Guidebook and get your crypto running!": "¡Consulta la Guía de Haru y pon en marcha tu cripto!",
+  "It seems like you're up to date!": "¡Parece que ya estás actualizado!",
+  "Mark all as read": "Marcar todo como leído",
+  "Monthly<1></1>Deposits": "Depósitos<1></1>Mensuales",
+  "My<1></1>Account": "Mi<1></1>Cuenta",
+  "No Notifications Found": "No Se Encontraron Notificaciones",
+  "Notifications": "Notificaciones",
+  "Performance Update": "Actualización de Rendimiento",
+  "Renewal Complete": "Renovación Completa",
+  "Renewal Notice": "Aviso de Renovación",
+  "Return (%):": "Rentabilidad (%):",
+  "Upcoming Interest Rates": "Próximas Tasas de Interés",
+  "Upcoming Rate:": "Próxima Tasa:",
+  "Upcoming Rates": "Próximas Tasas",
+  "Welcome to Haru": "Bienvenido a Haru"
+}

@@ -1,0 +1,20 @@
+{
+  "<0>{{productName}}</0> has been renewed at <2>{{interestRate}}% / year</2>.": "<0> {{productName}}</0>已更新 <2> {{interestRate}} % / 年</2>.",
+  "<0>{{productName}}</0> will be renewed on {{toBeRenewedAt}}. The interest rate to be applied is <4>{{interestRate}}% / year</4>.": "<0> {{productName}}</0>将在{{toBeRenewedAt}} 。要应用的利率是 <4> {{interestRate}} % / 年</4>.",
+  "<0>Upcoming Rates</0><1></1>Effective from {{effectiveDate}}": "<0>即将到来的价格</0><1></1>自{{effectiveDate}}",
+  "Check out the Haru Guidebook and get your crypto running!": "查看 Haru 指南，让您的加密货币运行起来！",
+  "It seems like you're up to date!": "看来你是最新的！",
+  "Mark all as read": "标记为已读",
+  "Monthly<1></1>Deposits": "每月<1></1>存款",
+  "My<1></1>Account": "我的<1></1>帐户",
+  "No Notifications Found": "未找到通知",
+  "Notifications": "通知",
+  "Performance Update": "性能更新",
+  "Renewal Complete": "续订完成",
+  "Renewal Notice": "更新通知",
+  "Return (%):": "返回 （％）：",
+  "Upcoming Interest Rates": "即将到来的利率",
+  "Upcoming Rate:": "即将到来的价格：",
+  "Upcoming Rates": "即将到来的价格",
+  "Welcome to Haru": "欢迎来到哈鲁"
+}

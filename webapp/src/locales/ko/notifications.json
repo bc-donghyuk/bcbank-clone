@@ -1,0 +1,20 @@
+{
+  "<0>{{productName}}</0> has been renewed at <2>{{interestRate}}% / year</2>.": "<0> {{productName}} </ 0>이 <2> {{interestRate}} % / 년 </ 2>으로 재투자되었습니다.",
+  "<0>{{productName}}</0> will be renewed on {{toBeRenewedAt}}. The interest rate to be applied is <4>{{interestRate}}% / year</4>.": "<0> {{productName}} </ 0>이 {{toBeRenewedAt}}에 재투자됩니다. 적용될 수익률은 <4> {{interestRate}} % / 년 </ 4>입니다.",
+  "<0>Upcoming Rates</0><1></1>Effective from {{effectiveDate}}": "<0> 향후 수익률 </ 0> <1> </ 1> {{effectiveDate}}부터 적용",
+  "Check out the Haru Guidebook and get your crypto running!": "서비스 사용법이 궁금하다면, Haru 가이드북을 확인해보세요!",
+  "It seems like you're up to date!": "업데이트 완료",
+  "Mark all as read": "모두 읽은 상태로 표시",
+  "Monthly<1></1>Deposits": "월 <1> </ 1> 정기 예금",
+  "My<1></1>Account": "내 <1> </ 1> 계좌",
+  "No Notifications Found": "알림이 없습니다",
+  "Notifications": "알림",
+  "Performance Update": "투자 수익률 업데이트",
+  "Renewal Complete": "갱신 완료",
+  "Renewal Notice": "투자 갱신 공지",
+  "Return (%):": "수익률 (%):",
+  "Upcoming Interest Rates": "이자율",
+  "Upcoming Rate:": "향후 이자율",
+  "Upcoming Rates": "향후 이자율",
+  "Welcome to Haru": "Haru에 오신 것을 환영합니다"
+}

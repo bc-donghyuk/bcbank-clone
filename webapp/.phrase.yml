@@ -1,0 +1,41 @@
+phrase:
+  project_id: 8d579d96b12007d2448dfa06ad042597
+  file_format: react_simple_json
+  push:
+    sources:
+      - file: ./src/locales/<locale_code>/<tag>.json
+        params:
+          update_translations: true
+          autotranslate: true
+  pull:
+    targets:
+      - file: ./src/locales/<locale_code>/accounts.json
+        params:
+          tags: accounts
+      - file: ./src/locales/<locale_code>/dashboard.json
+        params:
+          tags: dashboard
+      - file: ./src/locales/<locale_code>/default.json
+        params:
+          tags: default
+      - file: ./src/locales/<locale_code>/errors.json
+        params:
+          tags: errors
+      - file: ./src/locales/<locale_code>/homepage.json
+        params:
+          tags: homepage
+      - file: ./src/locales/<locale_code>/idv.json
+        params:
+          tags: idv
+      - file: ./src/locales/<locale_code>/notifications.json
+        params:
+          tags: notifications
+      - file: ./src/locales/<locale_code>/products.json
+        params:
+          tags: products
+      - file: ./src/locales/<locale_code>/promos.json
+        params:
+          tags: promos
+      - file: ./src/locales/<locale_code>/switch.json
+        params:
+          tags: switch

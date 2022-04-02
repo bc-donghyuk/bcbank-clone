@@ -1,0 +1,20 @@
+{
+  "<0>{{productName}}</0> has been renewed at <2>{{interestRate}}% / year</2>.": "<0> {{productName}}</0> <2> {{interestRate}} ％/年で更新されました</2>。",
+  "<0>{{productName}}</0> will be renewed on {{toBeRenewedAt}}. The interest rate to be applied is <4>{{interestRate}}% / year</4>.": "<0> {{productName}}</0> {{toBeRenewedAt}}更新されます。適用される利率は<4> {{interestRate}} ％/年です</4>。",
+  "<0>Upcoming Rates</0><1></1>Effective from {{effectiveDate}}": "<0>今後の料金</0><1></1> {{effectiveDate}}から有効",
+  "Check out the Haru Guidebook and get your crypto running!": "ハルガイドブックをチェックして、暗号を実行してください！",
+  "It seems like you're up to date!": "あなたは最新のようです！",
+  "Mark all as read": "全ての読み出しとしてマーク",
+  "Monthly<1></1>Deposits": "毎月<1></1>預金",
+  "My<1></1>Account": "私の<1></1>アカウント",
+  "No Notifications Found": "通知が見つかりません",
+  "Notifications": "通知",
+  "Performance Update": "パフォーマンスの更新",
+  "Renewal Complete": "更新完了",
+  "Renewal Notice": "更新通知",
+  "Return (%):": "戻る （％）：",
+  "Upcoming Interest Rates": "今後の金利",
+  "Upcoming Rate:": "今後のレート：",
+  "Upcoming Rates": "今後の料金",
+  "Welcome to Haru": "ハルへようこそ"
+}
