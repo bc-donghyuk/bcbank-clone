@@ -1,15 +1,30 @@
 import React from "react";
+import styled from "styled-components";
+
+const Wrapper = styled.div``;
+
+const AuthContainer = styled.div``;
+
+const LogoWrapper = styled.div``;
+
+const Title = styled.div``;
+
+const Contents = styled.div``;
 
 interface Props {
+  title: string;
   children: React.ReactNode;
 }
 
-const AuthLayout: React.FC<Props> = ({ children }) => {
+const AuthLayout: React.FC<Props> = ({ title, children }) => {
   return (
-    <div>
-      Auth
-      <div>{children}</div>
-    </div>
+    <Wrapper>
+      <AuthContainer>
+        <LogoWrapper>이미지</LogoWrapper>
+        <Title>{title}</Title>
+        <Contents>{children}</Contents>
+      </AuthContainer>
+    </Wrapper>
   );
 };
 
