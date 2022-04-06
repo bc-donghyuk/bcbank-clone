@@ -36,5 +36,6 @@ module.exports = {
         alias: {},
       },
     ],
+    ["babel-plugin-styled-components", { ssr: false, displayName: true, preprocess: true }],
   ],
 };

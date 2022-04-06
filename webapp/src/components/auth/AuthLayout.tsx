@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Image from "components/common/desktop/Image";
+
 const Wrapper = styled.div``;
 
 const AuthContainer = styled.div``;
@@ -20,7 +22,9 @@ const AuthLayout: React.FC<Props> = ({ title, children }) => {
   return (
     <Wrapper>
       <AuthContainer>
-        <LogoWrapper>이미지</LogoWrapper>
+        <LogoWrapper>
+          <Image assetId="haruLogoHorizontal" classNames="m-auto logo-image" />
+        </LogoWrapper>
         <Title>{title}</Title>
         <Contents>{children}</Contents>
       </AuthContainer>
