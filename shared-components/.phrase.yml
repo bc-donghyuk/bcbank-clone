@@ -1,0 +1,12 @@
+phrase:
+  project_id: e1356bab8c3e028948502e65eeb06480
+  file_format: react_simple_json
+  push:
+    sources:
+      - file: ./src/locales/<locale_code>/shared.json
+        params:
+          update_translations: true
+          autotranslate: true
+  pull:
+    targets:
+      - file: ./src/locales/<locale_code>/shared.json
