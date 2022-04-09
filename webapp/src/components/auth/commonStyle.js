@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const AuthContainer = styled.div`
   display: flex;
@@ -22,3 +22,12 @@ export const LogoWrapper = styled.div`
     margin: 0 auto;
   }
 `;
+
+export const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const FormGroup = styled.div``;
+
+export const FormControl = styled.div``;

@@ -26,6 +26,7 @@ module.exports = {
     "@babel/preset-flow",
     "@babel/preset-react",
     "@babel/preset-typescript",
+    "@emotion/babel-preset-css-prop",
   ],
   plugins: [
     [
@@ -36,7 +37,6 @@ module.exports = {
         alias: {},
       },
     ],
-    ["babel-plugin-styled-components", { ssr: false, displayName: true, preprocess: true }],
     ["@babel/plugin-proposal-decorators", { legacy: true }],
     ["@babel/plugin-syntax-flow"],
   ],
