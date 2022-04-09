@@ -37,5 +37,7 @@ module.exports = {
       },
     ],
     ["babel-plugin-styled-components", { ssr: false, displayName: true, preprocess: true }],
+    ["@babel/plugin-proposal-decorators", { legacy: true }],
+    ["@babel/plugin-syntax-flow"],
   ],
 };
