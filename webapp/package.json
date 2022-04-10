@@ -24,6 +24,7 @@
     "dotenv-webpack": "^7.1.0",
     "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.1.4",
+    "joi-browser": "^13.4.0",
     "modernizr-esm": "^2.0.s0",
     "react": "^18.0.0",
     "react-div-100vh": "^0.7.0",
