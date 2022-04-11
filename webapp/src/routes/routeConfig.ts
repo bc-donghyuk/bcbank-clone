@@ -18,7 +18,7 @@ const routeComponents = {
 
 const routes: iRoute[] = [
   {
-    path: "/login",
+    path: "/login/*",
     type: "public",
     component: LoginContainer,
   },

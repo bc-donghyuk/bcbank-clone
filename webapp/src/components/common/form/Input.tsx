@@ -12,7 +12,7 @@ const CssInputLabel = () => ({
   fontSize: "16px", // 12px = 16px * 0.75 (shrink)
 });
 
-const CssInput = (withBorderBottom?: boolean, withInputPadding?: boolean) => (theme: Theme) => ({
+const CssInput = (withBorderBottom?: boolean) => (theme: Theme) => ({
   height: "48px",
   lineHeight: "19px",
   color: colors.grayscale.gray8,
@@ -25,7 +25,7 @@ const CssInput = (withBorderBottom?: boolean, withInputPadding?: boolean) => (th
 
   "& .MuiInput-input": {
     height: "40px",
-    padding: withInputPadding ? "0 14px" : "0",
+    padding: 0,
     [theme.breakpoints.up("lg")]: {
       height: "60px",
     },
@@ -45,7 +45,6 @@ interface Props extends Omit<InputProps, "error"> {
   label?: string;
   error?: string;
   withBorderBottom?: boolean;
-  withInputPadding?: boolean;
   withErrorMessage?: boolean;
 }
 
@@ -55,26 +54,32 @@ const Input: React.FC<Props> = ({
   type = "text",
   error,
   withBorderBottom,
-  withInputPadding,
   withErrorMessage,
+  endAdornment,
   ...rest
 }) => {
   return (
     <>
       <FormControl fullWidth>
         {label && (
-          <InputLabel htmlFor={name} sx={CssInputLabel} shrink>
+          <InputLabel shrink htmlFor={name} sx={CssInputLabel}>
             {label}
           </InputLabel>
         )}
-        <BaseInput id={name} sx={CssInput(withBorderBottom, withInputPadding)} type={type} fullWidth {...rest} />
+        <BaseInput
+          fullWidth
+          id={name}
+          sx={CssInput(withBorderBottom)}
+          type={type}
+          endAdornment={endAdornment}
+          {...rest}
+        />
       </FormControl>
     </>
   );
 };
 
 Input.defaultProps = {
-  withInputPadding: false,
   withBorderBottom: true,
   withErrorMessage: true,
 };

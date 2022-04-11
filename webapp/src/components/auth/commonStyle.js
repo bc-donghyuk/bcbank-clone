@@ -30,4 +30,6 @@ export const Form = styled.div`
 
 export const FormGroup = styled.div``;
 
-export const FormControl = styled.div``;
+export const FormControl = styled.div`
+  padding-bottom: 12px;
+`;
