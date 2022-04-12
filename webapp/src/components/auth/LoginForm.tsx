@@ -58,10 +58,9 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
           </FormControl>
         </FormGroup>
         <ButtonWrapper>
-          {/* <Button type="submit" fullWidth theme="primary" size="large" onClick={() => {}}>
+          <Button fullWidth theme="primary" size="large" type="submit" onClick={() => {}}>
             {t("Sign In")}
-          </Button> */}
-          <button type="submit">{t("Sign In")}</button>
+          </Button>
         </ButtonWrapper>
       </Form>
     </AuthLayout>

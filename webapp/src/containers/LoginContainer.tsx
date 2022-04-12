@@ -26,8 +26,6 @@ const LoginContainer = () => {
     },
   });
 
-  console.log(methods);
-
   return (
     <FormProvider {...methods}>
       <Routes>

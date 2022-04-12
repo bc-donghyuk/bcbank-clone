@@ -126,6 +126,7 @@ export type BaseButtonSize = "small" | "medium" | "large";
 export interface BaseButtonProps {
   theme: BaseButtonTheme;
   size: BaseButtonSize;
+  type?: "button" | "submit" | "reset" | undefined;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
   fullWidth?: boolean;
@@ -138,6 +139,7 @@ export interface BaseButtonProps {
 const BaseButton: React.FC<BaseButtonProps> = ({
   theme,
   size,
+  type,
   onClick,
   children,
   disabled,
@@ -173,6 +175,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   return (
     <Button
       size={size}
+      type={type}
       variant={variant}
       fullWidth={fullWidth}
       sx={[baseButtonStyle, themeStyles, styles]}
