@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import { FormGroup, FormHelperText, IconButton, InputAdornment, InputLabel, Theme } from "@mui/material";
 import React from "react";
 
+import Input from "./Input";
 import colors from "styles/colors";
 import { ExclamationIcon } from "assets/icons";
 import AuthIcon from "assets/icons/AuthIcon";
-import Input from "./Input";
 
 const ErrorColor = "#eb3640";
 
@@ -75,7 +75,7 @@ const IconWrapper = styled.div`
 `;
 
 interface Props {
-  name: string;
+  field: any;
   label?: string;
   placeholder: string;
   error?: string;
@@ -83,28 +83,26 @@ interface Props {
   withIcon?: boolean;
 }
 
-const PasswordInput: React.FC<Props> = ({ name, label, error, withErrorMessage, withIcon, ...rest }) => {
+const PasswordInput: React.FC<Props> = ({ field, label, error, withErrorMessage, withIcon, ...rest }) => {
   return (
-    <>
-      <FormGroup>
-        {label && (
-          <InputLabel htmlFor={name} sx={CssInputLabel} shrink>
-            {label}
-          </InputLabel>
-        )}
-        <Input fullWidth name={name} id={name} sx={CssInput} type="password" endAdornment={EndAdornment} {...rest} />
-        {withErrorMessage && !!error && (
-          <FormHelperText sx={CssFormHelperText}>
-            {withIcon && (
-              <IconWrapper>
-                <ExclamationIcon color={ErrorColor} />
-              </IconWrapper>
-            )}
-            {error}
-          </FormHelperText>
-        )}
-      </FormGroup>
-    </>
+    <FormGroup>
+      {label && (
+        <InputLabel shrink htmlFor={field.name} sx={CssInputLabel}>
+          {label}
+        </InputLabel>
+      )}
+      <Input field={field} id={field.name} sx={CssInput} type="password" endAdornment={EndAdornment} {...rest} />
+      {withErrorMessage && !!error && (
+        <FormHelperText sx={CssFormHelperText}>
+          {withIcon && (
+            <IconWrapper>
+              <ExclamationIcon color={ErrorColor} />
+            </IconWrapper>
+          )}
+          {error}
+        </FormHelperText>
+      )}
+    </FormGroup>
   );
 };
 

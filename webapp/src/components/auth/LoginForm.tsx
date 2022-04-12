@@ -2,10 +2,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { InputAdornment } from "@mui/material";
+import { Controller, useForm, useFormContext, UseFormReturn } from "react-hook-form";
 
 import Input from "components/common/form/Input";
 import PasswordInput from "components/common/form/PasswordInput";
 
+import { formMethodsProps } from "containers/LoginContainer";
 import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
@@ -17,32 +19,48 @@ const IconWrapper = styled.div`
 
 const ButtonWrapper = styled.div``;
 
-interface Props {}
+interface Props {
+  formMethods: UseFormReturn<formMethodsProps>;
+}
 
-const LoginForm: React.FC<Props> = () => {
+const LoginForm: React.FC<Props> = ({ formMethods }) => {
+  const { control } = useFormContext();
   const { t } = useTranslation();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <AuthLayout title={t("Welcome Back")}>
-      <Form>
+      <Form onSubmit={formMethods.handleSubmit(onSubmit)}>
         <FormGroup>
           <FormControl>
-            <Input
+            <Controller
               name="email"
-              type="email"
-              placeholder={t("email")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconWrapper>
-                    {/* <AuthIcon type={isEmailValid() ? "checkOn" : "checkOff"} /> */}
-                    <AuthIcon type={"checkOn"} />
-                  </IconWrapper>
-                </InputAdornment>
-              }
+              control={control}
+              render={({ field }) => (
+                <Input
+                  field={field}
+                  placeholder={t("email")}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconWrapper>
+                        {/* <AuthIcon type={isEmailValid() ? "checkOn" : "checkOff"} /> */}
+                        <AuthIcon type={"checkOn"} />
+                      </IconWrapper>
+                    </InputAdornment>
+                  }
+                />
+              )}
             />
           </FormControl>
           <FormControl>
-            <PasswordInput name="password" placeholder={t("Password")} />
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => <PasswordInput field={field} placeholder={t("Password")} />}
+            />
           </FormControl>
         </FormGroup>
         <ButtonWrapper>

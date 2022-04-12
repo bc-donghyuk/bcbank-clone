@@ -1,5 +1,6 @@
 import React from "react";
 import { InputLabel, Input as BaseInput, InputProps, FormControl, Theme, ThemeOptions } from "@mui/material";
+import { FieldValues } from "react-hook-form";
 
 import colors from "styles/colors";
 
@@ -41,15 +42,15 @@ const CssInput = (withBorderBottom?: boolean) => (theme: Theme) => ({
 });
 
 interface Props extends Omit<InputProps, "error"> {
-  name: string;
   label?: string;
   error?: string;
   withBorderBottom?: boolean;
   withErrorMessage?: boolean;
+  field: FieldValues;
 }
 
 const Input: React.FC<Props> = ({
-  name,
+  field,
   label,
   type = "text",
   error,
@@ -59,23 +60,22 @@ const Input: React.FC<Props> = ({
   ...rest
 }) => {
   return (
-    <>
-      <FormControl fullWidth>
-        {label && (
-          <InputLabel shrink htmlFor={name} sx={CssInputLabel}>
-            {label}
-          </InputLabel>
-        )}
-        <BaseInput
-          fullWidth
-          id={name}
-          sx={CssInput(withBorderBottom)}
-          type={type}
-          endAdornment={endAdornment}
-          {...rest}
-        />
-      </FormControl>
-    </>
+    <FormControl fullWidth>
+      {label && (
+        <InputLabel shrink htmlFor={field.name} sx={CssInputLabel}>
+          {label}
+        </InputLabel>
+      )}
+      <BaseInput
+        id={field.name}
+        type={type}
+        fullWidth
+        sx={CssInput(withBorderBottom)}
+        endAdornment={endAdornment}
+        {...field}
+        {...rest}
+      />
+    </FormControl>
   );
 };
 
