@@ -75,7 +75,8 @@ const IconWrapper = styled.div`
 `;
 
 interface Props {
-  field: any;
+  name: string;
+  control: any;
   label?: string;
   placeholder: string;
   error?: string;
@@ -83,15 +84,23 @@ interface Props {
   withIcon?: boolean;
 }
 
-const PasswordInput: React.FC<Props> = ({ field, label, error, withErrorMessage, withIcon, ...rest }) => {
+const PasswordInput: React.FC<Props> = ({ name, control, label, error, withErrorMessage, withIcon, ...rest }) => {
   return (
     <FormGroup>
       {label && (
-        <InputLabel shrink htmlFor={field.name} sx={CssInputLabel}>
+        <InputLabel shrink htmlFor={name} sx={CssInputLabel}>
           {label}
         </InputLabel>
       )}
-      <Input field={field} id={field.name} sx={CssInput} type="password" endAdornment={EndAdornment} {...rest} />
+      <Input
+        name={name}
+        id={name}
+        control={control}
+        type="password"
+        sx={CssInput}
+        endAdornment={EndAdornment}
+        {...rest}
+      />
       {withErrorMessage && !!error && (
         <FormHelperText sx={CssFormHelperText}>
           {withIcon && (

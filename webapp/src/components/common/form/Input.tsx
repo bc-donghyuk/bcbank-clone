@@ -1,10 +1,10 @@
 import React from "react";
 import { InputLabel, Input as BaseInput, InputProps, FormControl, Theme, ThemeOptions } from "@mui/material";
-import { FieldValues } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 
 import colors from "styles/colors";
 
-const CssInputLabel = () => ({
+const InputLabelStyle = () => ({
   lineHeight: "20px",
   paddingBottom: "2px",
   color: colors.grayscale.gray5,
@@ -13,7 +13,7 @@ const CssInputLabel = () => ({
   fontSize: "16px", // 12px = 16px * 0.75 (shrink)
 });
 
-const CssInput = (withBorderBottom?: boolean) => (theme: Theme) => ({
+const InputStyle = (withBorderBottom?: boolean) => (theme: Theme) => ({
   height: "48px",
   lineHeight: "19px",
   color: colors.grayscale.gray8,
@@ -42,15 +42,17 @@ const CssInput = (withBorderBottom?: boolean) => (theme: Theme) => ({
 });
 
 interface Props extends Omit<InputProps, "error"> {
+  name: string;
+  control: any;
   label?: string;
   error?: string;
   withBorderBottom?: boolean;
   withErrorMessage?: boolean;
-  field: FieldValues;
 }
 
 const Input: React.FC<Props> = ({
-  field,
+  name,
+  control,
   label,
   type = "text",
   error,
@@ -62,18 +64,24 @@ const Input: React.FC<Props> = ({
   return (
     <FormControl fullWidth>
       {label && (
-        <InputLabel shrink htmlFor={field.name} sx={CssInputLabel}>
+        <InputLabel shrink htmlFor={name} sx={InputLabelStyle}>
           {label}
         </InputLabel>
       )}
-      <BaseInput
-        id={field.name}
-        type={type}
-        fullWidth
-        sx={CssInput(withBorderBottom)}
-        endAdornment={endAdornment}
-        {...field}
-        {...rest}
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <BaseInput
+            id={name}
+            type={type}
+            fullWidth
+            sx={InputStyle(withBorderBottom)}
+            endAdornment={endAdornment}
+            {...field}
+            {...rest}
+          />
+        )}
       />
     </FormControl>
   );

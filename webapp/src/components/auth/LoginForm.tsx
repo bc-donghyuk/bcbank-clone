@@ -6,6 +6,7 @@ import { Controller, useForm, useFormContext, UseFormReturn } from "react-hook-f
 
 import Input from "components/common/form/Input";
 import PasswordInput from "components/common/form/PasswordInput";
+import Button from "components/common/buttons/Button";
 
 import { formMethodsProps } from "containers/LoginContainer";
 import AuthLayout from "./AuthLayout";
@@ -17,7 +18,9 @@ const IconWrapper = styled.div`
   height: 24px;
 `;
 
-const ButtonWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+  margin-top: 24px;
+`;
 
 interface Props {
   formMethods: UseFormReturn<formMethodsProps>;
@@ -36,35 +39,29 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
       <Form onSubmit={formMethods.handleSubmit(onSubmit)}>
         <FormGroup>
           <FormControl>
-            <Controller
+            <Input
               name="email"
               control={control}
-              render={({ field }) => (
-                <Input
-                  field={field}
-                  placeholder={t("email")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconWrapper>
-                        {/* <AuthIcon type={isEmailValid() ? "checkOn" : "checkOff"} /> */}
-                        <AuthIcon type={"checkOn"} />
-                      </IconWrapper>
-                    </InputAdornment>
-                  }
-                />
-              )}
+              placeholder={t("email")}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconWrapper>
+                    {/* <AuthIcon type={isEmailValid() ? "checkOn" : "checkOff"} /> */}
+                    <AuthIcon type={"checkOn"} />
+                  </IconWrapper>
+                </InputAdornment>
+              }
             />
           </FormControl>
           <FormControl>
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => <PasswordInput field={field} placeholder={t("Password")} />}
-            />
+            <PasswordInput name="password" control={control} placeholder={t("Password")} />
           </FormControl>
         </FormGroup>
         <ButtonWrapper>
-          <button>{t("Sign In")}</button>
+          {/* <Button type="submit" fullWidth theme="primary" size="large" onClick={() => {}}>
+            {t("Sign In")}
+          </Button> */}
+          <button type="submit">{t("Sign In")}</button>
         </ButtonWrapper>
       </Form>
     </AuthLayout>
