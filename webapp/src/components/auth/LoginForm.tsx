@@ -5,6 +5,7 @@ import { InputAdornment } from "@mui/material";
 import { Controller, useForm, useFormContext, UseFormReturn } from "react-hook-form";
 
 import Input from "components/common/form/Input";
+import Recaptcha from "components/auth/Recaptcha";
 import PasswordInput from "components/common/form/PasswordInput";
 import Button from "components/common/buttons/Button";
 
@@ -18,6 +19,8 @@ const IconWrapper = styled.div`
   height: 24px;
 `;
 
+const RecaptchaWrapper = styled.div``;
+
 const ButtonWrapper = styled.div`
   margin-top: 24px;
 `;
@@ -27,7 +30,11 @@ interface Props {
 }
 
 const LoginForm: React.FC<Props> = ({ formMethods }) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+    watch,
+  } = useFormContext();
   const { t } = useTranslation();
 
   const onSubmit = (data: any) => {
@@ -54,9 +61,18 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
             />
           </FormControl>
           <FormControl>
-            <PasswordInput name="password" control={control} placeholder={t("Password")} />
+            <PasswordInput
+              name="password"
+              control={control}
+              error={errors}
+              errorMessage="다시 입력해주세요."
+              placeholder={t("Password")}
+            />
           </FormControl>
         </FormGroup>
+        <RecaptchaWrapper>
+          <Recaptcha />
+        </RecaptchaWrapper>
         <ButtonWrapper>
           <Button fullWidth theme="primary" size="large" type="submit" onClick={() => {}}>
             {t("Sign In")}

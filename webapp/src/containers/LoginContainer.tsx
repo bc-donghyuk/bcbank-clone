@@ -8,7 +8,7 @@ import { FormProvider, useForm, UseFormProps, FieldValues } from "react-hook-for
 
 const loginFormSchema = yup
   .object({
-    email: yup.string().email({ minDomainAtoms: 2 }).required(),
+    email: yup.string().email({ minDomainAtoms: 2, message: "제대로 입력좀" }).required(),
     password: yup.string().required(),
   })
   .required();

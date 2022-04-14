@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { FormGroup, FormHelperText, IconButton, InputAdornment, InputLabel, Theme } from "@mui/material";
 import React from "react";
+import { Control, FieldErrors } from "react-hook-form";
 
 import Input from "./Input";
 import colors from "styles/colors";
@@ -76,15 +77,25 @@ const IconWrapper = styled.div`
 
 interface Props {
   name: string;
-  control: any;
+  control: Control;
   label?: string;
   placeholder: string;
-  error?: string;
+  error?: FieldErrors;
+  errorMessage?: string;
   withErrorMessage?: boolean;
   withIcon?: boolean;
 }
 
-const PasswordInput: React.FC<Props> = ({ name, control, label, error, withErrorMessage, withIcon, ...rest }) => {
+const PasswordInput: React.FC<Props> = ({
+  name,
+  control,
+  label,
+  error,
+  errorMessage,
+  withErrorMessage,
+  withIcon,
+  ...rest
+}) => {
   return (
     <FormGroup>
       {label && (
@@ -101,14 +112,14 @@ const PasswordInput: React.FC<Props> = ({ name, control, label, error, withError
         endAdornment={EndAdornment}
         {...rest}
       />
-      {withErrorMessage && !!error && (
+      {withErrorMessage && error && !!error[name] && errorMessage && (
         <FormHelperText sx={CssFormHelperText}>
           {withIcon && (
             <IconWrapper>
               <ExclamationIcon color={ErrorColor} />
             </IconWrapper>
           )}
-          {error}
+          {errorMessage}
         </FormHelperText>
       )}
     </FormGroup>
