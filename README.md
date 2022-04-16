@@ -1,4 +1,4 @@
-# bcbank_clone
+# bcbank-clone
 
 ## Create React project
 
