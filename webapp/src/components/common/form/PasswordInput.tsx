@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { FormGroup, FormHelperText, IconButton, InputAdornment, InputLabel, Theme } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Control, FieldErrors } from "react-hook-form";
 
 import Input from "./Input";
@@ -10,7 +10,7 @@ import AuthIcon from "assets/icons/AuthIcon";
 
 const ErrorColor = "#eb3640";
 
-const CssInputLabel = () => ({
+const InputLabelStyle = () => ({
   lineHeight: "14px",
   color: colors.grayscale.gray5,
   fontStyle: "normal",
@@ -18,7 +18,7 @@ const CssInputLabel = () => ({
   fontSize: "12px",
 });
 
-const CssInput = (theme: Theme) => ({
+const InputStyle = (theme: Theme) => ({
   height: "40px",
   lineHeight: "19px",
   fontStyle: "normal",
@@ -46,7 +46,7 @@ const CssInput = (theme: Theme) => ({
   },
 });
 
-const CssFormHelperText = (theme: Theme) => ({
+const FormHelperTextStyle = (theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   marginTop: "10px",
@@ -58,17 +58,9 @@ const CssFormHelperText = (theme: Theme) => ({
   },
 });
 
-const CssIconButton = () => ({
+const IconButtonStyle = () => ({
   padding: 0,
 });
-
-const EndAdornment = (
-  <InputAdornment position="end">
-    <IconButton aria-label="toggle password visibility" sx={CssIconButton}>
-      <AuthIcon type={"eyeOpen"} />
-    </IconButton>
-  </InputAdornment>
-);
 
 const IconWrapper = styled.div`
   display: flex;
@@ -81,45 +73,57 @@ interface Props {
   label?: string;
   placeholder: string;
   error?: FieldErrors;
-  errorMessage?: string;
   withErrorMessage?: boolean;
   withIcon?: boolean;
 }
 
-const PasswordInput: React.FC<Props> = ({
-  name,
-  control,
-  label,
-  error,
-  errorMessage,
-  withErrorMessage,
-  withIcon,
-  ...rest
-}) => {
+const PasswordInput: React.FC<Props> = ({ name, control, label, error, withErrorMessage, withIcon, ...rest }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleMouseDownPassword = (event: React.MouseEvent) => event.preventDefault();
+
+  const handleClickShowPassword = () => {
+    setShowPassword(prev => !prev);
+  };
+
+  const EndAdornment = (
+    <InputAdornment position="end">
+      <IconButton
+        aria-label="toggle password visibility"
+        sx={IconButtonStyle}
+        onMouseDown={handleMouseDownPassword}
+        onClick={handleClickShowPassword}
+      >
+        <AuthIcon type={showPassword ? "eyeOpen" : "eyeClose"} />
+      </IconButton>
+    </InputAdornment>
+  );
+
   return (
     <FormGroup>
       {label && (
-        <InputLabel shrink htmlFor={name} sx={CssInputLabel}>
+        <InputLabel shrink htmlFor={name} sx={InputLabelStyle}>
           {label}
         </InputLabel>
       )}
+
       <Input
         name={name}
         id={name}
         control={control}
-        type="password"
-        sx={CssInput}
+        type={showPassword ? "text" : "password"}
+        sx={InputStyle}
         endAdornment={EndAdornment}
         {...rest}
       />
-      {withErrorMessage && error && !!error[name] && errorMessage && (
-        <FormHelperText sx={CssFormHelperText}>
+      {withErrorMessage && error && !!error[name] && (
+        <FormHelperText sx={FormHelperTextStyle}>
           {withIcon && (
             <IconWrapper>
               <ExclamationIcon color={ErrorColor} />
             </IconWrapper>
           )}
-          {errorMessage}
+          {error[name].message}
         </FormHelperText>
       )}
     </FormGroup>

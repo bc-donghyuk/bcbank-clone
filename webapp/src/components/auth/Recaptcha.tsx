@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useEffect } from "react";
 
 import ReCAPTCHA from "react-google-recaptcha";
-import { Controller } from "react-hook-form";
 
 const recaptchaKey = process.env.REACT_APP_RECAPTCHA_CLIENT_SITE_KEY;
 
@@ -14,12 +13,18 @@ const Wrapper = styled.div`
   }
 `;
 
-interface Props {}
+interface Props {
+  onChange: (token: string) => void;
+}
 
-const Recaptcha: React.FC<Props> = () => {
+const Recaptcha: React.FC<Props> = ({ onChange }) => {
+  useEffect(() => {
+    window.recaptchaOptions = { useRecaptchaNet: true };
+  }, []);
+
   return (
     <Wrapper>
-      <ReCAPTCHA sitekey={recaptchaKey} {...field} />
+      <ReCAPTCHA sitekey={recaptchaKey} size="normal" onChange={onChange} />
     </Wrapper>
   );
 };

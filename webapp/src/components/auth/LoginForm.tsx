@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { InputAdornment } from "@mui/material";
-import { Controller, useForm, useFormContext, UseFormReturn } from "react-hook-form";
+import { useFormContext, UseFormReturn } from "react-hook-form";
 
 import Input from "components/common/form/Input";
 import Recaptcha from "components/auth/Recaptcha";
@@ -32,10 +32,15 @@ interface Props {
 const LoginForm: React.FC<Props> = ({ formMethods }) => {
   const {
     control,
-    formState: { errors },
-    watch,
+    formState: { errors, dirtyFields },
+    setValue,
   } = useFormContext();
   const { t } = useTranslation();
+
+  const onChangeRecapt = (token: string) => {
+    setValue("recapt", token);
+    setValue("isHuman", true);
+  };
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -49,32 +54,25 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
             <Input
               name="email"
               control={control}
-              placeholder={t("email")}
+              placeholder={t("Email")}
               endAdornment={
                 <InputAdornment position="end">
                   <IconWrapper>
-                    {/* <AuthIcon type={isEmailValid() ? "checkOn" : "checkOff"} /> */}
-                    <AuthIcon type={"checkOn"} />
+                    <AuthIcon type={dirtyFields?.email && errors && !errors.email ? "checkOn" : "checkOff"} />
                   </IconWrapper>
                 </InputAdornment>
               }
             />
           </FormControl>
           <FormControl>
-            <PasswordInput
-              name="password"
-              control={control}
-              error={errors}
-              errorMessage="다시 입력해주세요."
-              placeholder={t("Password")}
-            />
+            <PasswordInput name="password" control={control} error={errors} placeholder={t("Password")} />
           </FormControl>
         </FormGroup>
         <RecaptchaWrapper>
-          <Recaptcha />
+          <Recaptcha onChange={onChangeRecapt} />
         </RecaptchaWrapper>
         <ButtonWrapper>
-          <Button fullWidth theme="primary" size="large" type="submit" onClick={() => {}}>
+          <Button fullWidth theme="primary" size="large" type="submit">
             {t("Sign In")}
           </Button>
         </ButtonWrapper>

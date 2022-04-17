@@ -127,7 +127,7 @@ export interface BaseButtonProps {
   theme: BaseButtonTheme;
   size: BaseButtonSize;
   type?: "button" | "submit" | "reset" | undefined;
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
   fullWidth?: boolean;
   textColor?: string;
