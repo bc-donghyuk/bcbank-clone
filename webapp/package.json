@@ -1,5 +1,5 @@
 {
-  "name": "bcbank_clone",
+  "name": "@bcbank-clone/webapp",
   "version": "1.0.0",
   "description": "frontend",
   "main": "index.js",
@@ -32,6 +32,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.29.0",
     "react-i18next": "^11.16.2",
+    "react-query": "^3.34.20",
     "react-router-dom": "^6.2.2",
     "regenerator-runtime": "^0.13.9",
     "yup": "^0.32.11"

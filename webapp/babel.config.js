@@ -34,7 +34,10 @@ module.exports = {
       {
         extensions: ["*", ".ts", ".js", ".tsx", ".jsx"],
         root: ["./src"],
-        alias: {},
+        alias: {
+          "@core": "../core/",
+          "@shared-components": "../shared-components/src",
+        },
       },
     ],
     ["@babel/plugin-proposal-decorators", { legacy: true }],

@@ -24,3 +24,5 @@ root.render(
 if (module.hot) {
   module.hot.accept();
 }
+
+// TODO : Lerna + Monorepo + yarn v2로 패키지 관리하기

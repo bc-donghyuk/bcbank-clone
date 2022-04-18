@@ -14,30 +14,32 @@ const App = () => {
   if (smil) {
     return (
       <ThemeProvider theme={MuiTheme}>
-        <Routes>
-          {
-            // isLoggedIn()?
-            <Route path="/" element={<Navigate replace to={LOGIN_URL} />} />
-          }
-          {routes.map(route => {
-            const RouteComponent = routeComponents[route.type];
+        <>
+          <Routes>
+            {
+              // isLoggedIn()?
+              <Route path="/" element={<Navigate replace to={LOGIN_URL} />} />
+            }
+            {routes.map(route => {
+              const RouteComponent = routeComponents[route.type];
 
-            return (
-              <RouteComponent
-                key={route.path}
-                path={route.path}
-                element={(() => {
-                  const node = <route.component />;
-                  if (route.fullscreen) {
-                    return node;
-                  }
-                  return <DesktopWrapper>{node}</DesktopWrapper>;
-                })()}
-                {...route.routeProps}
-              />
-            );
-          })}
-        </Routes>
+              return (
+                <RouteComponent
+                  key={route.path}
+                  path={route.path}
+                  element={(() => {
+                    const node = <route.component />;
+                    if (route.fullscreen) {
+                      return node;
+                    }
+                    return <DesktopWrapper>{node}</DesktopWrapper>;
+                  })()}
+                  {...route.routeProps}
+                />
+              );
+            })}
+          </Routes>
+        </>
       </ThemeProvider>
     );
   }

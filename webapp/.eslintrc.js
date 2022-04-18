@@ -22,7 +22,22 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: "module",
   },
-
+  settings: {
+    "import/resolver": {
+      node: {
+        paths: ["webapp/src"],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+      "eslint-import-resolver-custom-alias": {
+        alias: {
+          "@shared-components": "shared-components/src",
+          "@core": "core",
+        },
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        packages: ["shared-components/*"],
+      },
+    },
+  },
   overrides: [
     {
       files: ["*.js", "*.jsx"],
