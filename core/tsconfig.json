@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "target": "ES2019",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "lib": ["ES2019", "dom"],
+    "jsx": "react"
+  },
+  "include": ["."],
+  "exclude": ["node_modules"]
+}

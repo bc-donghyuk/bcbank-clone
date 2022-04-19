@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "target": "es5", // 컴파일 된 결과물이 어느 버전의 ECMAScript를 따를 것인지
     "noImplicitAny": true, // any 타입으로 구현된 표현식 혹은 정의를 에러처리 할 것인가

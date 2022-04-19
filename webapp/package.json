@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "frontend",
   "main": "index.js",
-  "author": "",
+  "author": "Donghyuk",
   "license": "private",
   "scripts": {
     "dev": "env-cmd -f .env-cmd.json -e dev yarn",
     "start": "node server.js"
   },
   "dependencies": {
+    "@bcbank-clone/core": "^1.0.0",
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -25,8 +26,7 @@
     "dotenv-webpack": "^7.1.0",
     "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.1.4",
-    "modernizr-esm": "^2.0.s0",
-    "react": "^18.0.0",
+    "modernizr-esm": "^2.0.0",
     "react-div-100vh": "^0.7.0",
     "react-dom": "^18.0.0",
     "react-google-recaptcha": "^2.1.0",
@@ -38,20 +38,14 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5",
     "@babel/plugin-proposal-decorators": "^7.17.9",
     "@babel/plugin-syntax-flow": "^7.16.7",
-    "@babel/preset-env": "^7.16.11",
     "@babel/preset-flow": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@loadable/babel-plugin": "^5.13.2",
-    "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "@types/react-google-recaptcha": "^2.1.5",
-    "@typescript-eslint/eslint-plugin": "^5.12.1",
-    "@typescript-eslint/parser": "^5.12.1",
-    "babel-eslint": "^10.1.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "clean-webpack-plugin": "^4.0.0",
@@ -59,15 +53,6 @@
     "cors": "^2.8.5",
     "css-loader": "^6.6.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^8.9.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.4.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
     "express": "^4.17.3",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
@@ -85,5 +70,8 @@
     "webpack-dev-middleware": "^5.3.1",
     "webpack-dev-server": "^4.7.4",
     "webpack-hot-middleware": "^2.25.1"
+  },
+  "installConfig": {
+    "hoistingLimits": "none"
   }
 }

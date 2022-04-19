@@ -10,7 +10,11 @@ const HaruQueryClient = new QueryClient({
   }),
 });
 
-const HaruQueriesClientProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const HaruQueriesClientProvider: React.FC<Props> = ({ children }) => {
   return <QueryClientProvider client={HaruQueryClient}>{children}</QueryClientProvider>;
 };
 

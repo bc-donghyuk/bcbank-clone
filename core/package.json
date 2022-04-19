@@ -2,13 +2,13 @@
   "name": "@bcbank-clone/core",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
-    "axios": "^0.26.1",
-    "react": "^18.0.0",
     "react-query": "^3.35.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.5",
     "@types/react-query": "^1.2.9"
   }
 }
