@@ -13,6 +13,7 @@ import { formMethodsProps } from "containers/LoginContainer";
 import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
+import authService from "@core/services/authService";
 
 const IconWrapper = styled.div`
   width: 24px;
@@ -42,8 +43,13 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
     setValue("isHuman", true);
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    // try {
+    //   const temp = await authService.login(data);
+    //   console.log("loginFormData", temp);
+    // } catch (e) {
+    //   console.log("loginFormError", { e });
+    // }
   };
 
   return (

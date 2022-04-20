@@ -1358,7 +1358,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.14.5, @babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.7.7, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7":
+"@babel/runtime-corejs3@npm:^7.17.9":
+  version: 7.17.9
+  resolution: "@babel/runtime-corejs3@npm:7.17.9"
+  dependencies:
+    core-js-pure: ^3.20.2
+    regenerator-runtime: ^0.13.4
+  checksum: c0893eb1ba4fd8a5a0e43d0fd5c3ad61c020dc5953bb74a76e9e10a0adfde7a5d8fd7e78d59b08dce3a0774948c6c40c81df0fdd0a1130c414fd3535fae365cb
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.14.5, @babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.17.9, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.7.7, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7":
   version: 7.17.9
   resolution: "@babel/runtime@npm:7.17.9"
   dependencies:
@@ -1424,6 +1434,8 @@ __metadata:
     "@babel/preset-flow": ^7.16.7
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
+    "@babel/runtime": ^7.17.9
+    "@babel/runtime-corejs3": ^7.17.9
     "@bcbank-clone/core": ^1.0.0
     "@emotion/babel-preset-css-prop": ^11.2.0
     "@emotion/react": ^11.9.0
@@ -4307,9 +4319,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bcbank_clone@workspace:.":
+"bcbank-clone@workspace:.":
   version: 0.0.0-use.local
-  resolution: "bcbank_clone@workspace:."
+  resolution: "bcbank-clone@workspace:."
   dependencies:
     "@babel/core": ^7.17.5
     "@babel/preset-env": ^7.16.11
@@ -5321,6 +5333,13 @@ __metadata:
     browserslist: ^4.20.2
     semver: 7.0.0
   checksum: ad204cfbe203803d2d86f7bb95f60525b1f9e3701b92d68d08e575932a5d8ea2ec31e121350a328a4035d8f0ef8793392efd74b1fede2702c26c80865b49597c
+  languageName: node
+  linkType: hard
+
+"core-js-pure@npm:^3.20.2":
+  version: 3.22.1
+  resolution: "core-js-pure@npm:3.22.1"
+  checksum: 404690f35703fb2db4c3e55030af9e2c0214b76f5bf975f69a632ca8103176862435a2b6b8dd2d3f60d8702131a4d762a8bdaa609331700a1bb894a94c84d6ab
   languageName: node
   linkType: hard
 

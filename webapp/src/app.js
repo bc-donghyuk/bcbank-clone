@@ -9,6 +9,7 @@ import UnsupportBrowserPage from "components/unsupport/UnsupportBrowserPage";
 import { routes, routeComponents } from "routes/routeConfig";
 import { LOGIN_URL } from "URLConstant";
 import MuiTheme from "styles/theme";
+import Services from "services";
 
 const App = () => {
   if (smil) {
@@ -45,5 +46,7 @@ const App = () => {
   }
   return <UnsupportBrowserPage />;
 };
+
+Services.configure();
 
 export default App;
