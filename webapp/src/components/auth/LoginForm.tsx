@@ -44,12 +44,12 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
   };
 
   const onSubmit = async (data: any) => {
-    // try {
-    //   const temp = await authService.login(data);
-    //   console.log("loginFormData", temp);
-    // } catch (e) {
-    //   console.log("loginFormError", { e });
-    // }
+    try {
+      const temp = await authService.login(data);
+      console.log("loginFormData", temp);
+    } catch (e) {
+      console.log("loginFormError", { e });
+    }
   };
 
   return (

@@ -14,8 +14,8 @@ import Services from "services";
 const App = () => {
   if (smil) {
     return (
-      <ThemeProvider theme={MuiTheme}>
-        <>
+      <>
+        <ThemeProvider theme={MuiTheme}>
           <Routes>
             {
               // isLoggedIn()?
@@ -40,8 +40,8 @@ const App = () => {
               );
             })}
           </Routes>
-        </>
-      </ThemeProvider>
+        </ThemeProvider>
+      </>
     );
   }
   return <UnsupportBrowserPage />;

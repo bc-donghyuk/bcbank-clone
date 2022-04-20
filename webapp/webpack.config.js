@@ -173,6 +173,10 @@ const buildConfig = {
           },
         ],
       },
+      {
+        loader: "webpack-modernizr-loader",
+        test: /\.modernizrrc\.js$/,
+      },
     ],
   },
   plugins: pluginList, // 번들파일 관련 설정
@@ -211,7 +215,10 @@ const buildConfig = {
   },
   resolve: {
     extensions: ["*", ".js", ".jsx", ".tsx", ".ts", ".css"],
-    alias: {},
+    alias: {
+      "core-js/es6": "core-js/es",
+      modernizr$: path.resolve(".modernizrrc.js"),
+    },
   },
 };
 

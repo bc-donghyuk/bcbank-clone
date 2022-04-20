@@ -42,11 +42,5 @@ module.exports = {
     ],
     ["@babel/plugin-proposal-decorators", { legacy: true }],
     ["@babel/plugin-syntax-flow"],
-    [
-      "@babel/plugin-transform-runtime",
-      {
-        regenerator: true,
-      },
-    ],
   ],
 };

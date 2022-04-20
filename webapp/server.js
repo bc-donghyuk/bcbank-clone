@@ -2,6 +2,7 @@ const cors = require("cors");
 const express = require("express");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 const middleware = require("webpack-dev-middleware");
 
 const fs = require("fs");
@@ -13,6 +14,20 @@ require("dotenv").config({ path: ".env" });
 (() => {
   const app = express();
   const compiler = webpack(config);
+
+  app.use(
+    createProxyMiddleware("/api", {
+      target: "http://localhost:8000",
+      changeOrigin: true,
+      logLevel: "debug",
+      pathRewrite: {
+        "^/api": "",
+      },
+      cookiePathRewrite: {
+        "/auth/token/refresh/": "/api/auth/token/refresh/",
+      },
+    }),
+  );
 
   app.use(cors());
 
