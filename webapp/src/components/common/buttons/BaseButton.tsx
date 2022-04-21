@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import React from "react";
 import colors from "styles/colors";
 
@@ -54,9 +54,7 @@ const primaryButtonStyle = () => ({
 });
 
 const primarySpinnerStyle = () => ({
-  colorPrimary: {
-    color: colors.grayscale.white,
-  },
+  color: colors.grayscale.white,
 });
 
 const secondaryButtonStyle = () => ({
@@ -84,9 +82,7 @@ const secondaryButtonStyle = () => ({
 });
 
 const secondarySpinnerStyle = () => ({
-  colorPrimary: {
-    color: colors.brand.dark,
-  },
+  color: colors.brand.dark,
 });
 
 const outlineButtonStyle = () => ({
@@ -115,10 +111,14 @@ const outlineButtonStyle = () => ({
 });
 
 const outlineSpinnerStyle = () => ({
-  colorPrimary: {
-    color: colors.grayscale.gray8,
-  },
+  color: colors.grayscale.gray8,
 });
+
+const spinnerSize = {
+  small: 15,
+  medium: 18,
+  large: 22,
+};
 
 export type BaseButtonTheme = "primary" | "secondary" | "outline" | "transparent";
 export type BaseButtonSize = "small" | "medium" | "large";
@@ -184,9 +184,15 @@ const BaseButton: React.FC<BaseButtonProps> = ({
       disableElevation
       {...other}
     >
-      {children}
+      {loading ? <CircularProgress size={spinnerSize[size]} sx={spinnerClasses} /> : children}
     </Button>
   );
+};
+
+BaseButton.defaultProps = {
+  loading: false,
+  disabled: false,
+  fullWidth: false,
 };
 
 export default BaseButton;

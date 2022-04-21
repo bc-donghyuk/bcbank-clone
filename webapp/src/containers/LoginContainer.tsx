@@ -6,9 +6,9 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import LoginForm from "components/auth/LoginForm";
 
-import httpService from "@core/services/httpService";
 import { passwordErrorMessage } from "constants/errorMessage";
 import { isLoggedIn } from "utils/auth";
+import { DASHBOARD_URL } from "URLConstant";
 
 const loginFormSchema = yup
   .object({
@@ -40,7 +40,7 @@ const LoginContainer = () => {
   return (
     <FormProvider {...methods}>
       <Routes>
-        {isLoggedIn() && <Route path="/" element={<Navigate replace to={"/dashboard"} />} />}
+        {isLoggedIn() && <Route path="/" element={<Navigate replace to={DASHBOARD_URL} />} />}
         <Route path="/" element={<LoginForm formMethods={methods} />} />
       </Routes>
     </FormProvider>

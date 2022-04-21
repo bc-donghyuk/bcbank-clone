@@ -7,38 +7,35 @@ import DesktopWrapper from "components/common/desktop/DesktopWrapper";
 import UnsupportBrowserPage from "components/unsupport/UnsupportBrowserPage";
 
 import { routes, routeComponents } from "routes/routeConfig";
-import { LOGIN_URL } from "URLConstant";
+import { DASHBOARD_URL, LOGIN_URL } from "URLConstant";
 import MuiTheme from "styles/theme";
 import Services from "services";
 import { isLoggedIn } from "utils/auth";
 
 const App = () => {
-  console.log(isLoggedIn());
   if (smil) {
     return (
       <>
         <ThemeProvider theme={MuiTheme}>
           <Routes>
             {isLoggedIn() ? (
-              <Route path="/" element={<Navigate replace to={"/dashboard"} />} />
+              <Route path="/" element={<Navigate replace to={DASHBOARD_URL} />} />
             ) : (
               <Route path="/" element={<Navigate replace to={LOGIN_URL} />} />
             )}
             {routes.map(route => {
-              const RouteComponent = routeComponents[route.type];
+              const RouteTypeHandler = routeComponents[route.type];
+              const node = <route.component />;
 
               return (
-                <RouteComponent
+                <Route
                   key={route.path}
                   path={route.path}
-                  element={(() => {
-                    const node = <route.component />;
-                    if (route.fullscreen) {
-                      return node;
-                    }
-                    return <DesktopWrapper>{node}</DesktopWrapper>;
-                  })()}
-                  {...route.routeProps}
+                  element={
+                    <RouteTypeHandler>
+                      {route.fullscreen ? node : <DesktopWrapper>{node}</DesktopWrapper>}
+                    </RouteTypeHandler>
+                  }
                 />
               );
             })}

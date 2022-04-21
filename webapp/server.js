@@ -39,6 +39,7 @@ require("dotenv").config({ path: ".env" });
   );
 
   app.use(require("webpack-hot-middleware")(compiler));
+  app.use("/static", express.static("resources/static"));
   app.use("/static", express.static("dist/static"));
 
   app.use("/", (req, res) => {

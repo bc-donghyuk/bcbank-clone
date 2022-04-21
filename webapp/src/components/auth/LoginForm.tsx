@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { InputAdornment } from "@mui/material";
@@ -40,6 +40,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
     setValue,
   } = useFormContext();
   const { t } = useTranslation();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onChangeRecapt = (token: string) => {
     setValue("recapt", token);
@@ -55,7 +56,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
 
   const onSubmit = async (data: any) => {
     try {
-      const temp = await authService.login(data);
+      // const temp = await authService.login(data);
       // navigate("/");
     } catch (e) {
       console.log({ e });
@@ -65,7 +66,6 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
   useEffect(() => {
     setDefaultRecapchaState();
   }, []);
-
   return (
     <AuthLayout title={t("Welcome Back")}>
       <Form onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -94,7 +94,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
           </RecaptchaWrapper>
         )}
         <ButtonWrapper>
-          <Button fullWidth theme="primary" size="large" type="submit">
+          <Button fullWidth theme="primary" size="large" type="submit" loading={loading}>
             {t("Sign In")}
           </Button>
         </ButtonWrapper>

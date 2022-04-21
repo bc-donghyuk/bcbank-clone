@@ -2,11 +2,12 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import customLoadable from "./customLoadable";
+import PrivateRoute from "./PrivateRoute";
 
 const LoginContainer = customLoadable(() => import("containers/LoginContainer"));
 const DashboardContainer = customLoadable(() => import("containers/DashboardContainer"));
 interface iRoute {
-  type: "public";
+  type: "public" | "private";
   path?: string;
   component: React.ComponentType;
   fullscreen?: boolean;
@@ -14,7 +15,8 @@ interface iRoute {
 }
 
 const routeComponents = {
-  public: Route,
+  public: React.Fragment,
+  private: PrivateRoute,
 };
 
 const routes: iRoute[] = [
@@ -25,7 +27,7 @@ const routes: iRoute[] = [
   },
   {
     path: "/dashboard/*",
-    type: "public",
+    type: "private",
     component: DashboardContainer,
   },
 ];
