@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import customLoadable from "./customLoadable";
 
 const LoginContainer = customLoadable(() => import("containers/LoginContainer"));
-const TestContainer = customLoadable(() => import("containers/TestContainer"));
+const DashboardContainer = customLoadable(() => import("containers/DashboardContainer"));
 interface iRoute {
   type: "public";
   path?: string;
@@ -24,9 +24,9 @@ const routes: iRoute[] = [
     component: LoginContainer,
   },
   {
-    path: "/test/*",
+    path: "/dashboard/*",
     type: "public",
-    component: TestContainer,
+    component: DashboardContainer,
   },
 ];
 

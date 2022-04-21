@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { InputAdornment } from "@mui/material";
 import { useFormContext, UseFormReturn } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import Input from "components/common/form/Input";
 import Recaptcha from "components/auth/Recaptcha";
 import PasswordInput from "components/common/form/PasswordInput";
 import Button from "components/common/buttons/Button";
 
+import authService from "@core/services/authService";
 import { formMethodsProps } from "containers/LoginContainer";
 import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
-import authService from "@core/services/authService";
+import { IS_STAGING_OR_PRODUCTION } from "envConstants";
 
 const IconWrapper = styled.div`
   width: 24px;
@@ -31,6 +33,7 @@ interface Props {
 }
 
 const LoginForm: React.FC<Props> = ({ formMethods }) => {
+  let navigate = useNavigate();
   const {
     control,
     formState: { errors, dirtyFields },
@@ -43,14 +46,25 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
     setValue("isHuman", true);
   };
 
+  const setDefaultRecapchaState = () => {
+    if (!IS_STAGING_OR_PRODUCTION) {
+      setValue("recapt", "");
+      setValue("isHuman", true);
+    }
+  };
+
   const onSubmit = async (data: any) => {
     try {
       const temp = await authService.login(data);
-      console.log("loginFormData", temp);
+      // navigate("/");
     } catch (e) {
-      console.log("loginFormError", { e });
+      console.log({ e });
     }
   };
+
+  useEffect(() => {
+    setDefaultRecapchaState();
+  }, []);
 
   return (
     <AuthLayout title={t("Welcome Back")}>
@@ -74,9 +88,11 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
             <PasswordInput name="password" control={control} error={errors} placeholder={t("Password")} />
           </FormControl>
         </FormGroup>
-        <RecaptchaWrapper>
-          <Recaptcha onChange={onChangeRecapt} />
-        </RecaptchaWrapper>
+        {IS_STAGING_OR_PRODUCTION && (
+          <RecaptchaWrapper>
+            <Recaptcha onChange={onChangeRecapt} />
+          </RecaptchaWrapper>
+        )}
         <ButtonWrapper>
           <Button fullWidth theme="primary" size="large" type="submit">
             {t("Sign In")}

@@ -2,6 +2,8 @@ import httpService from "@core/services/httpService";
 
 let globalAccessToken: string | null = null;
 
+// TODO : Update axios interceptors
+
 const updateAccessToken = async (accessToken: string) => {
   globalAccessToken = accessToken;
 };

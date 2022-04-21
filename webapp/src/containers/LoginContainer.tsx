@@ -1,12 +1,14 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 
 import LoginForm from "components/auth/LoginForm";
-import { passwordErrorMessage } from "constants/errorMessage";
+
 import httpService from "@core/services/httpService";
+import { passwordErrorMessage } from "constants/errorMessage";
+import { isLoggedIn } from "utils/auth";
 
 const loginFormSchema = yup
   .object({
@@ -38,6 +40,7 @@ const LoginContainer = () => {
   return (
     <FormProvider {...methods}>
       <Routes>
+        {isLoggedIn() && <Route path="/" element={<Navigate replace to={"/dashboard"} />} />}
         <Route path="/" element={<LoginForm formMethods={methods} />} />
       </Routes>
     </FormProvider>
