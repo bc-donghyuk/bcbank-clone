@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { InputAdornment } from "@mui/material";
 import { useFormContext, UseFormReturn } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Input from "components/common/form/Input";
 import Recaptcha from "components/auth/Recaptcha";
@@ -16,6 +16,11 @@ import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
+
+export interface AuthDeviceData {
+  type: number;
+  ending?: string;
+}
 
 const IconWrapper = styled.div`
   width: 24px;
@@ -33,13 +38,13 @@ interface Props {
 }
 
 const LoginForm: React.FC<Props> = ({ formMethods }) => {
-  let navigate = useNavigate();
   const {
     control,
     formState: { errors, dirtyFields },
     setValue,
   } = useFormContext();
   const { t } = useTranslation();
+  const location = useLocation();
   const [loading, setLoading] = useState<boolean>(false);
 
   const onChangeRecapt = (token: string) => {
@@ -51,13 +56,44 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
     if (!IS_STAGING_OR_PRODUCTION) {
       setValue("recapt", "");
       setValue("isHuman", true);
+      // TODO : remove temp setState
+      setValue("email", "piouy_+login@blockcrafters.com");
+      setValue("password", "pqowie001!");
     }
   };
 
   const onSubmit = async (data: any) => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+
+    const { email, password, recapt } = data;
+
     try {
-      // const temp = await authService.login(data);
-      // navigate("/");
+      const { otpEnabled, authDevices }: { otpEnabled: boolean; authDevices: AuthDeviceData[] } =
+        await authService.login(data);
+
+      setLoading(false);
+
+      const state: {
+        email: string;
+        password: string;
+        authDevices: AuthDeviceData[];
+        from?: { pathname: string; search?: string };
+      } = {
+        email,
+        password,
+        authDevices,
+      };
+
+      console.log(location);
+
+      if (location.state) {
+        if (location.state?.from) {
+          state.from = location.state.from;
+        }
+      }
     } catch (e) {
       console.log({ e });
     }
