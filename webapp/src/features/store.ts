@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import logger from "redux-logger";
+import RootReducer from "./rootReducer";
 
 export const store = configureStore({
-  reducer: {
-    // dashboard:
-  },
+  reducer: RootReducer,
+  middleware: [logger],
 });
 
-export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export default store;

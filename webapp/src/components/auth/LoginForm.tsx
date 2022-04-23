@@ -16,6 +16,7 @@ import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
+import { useRootState } from "hooks/useRootState";
 
 export interface AuthDeviceData {
   type: number;
@@ -46,6 +47,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const [loading, setLoading] = useState<boolean>(false);
+  const featureConfig = useRootState(state => state);
 
   const onChangeRecapt = (token: string) => {
     setValue("recapt", token);
@@ -98,6 +100,8 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
       console.log({ e });
     }
   };
+
+  console.log(featureConfig);
 
   useEffect(() => {
     setDefaultRecapchaState();

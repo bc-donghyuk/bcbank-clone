@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import smil from "modernizr-esm/feature/svg/smil";
 import { ThemeProvider } from "@mui/material";
+import { Provider } from "react-redux";
 
 import DesktopWrapper from "components/common/desktop/DesktopWrapper";
 import UnsupportBrowserPage from "components/unsupport/UnsupportBrowserPage";
@@ -11,11 +12,12 @@ import { DASHBOARD_URL, LOGIN_URL } from "URLConstant";
 import MuiTheme from "styles/theme";
 import Services from "services";
 import { isLoggedIn } from "utils/auth";
+import { store } from "features/store";
 
 const App = () => {
   if (smil) {
     return (
-      <>
+      <Provider store={store}>
         <ThemeProvider theme={MuiTheme}>
           <Routes>
             {isLoggedIn() ? (
@@ -41,7 +43,7 @@ const App = () => {
             })}
           </Routes>
         </ThemeProvider>
-      </>
+      </Provider>
     );
   }
   return <UnsupportBrowserPage />;
