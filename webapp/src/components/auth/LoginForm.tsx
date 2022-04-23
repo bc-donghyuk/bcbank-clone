@@ -17,6 +17,7 @@ import { Form, FormGroup, FormControl } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
 import { useRootState } from "hooks/useRootState";
+import { RootState } from "features/rootReducer";
 
 export interface AuthDeviceData {
   type: number;
@@ -47,7 +48,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const [loading, setLoading] = useState<boolean>(false);
-  const featureConfig = useRootState(state => state);
+  const featureConfig = useRootState(({ featureConfig }: RootState) => featureConfig);
 
   const onChangeRecapt = (token: string) => {
     setValue("recapt", token);
