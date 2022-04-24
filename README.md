@@ -6,7 +6,7 @@
 
 ## Manage React state
 
-- useContext => Redux, Redux-Saga
+- useContext => Redux, Redux-Thunk
 
 ## React Data Fetching
 

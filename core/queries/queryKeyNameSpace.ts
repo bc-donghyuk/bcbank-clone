@@ -1,1 +1,6 @@
-export const QUERY_KEY_NAMESPACE_AUTH = "auth";
+enum QUERY_KEY_NAMESPACE {
+  AUTH = "auth",
+  USER = "user",
+}
+
+export default QUERY_KEY_NAMESPACE;

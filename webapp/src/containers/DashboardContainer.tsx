@@ -1,5 +1,5 @@
-import authService from "@core/services/authService";
 import React from "react";
+
 import { setLoggedIn } from "utils/auth";
 
 const DashboardContainer = () => {

@@ -27,5 +27,6 @@ export const featureConfigSlice = createSlice({
 });
 
 export const { increment, decrement, incrementByAmount } = featureConfigSlice.actions;
+export const featureConfigSelector = state => state.featureConfig;
 
 export default featureConfigSlice.reducer;
