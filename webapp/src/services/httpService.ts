@@ -4,6 +4,13 @@ let globalAccessToken: string | null = null;
 
 // TODO : Update axios interceptors
 
+httpService.baseAxios.interceptors.request.use(config => {
+  if (globalAccessToken != null) {
+    config.headers.Authorization = `Bearer ${globalAccessToken}`;
+  }
+  return config;
+});
+
 const updateAccessToken = async (accessToken: string) => {
   globalAccessToken = accessToken;
 };

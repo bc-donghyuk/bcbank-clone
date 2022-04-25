@@ -16,8 +16,8 @@ import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
-import { useRootState } from "hooks/useRootState";
-import { featureConfigSelector } from "@core/features/featureConfig/featureConfigSlice";
+import { useAppSelector } from "hooks/useAppSelector";
+import { featureConfigSelector } from "features/featureConfig/featureConfigSlice";
 
 export interface AuthDeviceData {
   type: number;
@@ -48,7 +48,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const [loading, setLoading] = useState<boolean>(false);
-  const featureConfig = useRootState(featureConfigSelector);
+  const featureConfig = useAppSelector(featureConfigSelector);
 
   const onChangeRecapt = (token: string) => {
     setValue("recapt", token);

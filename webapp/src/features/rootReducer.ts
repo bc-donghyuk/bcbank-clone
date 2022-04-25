@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import featureConfigReducer from "@core/features/featureConfig/featureConfigSlice";
+import featureConfigReducer from "features/featureConfig/featureConfigSlice";
 
 const reducer = combineReducers({
   featureConfig: featureConfigReducer,

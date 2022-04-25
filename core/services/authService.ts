@@ -49,8 +49,7 @@ async function login({ email, password, recapt, otpToken }: LoginProps) {
 }
 
 function handleLogin(data: any) {
-  // if (!http.checkAndUpdateAccessToken(data?.access_token)) {
-  if (!http.checkAndUpdateAccessToken("test")) {
+  if (!http.checkAndUpdateAccessToken(data?.access_token)) {
     return false;
   }
 
