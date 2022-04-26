@@ -6,11 +6,11 @@
 
 ## Manage React state
 
-- useContext => Redux, Redux-Thunk
+- useContext => useContext + recoil
 
 ## React Data Fetching
 
-- React Query + axios => React Query + React v18(Suspense) + axios
+- React Query + axios + React v18(Suspense)
 
 ## Routing
 
