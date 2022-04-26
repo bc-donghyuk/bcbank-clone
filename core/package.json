@@ -6,8 +6,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.1",
-    "react-query": "^3.35.0"
+    "react-query": "^3.35.0",
+    "recoil": "^0.7.2"
   },
   "devDependencies": {
     "@types/react-query": "^1.2.9"
