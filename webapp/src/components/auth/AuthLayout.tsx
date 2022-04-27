@@ -7,8 +7,16 @@ import Image from "components/common/desktop/Image";
 import { AuthContainer, LogoWrapper } from "./commonStyle";
 import colors from "styles/colors";
 import { isMobile } from "styles/devices";
+import { redirectToLanding } from "utils/pageRedirect";
 
 const DivWrapper = styled.div``;
+
+const Logo = styled.button`
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+`;
 
 const Title = styled.div`
   width: 100%;
@@ -33,11 +41,17 @@ interface Props {
 const AuthLayout: React.FC<Props> = ({ title, children }) => {
   const Wrapper = isMobile() ? Div100vh : DivWrapper;
 
+  const handleLogoClick = () => {
+    redirectToLanding();
+  };
+
   return (
     <Wrapper>
       <AuthContainer>
         <LogoWrapper>
-          <Image assetId="haruLogoHorizontal" classNames="m-auto logo-image" />
+          <Logo onClick={handleLogoClick}>
+            <Image assetId="haruLogoHorizontal" classNames="m-auto logo-image" />
+          </Logo>
         </LogoWrapper>
         <Title>{title}</Title>
         <Contents>{children}</Contents>

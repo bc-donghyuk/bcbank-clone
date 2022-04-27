@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { InputAdornment } from "@mui/material";
-import { useFormContext, UseFormReturn } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import Input from "components/common/form/Input";
 import Recaptcha from "components/auth/Recaptcha";
@@ -28,11 +28,7 @@ const ButtonWrapper = styled.div`
   margin-top: 24px;
 `;
 
-interface Props {
-  formMethods: UseFormReturn<formMethodsProps>;
-}
-
-const LoginForm: React.FC<Props> = ({ formMethods }) => {
+const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
   const {
     control,
     formState: { errors, dirtyFields },
