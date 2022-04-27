@@ -9,7 +9,7 @@ import LoginForm from "components/auth/LoginForm";
 import { passwordErrorMessage } from "constants/errorMessage";
 import { isLoggedIn } from "utils/auth";
 import { DASHBOARD_URL } from "URLConstant";
-import ProgressBar from "components/ProgressBar";
+import HaruSuspense from "components/HaruSuspense";
 
 const loginFormSchema = yup
   .object({
@@ -45,9 +45,9 @@ const LoginContainer = () => {
         <Route
           path="/"
           element={
-            <Suspense fallback={<ProgressBar />}>
+            <HaruSuspense>
               <LoginForm formMethods={methods} />
-            </Suspense>
+            </HaruSuspense>
           }
         />
       </Routes>
