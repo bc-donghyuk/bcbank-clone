@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { InputAdornment } from "@mui/material";
 import { useFormContext, UseFormReturn } from "react-hook-form";
 import { useLocation } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 import Input from "components/common/form/Input";
 import Recaptcha from "components/auth/Recaptcha";
@@ -11,6 +12,7 @@ import PasswordInput from "components/common/form/PasswordInput";
 import Button from "components/common/buttons/Button";
 
 import authService from "@core/services/authService";
+import { getFeatureConfigSelector } from "@core/recoil/selectors/featureConfig/featureConfigSelector";
 import { formMethodsProps } from "containers/LoginContainer";
 import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl } from "./commonStyle";
@@ -45,6 +47,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
   } = useFormContext();
   const { t } = useTranslation();
   const location = useLocation();
+  const featureConfig = useRecoilValue(getFeatureConfigSelector);
   const [loading, setLoading] = useState<boolean>(false);
 
   const onChangeRecapt = (token: string) => {
@@ -102,6 +105,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
   useEffect(() => {
     setDefaultRecapchaState();
   }, []);
+
   return (
     <AuthLayout title={t("Welcome Back")}>
       <Form onSubmit={formMethods.handleSubmit(onSubmit)}>
