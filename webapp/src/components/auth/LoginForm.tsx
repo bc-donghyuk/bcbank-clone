@@ -3,26 +3,19 @@ import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { InputAdornment } from "@mui/material";
 import { useFormContext, UseFormReturn } from "react-hook-form";
-import { useLocation } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 
 import Input from "components/common/form/Input";
 import Recaptcha from "components/auth/Recaptcha";
 import PasswordInput from "components/common/form/PasswordInput";
 import Button from "components/common/buttons/Button";
+import Snackbar from "components/common/snackbars/Snackbar";
 
-import authService from "@core/services/authService";
-import { getFeatureConfigSelector } from "@core/recoil/selectors/featureConfig/featureConfigSelector";
 import { formMethodsProps } from "containers/LoginContainer";
 import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
-
-export interface AuthDeviceData {
-  type: number;
-  ending?: string;
-}
+import useFetchLogin from "hooks/auth/useFetchLogin";
 
 const IconWrapper = styled.div`
   width: 24px;
@@ -46,9 +39,10 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
     setValue,
   } = useFormContext();
   const { t } = useTranslation();
-  const location = useLocation();
-  const featureConfig = useRecoilValue(getFeatureConfigSelector);
+  const { login } = useFetchLogin();
   const [loading, setLoading] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [serverErrorMessage, setServerErrorMessage] = useState<string>("");
 
   const onChangeRecapt = (token: string) => {
     setValue("recapt", token);
@@ -60,7 +54,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
       setValue("recapt", "");
       setValue("isHuman", true);
       // TODO : remove temp setState
-      setValue("email", "piouy_+login@blockcrafters.com");
+      setValue("email", "piouy_@blockcrafters.com");
       setValue("password", "pqowie001!");
     }
   };
@@ -70,36 +64,17 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
       return;
     }
     setLoading(true);
+    await login({
+      data,
+      setValue,
+      setLoading,
+      setShowError,
+      setServerErrorMessage,
+    });
+  };
 
-    const { email, password, recapt } = data;
-
-    try {
-      const { otpEnabled, authDevices }: { otpEnabled: boolean; authDevices: AuthDeviceData[] } =
-        await authService.login(data);
-
-      setLoading(false);
-
-      const state: {
-        email: string;
-        password: string;
-        authDevices: AuthDeviceData[];
-        from?: { pathname: string; search?: string };
-      } = {
-        email,
-        password,
-        authDevices,
-      };
-
-      console.log(location);
-
-      if (location.state) {
-        if (location.state?.from) {
-          state.from = location.state.from;
-        }
-      }
-    } catch (e) {
-      console.log({ e });
-    }
+  const handleCloseErrorMessage = () => {
+    setShowError(false);
   };
 
   useEffect(() => {
@@ -139,6 +114,7 @@ const LoginForm: React.FC<Props> = ({ formMethods }) => {
           </Button>
         </ButtonWrapper>
       </Form>
+      <Snackbar theme="error" open={showError} message={serverErrorMessage} onClose={handleCloseErrorMessage} />
     </AuthLayout>
   );
 };

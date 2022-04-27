@@ -1,10 +1,8 @@
 import { atom } from "recoil";
 
-interface featureConfigStateProps {
-  data: Record<string, number> | null;
-}
+export type featureConfigData = Record<string, number> | {};
 
 export const featureConfigState = atom({
   key: "featureConfigState",
-  default: { data: null } as featureConfigStateProps,
+  default: {} as featureConfigData,
 });

@@ -1,7 +1,7 @@
 import http from "./httpService";
 import { AUTH_LOGIN_ENDPOINT } from "../constants/apiURIs";
 
-interface LoginProps {
+export interface LoginProps {
   email: string;
   password: string;
   recapt?: string;

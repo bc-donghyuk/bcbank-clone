@@ -11,8 +11,6 @@ const DashboardContainer = () => {
     window.location.reload();
   };
 
-  console.log(data);
-
   return (
     <div>
       <div>Dashboard</div>

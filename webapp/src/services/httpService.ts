@@ -2,7 +2,7 @@ import httpService from "@core/services/httpService";
 
 let globalAccessToken: string | null = null;
 
-// TODO : Update axios interceptors
+// TODO : Update axios response interceptors
 
 httpService.baseAxios.interceptors.request.use(config => {
   if (globalAccessToken != null) {
