@@ -20,7 +20,7 @@ const loginFormSchema = yup
     recapt: yup.string().nullable(),
   })
   .required();
-interface formMethodsState {
+interface loginFormMethodsState {
   email: string;
   password: string;
   isHuman: boolean;
@@ -28,11 +28,11 @@ interface formMethodsState {
 }
 
 export interface formMethodsProps {
-  formMethods: UseFormReturn<formMethodsState>;
+  formMethods: UseFormReturn<loginFormMethodsState>;
 }
 
 const LoginContainer = () => {
-  const methods = useForm<formMethodsState>({
+  const methods = useForm<loginFormMethodsState>({
     resolver: yupResolver(loginFormSchema),
     defaultValues: {
       email: "",

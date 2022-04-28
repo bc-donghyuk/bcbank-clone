@@ -1,13 +1,11 @@
 import React from "react";
 
+import SignupForm from "components/auth/SignupForm";
+
 interface Props {}
 
 const SignupContainer: React.FC<Props> = () => {
-  return (
-    <div>
-      <div>Signup</div>
-    </div>
-  );
+  return <SignupForm />;
 };
 
 export default SignupContainer;
