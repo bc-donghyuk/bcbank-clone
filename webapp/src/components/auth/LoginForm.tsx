@@ -17,6 +17,7 @@ import AuthIcon from "assets/icons/AuthIcon";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
 import useFetchLogin from "hooks/auth/useFetchLogin";
 import { useNavigate } from "react-router-dom";
+import { PASSWORD_CHANGE_PATH, SIGNUP_URL } from "URLConstant";
 
 const IconWrapper = styled.div`
   width: 24px;
@@ -77,7 +78,11 @@ const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
   };
 
   const handleSignupClick = () => {
-    navigate("/signup");
+    navigate(SIGNUP_URL);
+  };
+
+  const handleChangePasswordClick = () => {
+    navigate(PASSWORD_CHANGE_PATH);
   };
 
   useEffect(() => {
@@ -123,7 +128,7 @@ const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
         </FormFooterItem>
         <FormFooterItem>
           {t("Forgot your password?")}&nbsp;
-          <LinkItem onClick={() => {}}>{t("Reset Password")}</LinkItem>
+          <LinkItem onClick={handleChangePasswordClick}>{t("Reset Password")}</LinkItem>
         </FormFooterItem>
       </FormFooter>
       <Snackbar theme="error" open={showError} message={serverErrorMessage} onClose={handleCloseErrorMessage} />

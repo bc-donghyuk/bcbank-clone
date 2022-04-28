@@ -14,40 +14,43 @@ import { DASHBOARD_URL, LOGIN_URL } from "URLConstant";
 import MuiTheme from "styles/theme";
 import Services from "services";
 import { isLoggedIn } from "utils/auth";
+import ErrorBoundary from "components/common/ErrorBoundary";
 
 const App = () => {
   if (smil) {
     return (
-      <ThemeProvider theme={MuiTheme}>
-        <HaruQueriesClientProvider>
-          <RecoilRoot>
-            <DebugObserver />
-            <Routes>
-              {isLoggedIn() ? (
-                <Route path="/" element={<Navigate replace to={DASHBOARD_URL} />} />
-              ) : (
-                <Route path="/" element={<Navigate replace to={LOGIN_URL} />} />
-              )}
-              {routes.map(route => {
-                const RouteTypeHandler = routeComponents[route.type];
-                const node = <route.component />;
+      <ErrorBoundary>
+        <ThemeProvider theme={MuiTheme}>
+          <HaruQueriesClientProvider>
+            <RecoilRoot>
+              <DebugObserver />
+              <Routes>
+                {isLoggedIn() ? (
+                  <Route path="/" element={<Navigate replace to={DASHBOARD_URL} />} />
+                ) : (
+                  <Route path="/" element={<Navigate replace to={LOGIN_URL} />} />
+                )}
+                {routes.map(route => {
+                  const RouteTypeHandler = routeComponents[route.type];
+                  const node = <route.component />;
 
-                return (
-                  <Route
-                    key={route.path}
-                    path={route.path}
-                    element={
-                      <RouteTypeHandler>
-                        {route.fullscreen ? node : <DesktopWrapper>{node}</DesktopWrapper>}
-                      </RouteTypeHandler>
-                    }
-                  />
-                );
-              })}
-            </Routes>
-          </RecoilRoot>
-        </HaruQueriesClientProvider>
-      </ThemeProvider>
+                  return (
+                    <Route
+                      key={route.path}
+                      path={route.path}
+                      element={
+                        <RouteTypeHandler>
+                          {route.fullscreen ? node : <DesktopWrapper>{node}</DesktopWrapper>}
+                        </RouteTypeHandler>
+                      }
+                    />
+                  );
+                })}
+              </Routes>
+            </RecoilRoot>
+          </HaruQueriesClientProvider>
+        </ThemeProvider>
+      </ErrorBoundary>
     );
   }
   return <UnsupportBrowserPage />;

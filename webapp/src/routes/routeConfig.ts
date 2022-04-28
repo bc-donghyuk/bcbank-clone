@@ -1,11 +1,11 @@
 import React from "react";
-import { Route } from "react-router-dom";
 
 import customLoadable from "./customLoadable";
 import PrivateRoute from "./PrivateRoute";
 
 const LoginContainer = customLoadable(() => import("containers/LoginContainer"));
 const SignupContainer = customLoadable(() => import("containers/SignupContainer"));
+const PasswordChangeContainer = customLoadable(() => import("containers/PasswordChangeContainer"));
 const DashboardContainer = customLoadable(() => import("containers/DashboardContainer"));
 interface iRoute {
   type: "public" | "private";
@@ -30,6 +30,11 @@ const routes: iRoute[] = [
     path: "/signup/*",
     type: "public",
     component: SignupContainer,
+  },
+  {
+    path: "/password-change/*",
+    type: "public",
+    component: PasswordChangeContainer,
   },
   {
     path: "/dashboard/*",
