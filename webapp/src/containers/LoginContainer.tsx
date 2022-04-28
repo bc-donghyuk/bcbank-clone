@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 import LoginForm from "components/auth/LoginForm";
 import HaruSuspense from "components/HaruSuspense";
@@ -27,10 +27,6 @@ interface loginFormMethodsState {
   recapt: string | null;
 }
 
-export interface formMethodsProps {
-  formMethods: UseFormReturn<loginFormMethodsState>;
-}
-
 const LoginContainer = () => {
   const methods = useForm<loginFormMethodsState>({
     resolver: yupResolver(loginFormSchema),
@@ -47,12 +43,12 @@ const LoginContainer = () => {
     <FormProvider {...methods}>
       <Routes>
         {isLoggedIn() && <Route path="/" element={<Navigate replace to={DASHBOARD_URL} />} />}
-        <Route path={OTP_URL} element={<LoginFormOtp formMethods={methods} />} />
+        <Route path={OTP_URL} element={<LoginFormOtp />} />
         <Route
           path="/"
           element={
             <HaruSuspense>
-              <LoginForm formMethods={methods} />
+              <LoginForm />
             </HaruSuspense>
           }
         />

@@ -10,7 +10,6 @@ import PasswordInput from "components/common/form/PasswordInput";
 import Button from "components/common/buttons/Button";
 import Snackbar from "components/common/snackbars/Snackbar";
 
-import { formMethodsProps } from "containers/LoginContainer";
 import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl, FormFooter, FormFooterItem, LinkItem } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
@@ -31,11 +30,12 @@ const ButtonWrapper = styled.div`
   padding: 16px 0;
 `;
 
-const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
+const LoginForm: React.FC = () => {
   const {
     control,
     formState: { errors, dirtyFields },
     setValue,
+    handleSubmit,
   } = useFormContext();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -91,7 +91,7 @@ const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
 
   return (
     <AuthLayout title={t("Welcome Back")}>
-      <Form onSubmit={formMethods.handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <FormControl>
             <Input
