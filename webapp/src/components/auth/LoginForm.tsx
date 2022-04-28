@@ -12,10 +12,11 @@ import Snackbar from "components/common/snackbars/Snackbar";
 
 import { formMethodsProps } from "containers/LoginContainer";
 import AuthLayout from "./AuthLayout";
-import { Form, FormGroup, FormControl } from "./commonStyle";
+import { Form, FormGroup, FormControl, FormFooter, FormFooterItem, LinkItem } from "./commonStyle";
 import AuthIcon from "assets/icons/AuthIcon";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
 import useFetchLogin from "hooks/auth/useFetchLogin";
+import { useNavigate } from "react-router-dom";
 
 const IconWrapper = styled.div`
   width: 24px;
@@ -25,7 +26,8 @@ const IconWrapper = styled.div`
 const RecaptchaWrapper = styled.div``;
 
 const ButtonWrapper = styled.div`
-  margin-top: 24px;
+  margin-top: 8px;
+  padding: 16px 0;
 `;
 
 const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
@@ -35,6 +37,7 @@ const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
     setValue,
   } = useFormContext();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { login } = useFetchLogin();
   const [loading, setLoading] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
@@ -71,6 +74,10 @@ const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
 
   const handleCloseErrorMessage = () => {
     setShowError(false);
+  };
+
+  const handleSignupClick = () => {
+    navigate("/signup");
   };
 
   useEffect(() => {
@@ -110,6 +117,15 @@ const LoginForm: React.FC<formMethodsProps> = ({ formMethods }) => {
           </Button>
         </ButtonWrapper>
       </Form>
+      <FormFooter>
+        <FormFooterItem>
+          {t("Don't have an account yet?")}&nbsp;<LinkItem onClick={handleSignupClick}>{t("Sign up")}</LinkItem>
+        </FormFooterItem>
+        <FormFooterItem>
+          {t("Forgot your password?")}&nbsp;
+          <LinkItem onClick={() => {}}>{t("Reset Password")}</LinkItem>
+        </FormFooterItem>
+      </FormFooter>
       <Snackbar theme="error" open={showError} message={serverErrorMessage} onClose={handleCloseErrorMessage} />
     </AuthLayout>
   );

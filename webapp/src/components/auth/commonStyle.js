@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+import colors from "styles/colors";
+
 export const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,4 +33,24 @@ export const FormGroup = styled.div``;
 
 export const FormControl = styled.div`
   padding-bottom: 12px;
+`;
+
+export const FormFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+`;
+
+export const FormFooterItem = styled.div`
+  font-size: 14px;
+  padding-bottom: 8px;
+`;
+
+export const LinkItem = styled.span`
+  display: inline-block;
+  color: ${colors.brand[100]};
+  font-weight: bold;
+  cursor: pointer;
 `;
