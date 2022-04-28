@@ -34,7 +34,7 @@ const Contents = styled.div`
 `;
 
 interface Props {
-  title: string;
+  title?: string;
   children: React.ReactNode;
 }
 
@@ -53,7 +53,7 @@ const AuthLayout: React.FC<Props> = ({ title, children }) => {
             <Image assetId="haruLogoHorizontal" classNames="m-auto logo-image" />
           </Logo>
         </LogoWrapper>
-        <Title>{title}</Title>
+        {title && <Title>{title}</Title>}
         <Contents>{children}</Contents>
       </AuthContainer>
     </Wrapper>

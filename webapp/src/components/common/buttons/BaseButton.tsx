@@ -126,7 +126,7 @@ export type BaseButtonSize = "small" | "medium" | "large";
 export interface BaseButtonProps {
   theme: BaseButtonTheme;
   size: BaseButtonSize;
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: "button" | "submit" | "reset";
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
   fullWidth?: boolean;

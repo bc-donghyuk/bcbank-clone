@@ -9,7 +9,7 @@ const LoginFormOtp: React.FC<formMethodsProps> = () => {
   const navigate = useNavigate();
 
   return (
-    <AuthLayout title="">
+    <AuthLayout>
       <OtpForm />
     </AuthLayout>
   );

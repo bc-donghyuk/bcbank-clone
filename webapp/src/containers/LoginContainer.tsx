@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,7 +10,7 @@ import LoginFormOtp from "components/auth/LoginFormOtp";
 
 import { passwordErrorMessage } from "constants/errorMessage";
 import { isLoggedIn } from "utils/auth";
-import { DASHBOARD_URL, LOGIN_OTP_URL } from "URLConstant";
+import { DASHBOARD_URL, OTP_URL } from "URLConstant";
 
 const loginFormSchema = yup
   .object({
@@ -47,7 +47,7 @@ const LoginContainer = () => {
     <FormProvider {...methods}>
       <Routes>
         {isLoggedIn() && <Route path="/" element={<Navigate replace to={DASHBOARD_URL} />} />}
-        <Route path={LOGIN_OTP_URL} element={<LoginFormOtp formMethods={methods} />} />
+        <Route path={OTP_URL} element={<LoginFormOtp formMethods={methods} />} />
         <Route
           path="/"
           element={
