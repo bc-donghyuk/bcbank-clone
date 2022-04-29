@@ -31,18 +31,6 @@ const signupFormSchema = yup.object({
   userType: yup.number(),
 });
 
-signupFormSchema
-  .validate({
-    email: "piouy_@naver.com",
-    password: "pqowie001!",
-    passwordConfirmation: "pqowie001!",
-    referralCode: "",
-    userType: 1,
-  })
-  .then(value => {
-    console.log(value);
-  });
-
 const SignupContainer: React.FC<Props> = () => {
   const method = useForm<signupFormMethodsState>({
     mode: "onChange",
