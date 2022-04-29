@@ -1,0 +1,2 @@
+export const BCBANK_USER__TYPE_PERSONAL = 0;
+export const BCBANK_USER__TYPE_CORPORATE = 1;
