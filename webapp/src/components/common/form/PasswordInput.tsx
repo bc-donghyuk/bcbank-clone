@@ -7,6 +7,7 @@ import Input from "./Input";
 import colors from "styles/colors";
 import { ExclamationIcon } from "assets/icons";
 import AuthIcon from "assets/icons/AuthIcon";
+import HaruTrans from "components/HaruTrans";
 
 const ErrorColor = "#eb3640";
 
@@ -123,7 +124,8 @@ const PasswordInput: React.FC<Props> = ({ name, control, label, error, withError
               <ExclamationIcon color={ErrorColor} />
             </IconWrapper>
           )}
-          {error[name].message}
+          {}
+          <HaruTrans ns="errors" i18nKey={error[name].message} />
         </FormHelperText>
       )}
     </FormGroup>
