@@ -9,37 +9,40 @@ export interface HaruTabsProps {
 }
 
 const TabsStyle = () => ({
-  //   height: "36px",
+  height: "36px",
   minHeight: "36px",
-  padding: 0,
-  //   boxSizing: "border-box",
-  //   backgroundColor: colors.grayscale.gray0,
-  //   borderRadius: 8,
-  //   "& .MuiTabs-indicator": {
-  //     bottom: 0,
-  //     zIndex: 0,
-  //     height: 30,
-  //     backgroundColor: colors.grayscale.white,
-  //     borderRadius: 6,
-  //   },
+  padding: "3px",
+  boxSizing: "border-box",
+  background: colors.grayscale.gray0,
+  borderRadius: "8px",
+  "& .MuiTabs-indicator": {
+    zIndex: 0,
+    bottom: 0,
+    height: 30,
+    background: colors.grayscale.white,
+    borderRadius: "6px",
+  },
 });
 
 const TabStyle = () => ({
-  minWidth: "65px",
+  flex: "1 1",
+  zIndex: 1,
+  minWidth: 65,
+  minHeight: 30,
+  height: 30,
   padding: 0,
-  //   zIndex: 1,
-  //   minWidth: 65,
-  //   height: 30,
-  //   minHeight: 30,
-  //   backgroundColor: "transparent",
-  //   borderRadius: 6,
-  //   color: colors.grayscale.gray4,
-  //   fontWeight: 500,
-  //   fontSize: 13,
-  //   "& .Mui-selected": {
-  //     color: colors.brand[100],
-  //     fontWeight: "bold",
-  //   },
+  backgroundColor: "transparent",
+  borderRadius: 6,
+  color: colors.grayscale.gray4,
+  fontWeight: 500,
+  fontSize: 13,
+  "&.Mui-selected": {
+    color: colors.brand[100],
+    fontWeight: "bold",
+    "& .MuiTouchRipple-root": {
+      color: colors.grayscale.white,
+    },
+  },
 });
 
 const HaruTabs: React.FC<HaruTabsProps> = ({ tabIndex, tabItems, onChange }) => {
