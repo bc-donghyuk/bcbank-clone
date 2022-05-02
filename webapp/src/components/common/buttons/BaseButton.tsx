@@ -170,11 +170,11 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   type,
   onClick,
   children,
-  disabled,
-  fullWidth,
+  disabled = false,
+  fullWidth = false,
   textColor,
   styles,
-  loading,
+  loading = false,
   ...other
 }) => {
   let variant: "text" | "contained" | "outlined" = "contained";
@@ -219,12 +219,6 @@ const BaseButton: React.FC<BaseButtonProps> = ({
       {loading ? <CircularProgress size={spinnerSize[size]} sx={spinnerClasses} /> : children}
     </Button>
   );
-};
-
-BaseButton.defaultProps = {
-  loading: false,
-  disabled: false,
-  fullWidth: false,
 };
 
 export default BaseButton;

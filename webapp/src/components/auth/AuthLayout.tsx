@@ -11,10 +11,12 @@ import { redirectToLanding } from "utils/pageRedirect";
 
 const DivWrapper = styled.div``;
 
-const Logo = styled.button`
+const Logo = styled.div`
+  height: 30px;
   background: none;
   outline: none;
   border: none;
+  padding: 0;
   cursor: pointer;
 `;
 

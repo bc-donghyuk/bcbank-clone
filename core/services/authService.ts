@@ -42,7 +42,6 @@ async function login({ email, password, recapt, otpToken }: LoginProps) {
 
   const { data } = await http.post(AUTH_LOGIN_ENDPOINT, payload);
 
-  console.log(data);
   handleLogin(data);
 
   return { otpEnabled: !!data.otp_enabled, authDevices: data.auth_devices };

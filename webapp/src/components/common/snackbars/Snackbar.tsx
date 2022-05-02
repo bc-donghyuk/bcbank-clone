@@ -54,7 +54,7 @@ const iconButtonStyle = () => ({
   paddingLeft: "16px",
 });
 
-const Snackbar: React.FC<Props> = ({ open, message, theme, onClose, vertical, horizontal }) => {
+const Snackbar: React.FC<Props> = ({ open, message, theme, onClose, vertical = "bottom", horizontal = "center" }) => {
   let themeStyles = {};
 
   switch (theme) {
@@ -87,11 +87,6 @@ const Snackbar: React.FC<Props> = ({ open, message, theme, onClose, vertical, ho
       }
     />
   );
-};
-
-Snackbar.defaultProps = {
-  vertical: "bottom",
-  horizontal: "center",
 };
 
 export default Snackbar;

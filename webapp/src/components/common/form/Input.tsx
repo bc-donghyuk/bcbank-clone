@@ -1,6 +1,6 @@
 import React from "react";
 import { InputLabel, Input as BaseInput, InputProps, FormControl, Theme, ThemeOptions } from "@mui/material";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import { Control, Controller, FieldError } from "react-hook-form";
 
 import colors from "styles/colors";
 import HelpMessage from "./HelpMessage";
@@ -45,7 +45,7 @@ const InputStyle = (withBorderBottom?: boolean) => (theme: Theme) => ({
 interface Props extends Omit<InputProps, "error"> {
   name: string;
   control: Control;
-  error?: FieldErrors;
+  error?: FieldError;
   label?: string;
   withBorderBottom?: boolean;
   withErrorMessage?: boolean;
@@ -57,8 +57,8 @@ const Input: React.FC<Props> = ({
   label,
   type = "text",
   error,
-  withBorderBottom,
-  withErrorMessage,
+  withBorderBottom = true,
+  withErrorMessage = true,
   endAdornment,
   ...rest
 }) => {
@@ -84,14 +84,9 @@ const Input: React.FC<Props> = ({
           />
         )}
       />
-      {error && error[name] && <HelpMessage message={error[name].message} />}
+      {error && <HelpMessage message={error.message} />}
     </FormControl>
   );
-};
-
-Input.defaultProps = {
-  withBorderBottom: true,
-  withErrorMessage: true,
 };
 
 export default Input;

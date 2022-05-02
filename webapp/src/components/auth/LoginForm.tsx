@@ -98,7 +98,7 @@ const LoginForm: React.FC = () => {
             />
           </FormControl>
           <FormControl>
-            <PasswordInput name="password" control={control} error={errors} placeholder={t("Password")} />
+            <PasswordInput name="password" control={control} error={errors["password"]} placeholder={t("Password")} />
           </FormControl>
         </FormGroup>
         {IS_STAGING_OR_PRODUCTION && (

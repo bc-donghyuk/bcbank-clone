@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { FormGroup, FormHelperText, IconButton, InputAdornment, InputLabel, Theme } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Control, FieldErrors } from "react-hook-form";
+import React, { useState } from "react";
+import { Control, FieldError } from "react-hook-form";
 
 import Input from "./Input";
 import colors from "styles/colors";
@@ -73,12 +73,20 @@ interface Props {
   control: Control;
   label?: string;
   placeholder: string;
-  error?: FieldErrors;
+  error?: FieldError;
   withErrorMessage?: boolean;
   withIcon?: boolean;
 }
 
-const PasswordInput: React.FC<Props> = ({ name, control, label, error, withErrorMessage, withIcon, ...rest }) => {
+const PasswordInput: React.FC<Props> = ({
+  name,
+  control,
+  label,
+  error,
+  withErrorMessage = true,
+  withIcon = true,
+  ...rest
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleMouseDownPassword = (event: React.MouseEvent) => event.preventDefault();
@@ -117,7 +125,7 @@ const PasswordInput: React.FC<Props> = ({ name, control, label, error, withError
         endAdornment={EndAdornment}
         {...rest}
       />
-      {withErrorMessage && error && !!error[name] && (
+      {withErrorMessage && error && (
         <FormHelperText sx={FormHelperTextStyle}>
           {withIcon && (
             <IconWrapper>
@@ -125,16 +133,11 @@ const PasswordInput: React.FC<Props> = ({ name, control, label, error, withError
             </IconWrapper>
           )}
           {}
-          <HaruTrans ns="errors" i18nKey={error[name].message} />
+          <HaruTrans ns="errors" i18nKey={error.message} />
         </FormHelperText>
       )}
     </FormGroup>
   );
-};
-
-PasswordInput.defaultProps = {
-  withErrorMessage: true,
-  withIcon: true,
 };
 
 export default PasswordInput;

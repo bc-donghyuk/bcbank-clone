@@ -18,7 +18,7 @@ const HelpMessageStyle = (theme: Theme) => ({
 });
 
 interface Props {
-  message: string;
+  message?: string;
 }
 
 const HelpMessage: React.FC<Props> = ({ message }) => {
