@@ -14,5 +14,13 @@
       "title": "Login - Haru",
       "description": "Haru App login page."
     }
+  },
+  "/signup": {
+    "filename": "html/signup.html",
+    "template": "src/html/index.ejs",
+    "templateParameters": {
+      "title": "Sign Up - Haru",
+      "description": "Create an account with Haru and start earning from day one."
+    }
   }
 }

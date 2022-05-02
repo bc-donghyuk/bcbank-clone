@@ -6,6 +6,7 @@ import { RecoilRoot } from "recoil";
 
 import DesktopWrapper from "components/common/desktop/DesktopWrapper";
 import UnsupportBrowserPage from "components/unsupport/UnsupportBrowserPage";
+import ErrorBoundary from "components/common/ErrorBoundary";
 
 import HaruQueriesClientProvider from "@core/queries/HaruQueriesClientProvider";
 import DebugObserver from "@core/recoil/DebugObserver";
@@ -14,9 +15,8 @@ import { DASHBOARD_URL, LOGIN_URL } from "URLConstant";
 import MuiTheme from "styles/theme";
 import Services from "services";
 import { isLoggedIn } from "utils/auth";
-import ErrorBoundary from "components/common/ErrorBoundary";
 
-const App = () => {
+const App = ({ location }) => {
   if (smil) {
     return (
       <ErrorBoundary>
@@ -26,7 +26,7 @@ const App = () => {
               <DebugObserver />
               <Routes>
                 {isLoggedIn() ? (
-                  <Route path="/" element={<Navigate replace to={DASHBOARD_URL} />} />
+                  <Route path="/" element={<Navigate replace to={(DASHBOARD_URL, { state: location.state })} />} />
                 ) : (
                   <Route path="/" element={<Navigate replace to={LOGIN_URL} />} />
                 )}
