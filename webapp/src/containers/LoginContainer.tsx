@@ -8,14 +8,14 @@ import LoginForm from "components/auth/LoginForm";
 import HaruSuspense from "components/HaruSuspense";
 import LoginFormOtp from "components/auth/LoginFormOtp";
 
-import { passwordErrorMessage } from "constants/errorMessage";
+import { passwordErrorMessages } from "constants/errorMessage";
 import { isLoggedIn } from "utils/auth";
 import { DASHBOARD_URL, OTP_URL } from "URLConstant";
 
 const loginFormSchema = yup
   .object({
     email: yup.string().email({ minDomainAtoms: 2 }).required(),
-    password: yup.string().required(passwordErrorMessage["any.empty"]),
+    password: yup.string().required(passwordErrorMessages["any.empty"]),
     isHuman: yup.boolean().required().oneOf([true]),
     recapt: yup.string().nullable(),
   })

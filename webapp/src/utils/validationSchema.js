@@ -1,10 +1,11 @@
+import { emailErrorMessages, passwordErrorMessages } from "constants/errorMessage";
 import * as yup from "yup";
 
 export const EmailSchema = yup
   .string()
   .email({ minDomainAtoms: 2 })
   .matches(/^(?!.*@(daum.net|hanmail.net)$).*$/)
-  .required();
+  .required(emailErrorMessages["any.empty"]);
 
 export const passwordSchema = yup
   .string()
@@ -12,4 +13,4 @@ export const passwordSchema = yup
   .max(30)
   .matches(/[0-9]+/, "numbers")
   .matches(/[a-zA-Z]+/, "characters")
-  .required();
+  .required(passwordErrorMessages["any.empty"]);

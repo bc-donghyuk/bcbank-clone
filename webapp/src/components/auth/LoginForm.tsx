@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
-import { InputAdornment } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 
 import Input from "components/common/form/Input";
@@ -12,16 +11,11 @@ import Snackbar from "components/common/snackbars/Snackbar";
 
 import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl, FormFooter, FormFooterItem, LinkItem } from "./commonStyle";
-import AuthIcon from "assets/icons/AuthIcon";
+import InputAdornment from "components/common/form/InputAdornment";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
 import useFetchLogin from "hooks/auth/useFetchLogin";
 import { useNavigate } from "react-router-dom";
 import { PASSWORD_CHANGE_PATH, SIGNUP_URL } from "URLConstant";
-
-const IconWrapper = styled.div`
-  width: 24px;
-  height: 24px;
-`;
 
 const RecaptchaWrapper = styled.div``;
 
@@ -58,6 +52,8 @@ const LoginForm: React.FC = () => {
       setValue("password", "pqowie001!");
     }
   };
+
+  const isEmailValid = dirtyFields?.email && errors && !errors.email;
 
   const onSubmit = async (data: any) => {
     if (loading) {
@@ -98,13 +94,7 @@ const LoginForm: React.FC = () => {
               name="email"
               control={control}
               placeholder={t("Email")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconWrapper>
-                    <AuthIcon type={dirtyFields?.email && errors && !errors.email ? "checkOn" : "checkOff"} />
-                  </IconWrapper>
-                </InputAdornment>
-              }
+              endAdornment={<InputAdornment position="end" isValid={isEmailValid} />}
             />
           </FormControl>
           <FormControl>
