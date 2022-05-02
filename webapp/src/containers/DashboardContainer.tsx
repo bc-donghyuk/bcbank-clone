@@ -1,6 +1,6 @@
-import useUserProfileQuery from "@core/queries/user/useUserProfileQuery";
 import React from "react";
 
+import useUserProfileQuery from "@core/queries/user/useUserProfileQuery";
 import { setLoggedIn } from "utils/auth";
 
 const DashboardContainer = () => {

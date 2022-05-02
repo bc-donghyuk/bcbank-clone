@@ -31,7 +31,6 @@
     "i18next-browser-languagedetector": "^6.1.4",
     "modernizr-esm": "^2.0.0",
     "react-div-100vh": "^0.7.0",
-    "react-dom": "^18.0.0",
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.29.0",
     "react-i18next": "^11.16.2",

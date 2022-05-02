@@ -23,7 +23,7 @@ interface loginProps {
   setServerErrorMessage: (value: string) => void;
 }
 
-const useFetchLogin = () => {
+const useLogin = () => {
   const featureConfig = useRecoilValue(getFeatureConfigSelector);
   const location = useLocation();
   const navigate = useNavigate();
@@ -70,7 +70,6 @@ const useFetchLogin = () => {
     } catch (err) {
       setLoading(false);
 
-      // TODO : 왜 catch에서  err.response를 따져 검증페이지로 이동시키는지 생각해보고 적용하기
       if (err.response?.status === 400) {
         setShowError(true);
         if (IS_STAGING_OR_PRODUCTION) {
@@ -85,4 +84,4 @@ const useFetchLogin = () => {
   return { login };
 };
 
-export default useFetchLogin;
+export default useLogin;

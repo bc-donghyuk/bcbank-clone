@@ -13,7 +13,7 @@ import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl, FormFooter, FormFooterItem, LinkItem } from "./commonStyle";
 import InputAdornment from "components/common/form/InputAdornment";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
-import useFetchLogin from "hooks/auth/useFetchLogin";
+import useLogin from "hooks/auth/useLogin";
 import { useNavigate } from "react-router-dom";
 import { PASSWORD_CHANGE_PATH, SIGNUP_URL } from "URLConstant";
 
@@ -33,7 +33,7 @@ const LoginForm: React.FC = () => {
   } = useFormContext();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { login } = useFetchLogin();
+  const { login } = useLogin();
   const [loading, setLoading] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [serverErrorMessage, setServerErrorMessage] = useState<string>("");
