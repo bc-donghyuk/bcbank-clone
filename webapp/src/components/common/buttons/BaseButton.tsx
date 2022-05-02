@@ -85,6 +85,34 @@ const secondarySpinnerStyle = () => ({
   color: colors.brand.dark,
 });
 
+const darkButtonStyle = () => ({
+  background: colors.grayscale.gray8,
+  color: colors.grayscale.white,
+
+  "&:hover": {
+    background: colors.grayscale.gray6,
+    color: colors.grayscale.gray4,
+    "@media (hover: none)": {
+      background: colors.grayscale.gray8,
+      color: colors.grayscale.white,
+    },
+  },
+
+  "&:active": {
+    background: colors.grayscale.gray9,
+    color: colors.grayscale.white,
+  },
+
+  "&:disabled": {
+    background: colors.state.disabled.bg,
+    color: colors.state.disabled.default,
+  },
+});
+
+const darkSpinnerStyle = () => ({
+  color: colors.grayscale.white,
+});
+
 const outlineButtonStyle = () => ({
   background: colors.grayscale.white,
   color: colors.grayscale.gray8,
@@ -120,7 +148,7 @@ const spinnerSize = {
   large: 22,
 };
 
-export type BaseButtonTheme = "primary" | "secondary" | "outline" | "transparent";
+export type BaseButtonTheme = "primary" | "secondary" | "dark" | "outline" | "transparent";
 export type BaseButtonSize = "small" | "medium" | "large";
 
 export interface BaseButtonProps {
@@ -164,6 +192,10 @@ const BaseButton: React.FC<BaseButtonProps> = ({
     case "secondary":
       themeStyles = secondaryButtonStyle;
       spinnerClasses = secondarySpinnerStyle;
+      break;
+    case "dark":
+      themeStyles = darkButtonStyle;
+      spinnerClasses = darkSpinnerStyle;
       break;
     case "outline":
       themeStyles = outlineButtonStyle;

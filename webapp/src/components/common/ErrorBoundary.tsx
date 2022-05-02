@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from "react";
 
 import { IS_DEV } from "envConstants";
+import LoadError from "./errors/loadError";
 
 interface Props {
   children: ReactNode;
@@ -25,9 +26,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   render() {
     const { hasError } = this.state;
-    if (hasError) {
-      return <div>error</div>;
-    }
+    if (hasError) return <LoadError />;
     return this.props.children;
   }
 }
