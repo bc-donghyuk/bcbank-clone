@@ -9,8 +9,8 @@ export const EmailSchema = yup
 
 export const passwordSchema = yup
   .string()
-  .min(10)
-  .max(30)
+  .min(10, "string.min")
+  .max(30, "string.max")
   .matches(/[0-9]+/, "numbers")
   .matches(/[a-zA-Z]+/, "characters")
   .required(passwordErrorMessages["any.empty"]);

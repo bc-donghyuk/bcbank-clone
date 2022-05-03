@@ -54,3 +54,14 @@ export const LinkItem = styled.span`
   font-weight: bold;
   cursor: pointer;
 `;
+
+export const PasswordRequirements = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 16px 0;
+  margin-bottom: 14px;
+  list-style: none;
+`;
