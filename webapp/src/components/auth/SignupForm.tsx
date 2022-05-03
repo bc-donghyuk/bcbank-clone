@@ -13,6 +13,7 @@ import SignupTabs from "./SignupTabs";
 import { passwordSchema } from "utils/validationSchema";
 import { passwordRequirements } from "constants/fieldRequirements";
 import PasswordRequirementsItem from "./PasswordRequirements";
+import useCheckValidity from "hooks/useCheckValidity";
 
 interface Props {}
 
@@ -26,6 +27,10 @@ const SignupForm: React.FC<Props> = () => {
     formState: { errors, dirtyFields },
   } = useFormContext();
   const { t } = useTranslation();
+  const { checkValidityByKey } = useCheckValidity({
+    schema: passwordSchema,
+    value: watch("password"),
+  });
 
   const tabLabels = Object.values(BCBANK_USER__TYPE__LABELS());
   const isEmailValid = dirtyFields?.email && errors && !errors.email;
@@ -36,20 +41,6 @@ const SignupForm: React.FC<Props> = () => {
 
   const handleChangeUserType = (e: React.SyntheticEvent<Element, Event>, value: number): void => {
     setValue("userType", value);
-  };
-
-  const checkPasswordValidByKey = (key: string) => {
-    try {
-      passwordSchema.validateSync(watch("password"), { abortEarly: false });
-      return true;
-    } catch (err: any) {
-      const invalidKeys = err.inner.map((element: any) => {
-        return element.errors[0];
-      });
-      console.log(err.inner);
-      const isValid = invalidKeys.includes(key);
-      return !isValid;
-    }
   };
 
   return (
@@ -72,7 +63,7 @@ const SignupForm: React.FC<Props> = () => {
                 <PasswordRequirementsItem
                   key={item.key}
                   touched={!!dirtyFields.password}
-                  isValid={checkPasswordValidByKey(item.key)}
+                  isValid={checkValidityByKey(item.key)}
                   message={item.message}
                 />
               ))}
