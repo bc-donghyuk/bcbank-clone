@@ -2,7 +2,7 @@ import { Button, CircularProgress } from "@mui/material";
 import React from "react";
 import colors from "styles/colors";
 
-const baseButtonStyle = () => ({
+const baseButtonStyle = (color?: string) => ({
   height: "36px",
   fontSize: "14px",
   fontFamily: "Roboto",
@@ -10,7 +10,7 @@ const baseButtonStyle = () => ({
   letterSpacing: "0.3px",
   padding: "8px 14px",
   minWidth: "initial",
-  color: "inherit",
+  color: color ? color : "inherit",
   textTransform: "inherit",
 
   "&.MuiButton-sizeSmall": {
@@ -158,7 +158,7 @@ export interface BaseButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
   fullWidth?: boolean;
-  textColor?: string;
+  color?: string;
   styles?: any;
   loading?: boolean;
   children: React.ReactNode;
@@ -172,7 +172,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   children,
   disabled = false,
   fullWidth = false,
-  textColor,
+  color = "primary",
   styles,
   loading = false,
   ...other
@@ -210,7 +210,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
       type={type}
       variant={variant}
       fullWidth={fullWidth}
-      sx={[baseButtonStyle, themeStyles, styles]}
+      sx={[baseButtonStyle(color), themeStyles, styles]}
       onClick={!loading ? onClick : () => {}}
       disabled={disabled}
       disableElevation

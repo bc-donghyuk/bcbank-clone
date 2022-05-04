@@ -4,17 +4,7 @@ import BaseButton, { BaseButtonProps } from "./BaseButton";
 
 interface Props extends BaseButtonProps {}
 
-const Button: React.FC<Props> = ({
-  children,
-  onClick,
-  size,
-  type,
-  theme,
-  disabled,
-  textColor,
-  fullWidth,
-  ...others
-}) => {
+const Button: React.FC<Props> = ({ children, onClick, size, type, theme, disabled, color, fullWidth, ...others }) => {
   return (
     <BaseButton
       size={size}
@@ -23,7 +13,7 @@ const Button: React.FC<Props> = ({
       disabled={disabled}
       onClick={onClick}
       fullWidth={fullWidth}
-      textColor={textColor}
+      color={color}
       {...others}
     >
       {children}

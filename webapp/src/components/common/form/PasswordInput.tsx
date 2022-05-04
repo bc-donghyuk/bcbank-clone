@@ -132,7 +132,6 @@ const PasswordInput: React.FC<Props> = ({
               <ExclamationIcon color={ErrorColor} />
             </IconWrapper>
           )}
-          {}
           <HaruTrans ns="errors" i18nKey={error.message} />
         </FormHelperText>
       )}

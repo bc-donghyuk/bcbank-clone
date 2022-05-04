@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import SignupForm from "components/auth/SignupForm";
 import { BCBANK_USER__TYPE_PERSONAL } from "@core/constants/user";
 import { EmailSchema, passwordSchema } from "utils/validationSchema";
+import { passwordConfirmErrorMessages } from "constants/errorMessage";
 
 interface Props {}
 
@@ -22,7 +23,7 @@ const signupFormSchema = yup.object({
   password: passwordSchema,
   passwordConfirmation: yup
     .string()
-    .oneOf([yup.ref("password")])
+    .oneOf([yup.ref("password")], passwordConfirmErrorMessages["any.allowOnly"])
     .required(),
   referralCode: yup
     .string()

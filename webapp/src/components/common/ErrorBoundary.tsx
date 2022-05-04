@@ -26,10 +26,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   render() {
     const { hasError } = this.state;
-    if (hasError) {
-      return <LoadError />;
-    }
-    return this.props.children;
+    return <>{hasError ? <LoadError /> : <>{this.props.children}</>}</>;
   }
 }
 

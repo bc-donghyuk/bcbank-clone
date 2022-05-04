@@ -7,3 +7,7 @@ export const emailErrorMessages = {
 export const passwordErrorMessages = {
   "any.empty": i18n.t("Password is required"),
 };
+
+export const passwordConfirmErrorMessages = {
+  "any.allowOnly": i18n.t("Password confirmation must match new password"),
+};

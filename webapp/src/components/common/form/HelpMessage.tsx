@@ -1,8 +1,8 @@
 import React from "react";
 import { FormHelperText, Theme } from "@mui/material";
-import styled from "@emotion/styled";
 
 import colors from "styles/colors";
+import HaruTrans from "components/HaruTrans";
 
 const HelpMessageStyle = (theme: Theme) => ({
   fontSize: "11px",
@@ -26,7 +26,7 @@ const HelpMessage: React.FC<Props> = ({ message }) => {
 
   return (
     <FormHelperText sx={HelpMessageStyle} component={"div"}>
-      {message}
+      <HaruTrans ns="errors" i18nKey={message} />
     </FormHelperText>
   );
 };
