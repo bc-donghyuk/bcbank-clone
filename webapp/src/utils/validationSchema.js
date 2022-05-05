@@ -3,7 +3,7 @@ import * as yup from "yup";
 
 export const EmailSchema = yup
   .string()
-  .email({ minDomainAtoms: 2 })
+  .email(emailErrorMessages["string.email"])
   .matches(/^(?!.*@(daum.net|hanmail.net)$).*$/)
   .required(emailErrorMessages["any.empty"]);
 

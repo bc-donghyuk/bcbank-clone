@@ -14,7 +14,7 @@ import { DASHBOARD_URL, OTP_URL } from "URLConstant";
 
 const loginFormSchema = yup
   .object({
-    email: yup.string().email({ minDomainAtoms: 2 }).required(),
+    email: yup.string().email().required(),
     password: yup.string().required(passwordErrorMessages["any.empty"]),
     isHuman: yup.boolean().required().oneOf([true]),
     recapt: yup.string().nullable(),

@@ -89,6 +89,8 @@ const SignupForm: React.FC<Props> = () => {
     });
   };
 
+  console.log(errors);
+
   const renderReferralBox = () => {
     if (watch("referralCode")) {
       return (
@@ -140,11 +142,18 @@ const SignupForm: React.FC<Props> = () => {
               name="email"
               control={control}
               placeholder={t("Email")}
+              error={errors.email?.message}
               endAdornment={<InputAdornment position="end" isValid={isEmailValid} />}
             />
           </FormControl>
           <FormControl>
-            <PasswordInput name="password" control={control} placeholder={t("Password")} withErrorMessage={false} />
+            <PasswordInput
+              name="password"
+              control={control}
+              error={errors.password?.message}
+              placeholder={t("Password")}
+              withErrorMessage={false}
+            />
           </FormControl>
           <PasswordRequirements>
             {passwordRequirements.map(item => (
@@ -161,7 +170,8 @@ const SignupForm: React.FC<Props> = () => {
               name="passwordConfirmation"
               control={control}
               placeholder={t("Confirm Password")}
-              error={errors.passwordConfirmation}
+              error={errors.passwordConfirmation?.message}
+              withIcon={false}
             />
           </FormControl>
           {renderReferralBox()}

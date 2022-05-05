@@ -22,13 +22,11 @@ interface Props {
 }
 
 const HelpMessage: React.FC<Props> = ({ message }) => {
-  if (!message) return null;
-
-  return (
+  return !!message ? (
     <FormHelperText sx={HelpMessageStyle} component={"div"}>
       <HaruTrans ns="errors" i18nKey={message} />
     </FormHelperText>
-  );
+  ) : null;
 };
 
 export default HelpMessage;

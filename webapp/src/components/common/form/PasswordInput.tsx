@@ -73,7 +73,7 @@ interface Props {
   control: Control;
   label?: string;
   placeholder: string;
-  error?: FieldError;
+  error?: string;
   withErrorMessage?: boolean;
   withIcon?: boolean;
 }
@@ -118,11 +118,12 @@ const PasswordInput: React.FC<Props> = ({
 
       <Input
         name={name}
-        id={name}
         control={control}
         type={showPassword ? "text" : "password"}
         sx={InputStyle}
+        error={error}
         endAdornment={EndAdornment}
+        withErrorMessage={false}
         {...rest}
       />
       {withErrorMessage && error && (
@@ -132,7 +133,7 @@ const PasswordInput: React.FC<Props> = ({
               <ExclamationIcon color={ErrorColor} />
             </IconWrapper>
           )}
-          <HaruTrans ns="errors" i18nKey={error.message} />
+          <HaruTrans ns="errors" i18nKey={error} />
         </FormHelperText>
       )}
     </FormGroup>

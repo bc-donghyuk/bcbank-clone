@@ -24,7 +24,7 @@ const signupFormSchema = yup.object({
   passwordConfirmation: yup
     .string()
     .oneOf([yup.ref("password")], passwordConfirmErrorMessages["any.allowOnly"])
-    .required(),
+    .required(""),
   referralCode: yup
     .string()
     .max(32)

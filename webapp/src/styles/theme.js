@@ -12,6 +12,9 @@ const MuiTheme = createTheme({
   },
   palette: {
     primary: { main: colors.brand["100"] },
+    error: {
+      main: "#f44336",
+    },
   },
   status: {
     danger: "orange",

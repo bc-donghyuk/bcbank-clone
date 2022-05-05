@@ -1,9 +1,11 @@
 import React from "react";
 import { InputLabel, Input as BaseInput, InputProps, FormControl, Theme, ThemeOptions } from "@mui/material";
-import { Control, Controller, FieldError } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
+
+import ErrorMessage from "./ErrorMessage";
+import HelpMessage from "./HelpMessage";
 
 import colors from "styles/colors";
-import HelpMessage from "./HelpMessage";
 
 const InputLabelStyle = () => ({
   lineHeight: "20px",
@@ -14,7 +16,7 @@ const InputLabelStyle = () => ({
   fontSize: "16px", // 12px = 16px * 0.75 (shrink)
 });
 
-const InputStyle = (withBorderBottom?: boolean) => (theme: Theme) => ({
+const InputStyle = (withBorderBottom?: boolean, withInputPadding?: boolean) => (theme: Theme) => ({
   height: "48px",
   lineHeight: "19px",
   color: colors.grayscale.gray8,
@@ -27,7 +29,7 @@ const InputStyle = (withBorderBottom?: boolean) => (theme: Theme) => ({
 
   "& .MuiInput-input": {
     height: "40px",
-    padding: 0,
+    padding: withInputPadding ? "0 14px" : "0",
     [theme.breakpoints.up("lg")]: {
       height: "60px",
     },
@@ -45,8 +47,9 @@ const InputStyle = (withBorderBottom?: boolean) => (theme: Theme) => ({
 interface Props extends Omit<InputProps, "error"> {
   name: string;
   control: Control;
-  error?: FieldError;
+  error?: string;
   label?: string;
+  withInputPadding?: boolean;
   withBorderBottom?: boolean;
   withErrorMessage?: boolean;
 }
@@ -57,13 +60,14 @@ const Input: React.FC<Props> = ({
   label,
   type = "text",
   error,
+  withInputPadding = false,
   withBorderBottom = true,
   withErrorMessage = true,
   endAdornment,
   ...rest
 }) => {
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth error={!!error}>
       {label && (
         <InputLabel shrink htmlFor={name} sx={InputLabelStyle}>
           {label}
@@ -77,14 +81,15 @@ const Input: React.FC<Props> = ({
             id={name}
             type={type}
             fullWidth
-            sx={InputStyle(withBorderBottom)}
+            sx={InputStyle(withBorderBottom, withInputPadding)}
             endAdornment={endAdornment}
             {...field}
             {...rest}
           />
         )}
       />
-      {error && <HelpMessage message={error.message} />}
+      {withErrorMessage && <ErrorMessage error={error} />}
+      {!error && <HelpMessage message={error} />}
     </FormControl>
   );
 };

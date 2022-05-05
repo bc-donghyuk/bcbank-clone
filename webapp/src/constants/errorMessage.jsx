@@ -2,6 +2,7 @@ import i18n from "i18n";
 
 export const emailErrorMessages = {
   "any.empty": i18n.t("Email is required"),
+  "string.email": i18n.t("Email is invalid"),
 };
 
 export const passwordErrorMessages = {
