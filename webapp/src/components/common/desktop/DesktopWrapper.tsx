@@ -4,6 +4,7 @@ import Div100vh from "react-div-100vh";
 
 import colors from "styles/colors";
 import { isMobile as checkIsMobile } from "styles/devices";
+import { isLoggedIn } from "utils/auth";
 
 export const LOGGED_IN_PAGE_WIDTH = 769;
 const LOGGED_OUT_PAGE_WIDTH = 600;
@@ -28,7 +29,11 @@ const MobileContainer = styled(Div100vh)`
   flex-direction: column;
 `;
 
-const DesktopWrapper: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const DesktopWrapper: React.FC<Props> = ({ children }) => {
   const [isMobile, setIsMobile] = useState(checkIsMobile());
 
   const handleResize = () => {
@@ -43,17 +48,19 @@ const DesktopWrapper: React.FC = ({ children }) => {
   }, []);
 
   if (isMobile) {
-    return <MobileContainer>{children}</MobileContainer>;
+    return (
+      <>
+        <MobileContainer>{children}</MobileContainer>
+      </>
+    );
   }
 
   return (
     <Container>
       <Column>
         <DesktopMobileViewWrapper
-          width={
-            // isLoggedIn()? LOGGED_IN_PAGE_WIDTH:
-            LOGGED_OUT_PAGE_WIDTH
-          }
+          id="desktop-mobile-view-wrapper"
+          width={isLoggedIn() ? LOGGED_IN_PAGE_WIDTH : LOGGED_OUT_PAGE_WIDTH}
         >
           {children}
         </DesktopMobileViewWrapper>

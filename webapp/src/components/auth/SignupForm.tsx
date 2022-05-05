@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
@@ -10,6 +10,7 @@ import Button from "components/common/buttons/Button";
 import AuthLayout from "./AuthLayout";
 import SignupTabs from "./SignupTabs";
 import PasswordRequirementsItem from "./PasswordRequirements";
+import SignupReferralCodeDrawer from "./SignupReferralCodeDrawer";
 
 import { BCBANK_USER__TYPE__LABELS } from "utils/user";
 import { Form, FormControl, FormGroup, PasswordRequirements } from "./commonStyle";
@@ -17,6 +18,8 @@ import { passwordSchema } from "utils/validationSchema";
 import { passwordRequirements } from "constants/fieldRequirements";
 import useCheckValidity from "hooks/useCheckValidity";
 import colors from "styles/colors";
+import useGlobalBanner from "hooks/useGlobalDrawer";
+import Ticket from "components/common/Ticket";
 
 const ReferralWrapper = styled.div`
   padding-top: 36px;
@@ -35,14 +38,18 @@ const ReferralLabel = styled.div`
 
 const ReferralButton = styled.div``;
 
+const TicketWrapper = styled.div`
+  padding-top: 8px;
+`;
+
 interface Props {}
 
 const SignupForm: React.FC<Props> = () => {
   const {
     control,
     handleSubmit,
-    setValue,
     getValues,
+    setValue,
     watch,
     formState: { errors, dirtyFields },
   } = useFormContext();
@@ -51,6 +58,8 @@ const SignupForm: React.FC<Props> = () => {
     schema: passwordSchema,
     value: watch("password"),
   });
+  const { openGlobalDrawer } = useGlobalBanner();
+  const [serverError, setServerError] = useState("");
 
   const tabLabels = Object.values(BCBANK_USER__TYPE__LABELS());
   const isEmailValid = dirtyFields?.email && errors && !errors.email;
@@ -63,8 +72,25 @@ const SignupForm: React.FC<Props> = () => {
     setValue("userType", value);
   };
 
+  const handleRemoveReferralCode = () => {
+    setValue("referralCode", "");
+  };
+
+  const handleApplyReferralCode = (referralCode: string) => {
+    setValue("referralCode", referralCode);
+  };
+
+  const handleClickReferralAdd = () => {
+    openGlobalDrawer({
+      component: SignupReferralCodeDrawer,
+      componentProps: {
+        handleApply: handleApplyReferralCode,
+      },
+    });
+  };
+
   const renderReferralBox = () => {
-    if (getValues("referralCode")) {
+    if (watch("referralCode")) {
       return (
         <ReferralWrapper>
           <ReferralBox>
@@ -74,13 +100,19 @@ const SignupForm: React.FC<Props> = () => {
                 key="withReferral"
                 theme="transparent"
                 size="small"
-                onClick={() => {}}
+                onClick={handleRemoveReferralCode}
                 color={colors.state.error.default}
               >
                 {t("Clear")}
               </Button>
             </ReferralButton>
           </ReferralBox>
+          <TicketWrapper>
+            <Ticket
+              title={getValues("referralCode")}
+              desc={t("Additional 0.2% Earn Rate for Haru Earn & Haru Earn Plus")}
+            />
+          </TicketWrapper>
         </ReferralWrapper>
       );
     }
@@ -89,7 +121,7 @@ const SignupForm: React.FC<Props> = () => {
         <ReferralBox>
           <ReferralLabel>{t("Got a referral code?")}</ReferralLabel>
           <ReferralButton>
-            <Button key="withoutReferral" theme="outline" size="small" onClick={() => {}}>
+            <Button key="withoutReferral" theme="outline" size="small" onClick={handleClickReferralAdd}>
               {t("ADD")}
             </Button>
           </ReferralButton>

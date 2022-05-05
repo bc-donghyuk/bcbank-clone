@@ -7,6 +7,7 @@ import { RecoilRoot } from "recoil";
 import DesktopWrapper from "components/common/desktop/DesktopWrapper";
 import UnsupportBrowserPage from "components/unsupport/UnsupportBrowserPage";
 import ErrorBoundary from "components/common/ErrorBoundary";
+import GlobalDrawer from "components/common/GlobalDrawer";
 
 import HaruQueriesClientProvider from "@core/queries/HaruQueriesClientProvider";
 import DebugObserver from "@core/recoil/DebugObserver";
@@ -47,6 +48,7 @@ const App = ({ location }) => {
                   );
                 })}
               </Routes>
+              <GlobalDrawer />
             </RecoilRoot>
           </HaruQueriesClientProvider>
         </ThemeProvider>
