@@ -44,6 +44,7 @@ export const FormFooter = styled.div`
 `;
 
 export const FormFooterItem = styled.div`
+  display: flex;
   font-size: 14px;
   padding-bottom: 8px;
 `;
@@ -64,4 +65,10 @@ export const PasswordRequirements = styled.div`
   padding: 16px 0;
   margin-bottom: 14px;
   list-style: none;
+`;
+
+export const StyledTag = styled.div`
+  color: ${colors["Brand/Primary/Haru Purple 100"]};
+  font-weight: bold;
+  cursor: pointer;
 `;

@@ -9,7 +9,7 @@ import DrawerContentLayout from "components/common/drawer/DrawerContentLayout";
 import colors from "styles/colors";
 import useGlobalDrawer from "hooks/useGlobalDrawer";
 
-const Wrapper = styled.form`
+const Wrapper = styled.div`
   margin-bottom: 60px;
   padding: 4px 20px;
 `;
