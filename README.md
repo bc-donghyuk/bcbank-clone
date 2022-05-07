@@ -6,7 +6,7 @@
 
 ## Manage React state
 
-- useContext => useContext + recoil
+- useContext => recoil
 
 ## React Data Fetching
 
