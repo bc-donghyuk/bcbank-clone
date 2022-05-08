@@ -22,7 +22,7 @@
 
 ## Form Libraries in React
 
-- Joi + yup => React Hook Form + yup/zod
+- Joi + yup => React Hook Form + yup
 
 ## Testing in React
 
