@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { useFormContext } from "react-hook-form";
+import { useRecoilValue } from "recoil";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Input from "components/common/form/Input";
 import Recaptcha from "components/auth/Recaptcha";
@@ -13,9 +15,16 @@ import AuthLayout from "./AuthLayout";
 import { Form, FormGroup, FormControl, FormFooter, FormFooterItem, LinkItem } from "./commonStyle";
 import InputAdornment from "components/common/form/InputAdornment";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
-import useLogin from "hooks/auth/useLogin";
-import { useNavigate } from "react-router-dom";
-import { PASSWORD_CHANGE_PATH, SIGNUP_URL } from "URLConstant";
+import { LOGIN_OTP_URL, PASSWORD_CHANGE_PATH, SIGNUP_URL } from "URLConstant";
+import { getFeatureConfigSelector } from "@core/recoil/selectors/featureConfig/featureConfigSelector";
+import authService from "@core/services/authService";
+import { FEATURE_CONFIG__SUSPICIOUS_LOGIN } from "@core/constants/featureConfig";
+
+// Verification container 생성 시, 제거
+interface AuthDeviceData {
+  type: number;
+  ending?: string;
+}
 
 const RecaptchaWrapper = styled.div``;
 
@@ -31,9 +40,10 @@ const LoginForm: React.FC = () => {
     setValue,
     handleSubmit,
   } = useFormContext();
+  const featureConfig = useRecoilValue(getFeatureConfigSelector);
   const { t } = useTranslation();
+  const location = useLocation();
   const navigate = useNavigate();
-  const { login } = useLogin();
   const [loading, setLoading] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [serverErrorMessage, setServerErrorMessage] = useState<string>("");
@@ -60,13 +70,55 @@ const LoginForm: React.FC = () => {
       return;
     }
     setLoading(true);
-    await login({
-      data,
-      setValue,
-      setLoading,
-      setShowError,
-      setServerErrorMessage,
-    });
+
+    const { email, password, recapt } = data;
+
+    try {
+      const { otpEnabled, authDevices }: { otpEnabled: boolean; authDevices: AuthDeviceData[] } =
+        await authService.login({ email, password, recapt });
+
+      setLoading(false);
+
+      const state: {
+        email: string;
+        password: string;
+        authDevices: AuthDeviceData[];
+        from?: { pathname: string; search?: string };
+      } = {
+        email,
+        password,
+        authDevices,
+      };
+
+      console.log(featureConfig);
+
+      if (location.state) {
+        if (location.state?.from) {
+          state.from = location.state.from;
+        }
+      }
+
+      if (featureConfig?.isEnabled(FEATURE_CONFIG__SUSPICIOUS_LOGIN)) {
+        // TODO : verifycation
+      }
+
+      // TODO : otp
+      if (otpEnabled) {
+        navigate(LOGIN_OTP_URL, { state });
+        return;
+      }
+    } catch (err) {
+      setLoading(false);
+
+      if (err.response?.status === 400) {
+        setShowError(true);
+        if (IS_STAGING_OR_PRODUCTION) {
+          setValue("recapt", null);
+          setValue("isHuman", false);
+        }
+        setServerErrorMessage(`${t("Invalid username or password")}`);
+      }
+    }
   };
 
   const handleCloseErrorMessage = () => {

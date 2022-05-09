@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Input from "components/common/form/Input";
 import InputAdornment from "components/common/form/InputAdornment";
@@ -32,8 +32,8 @@ import colors from "styles/colors";
 import useGlobalBanner from "hooks/useGlobalDrawer";
 import { IS_KOREAN_SITE } from "envConstants";
 import { devices } from "styles/devices";
-import { LEGAL_PRIVACY_POLICY_URL, LEGAL_TERMS_OF_SERVICE_URL, LOGIN_URL } from "URLConstant";
-import useSignup from "hooks/auth/useSignup";
+import { HOME_URL, LEGAL_PRIVACY_POLICY_URL, LEGAL_TERMS_OF_SERVICE_URL, LOGIN_URL } from "URLConstant";
+import authService from "@core/services/authService";
 
 const ReferralWrapper = styled.div`
   padding-top: 36px;
@@ -89,6 +89,7 @@ const SignupForm: React.FC<Props> = () => {
   } = useFormContext();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { checkValidityByKey } = useCheckValidity({
     schema: passwordSchema,
     value: watch("password"),
@@ -97,7 +98,6 @@ const SignupForm: React.FC<Props> = () => {
   const [isKoreanSiteAuthFormChecked, setIsKoreanSiteAuthFormChecked] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState("");
-  const { signup } = useSignup();
 
   const tabLabels = Object.values(BCBANK_USER__TYPE__LABELS());
   const isEmailValid = dirtyFields?.email && errors && !errors.email;
@@ -108,7 +108,16 @@ const SignupForm: React.FC<Props> = () => {
     }
 
     setLoading(true);
-    await signup({ data, setLoading });
+    const { email, password, passwordConfirmation, usertype, referralCode } = data;
+    try {
+      setLoading(false);
+      await authService.signup({ email, password, passwordConfirmation, usertype, referralCode });
+
+      const { state } = location;
+      const targetIUrl = state ? state.from.pathname : HOME_URL;
+    } catch (err) {
+      setLoading(false);
+    }
   };
 
   const handleChangeUserType = (e: React.SyntheticEvent<Element, Event>, value: number): void => {
