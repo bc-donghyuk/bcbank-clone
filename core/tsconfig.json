@@ -1,13 +1,12 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "moduleResolution": "node",
-    "target": "ES2019",
-    "module": "commonjs",
-    "esModuleInterop": true,
     "lib": ["ES2019", "dom"],
-    "jsx": "react"
+    "outDir": "dist",
+    "composite": true,
+    "noEmit": false
   },
   "include": ["."],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

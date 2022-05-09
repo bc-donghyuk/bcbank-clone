@@ -33,7 +33,7 @@ module.exports = {
       "module-resolver",
       {
         extensions: ["*", ".ts", ".js", ".tsx", ".jsx"],
-        root: ["./src"],
+        root: ["./src", "../core", "../design"],
         alias: {
           "@core": "../core/",
           "@shared-components": "../shared-components/src",

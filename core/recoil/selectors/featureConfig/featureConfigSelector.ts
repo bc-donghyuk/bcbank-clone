@@ -1,8 +1,8 @@
 import { selector } from "recoil";
 
-import { FEATURE_CONFIGS_API_ENDPOINT } from "../../../constants/apiURIs";
-import userService from "../../../services/userService";
-import { IFeatureConfigData, featureConfigState } from "../../../recoil/atoms/featureConfig";
+import { FEATURE_CONFIGS_API_ENDPOINT } from "constants/apiURIs";
+import userService from "services/userService";
+import { IFeatureConfigData, featureConfigState } from "recoil/atoms/featureConfig";
 
 class FeatureConfigs {
   readonly data: IFeatureConfigData;
@@ -30,7 +30,7 @@ class FeatureConfigs {
   }
 }
 
-export const getFeatureConfigSelector = selector({
+export const getFeatureConfigSelector = selector<IFeatureConfigData>({
   key: FEATURE_CONFIGS_API_ENDPOINT,
   get: async () => {
     try {

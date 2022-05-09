@@ -1,5 +1,5 @@
-import http from "./httpService";
-import { AUTH_LOGIN_ENDPOINT, AUTH_SIGNUP_ENDPOINT } from "../constants/apiURIs";
+import http from "services/httpService";
+import { AUTH_LOGIN_ENDPOINT, AUTH_SIGNUP_ENDPOINT } from "constants/apiURIs";
 
 export interface LoginProps {
   email: string;
