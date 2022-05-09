@@ -1,10 +1,10 @@
 import http from "./httpService";
-import { AUTH_LOGIN_ENDPOINT } from "../constants/apiURIs";
+import { AUTH_LOGIN_ENDPOINT, AUTH_SIGNUP_ENDPOINT } from "../constants/apiURIs";
 
 export interface LoginProps {
   email: string;
   password: string;
-  recapt?: string;
+  recapt: string | null;
   otpToken?: string;
 }
 interface LoginPayload {
@@ -14,9 +14,22 @@ interface LoginPayload {
   token?: string;
 }
 
-type AuthEventType = "onLogInStart" | "onLoggedIn" | "onLoggedOut";
+export interface SignupProps {
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+  usertype: number;
+  referralCode?: string;
+}
 
-type AuthEvent = { type: "onLogInStart" } | { type: "onLoggedIn" } | { type: "onLoggedOut" };
+type AuthEventType = "onLogInStart" | "onLoggedIn" | "onLoggedOut" | "onSignupStart" | "onSignedupWithReferralCode";
+
+type AuthEvent =
+  | { type: "onLogInStart" }
+  | { type: "onLoggedIn" }
+  | { type: "onLoggedOut" }
+  | { type: "onSignupStart" }
+  | { type: "onSignedupWithReferralCode"; referralCode: string; referralType: number };
 
 const authCallbacks: { type: AuthEventType; callback: Function }[] = [];
 
@@ -56,7 +69,31 @@ function handleLogin(data: any) {
   return true;
 }
 
+async function signup(values: SignupProps) {
+  dispatch({ type: "onSignupStart" });
+
+  const { email, password, passwordConfirmation, usertype, referralCode } = values;
+
+  const { data } = await http.post(AUTH_SIGNUP_ENDPOINT, {
+    email,
+    password,
+    passwordConfirmation,
+    usertype,
+    referral_code: referralCode,
+  });
+
+  if (referralCode) {
+    dispatch({
+      type: "onSignedupWithReferralCode",
+      referralCode,
+      referralType: parseInt(data.referral_type, 10),
+    });
+  }
+  handleLogin(data);
+}
+
 export default {
   addCallback,
   login,
+  signup,
 };

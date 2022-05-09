@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 import Input from "components/common/form/Input";
 import InputAdornment from "components/common/form/InputAdornment";
@@ -31,8 +32,8 @@ import colors from "styles/colors";
 import useGlobalBanner from "hooks/useGlobalDrawer";
 import { IS_KOREAN_SITE } from "envConstants";
 import { devices } from "styles/devices";
-import { useNavigate } from "react-router-dom";
 import { LEGAL_PRIVACY_POLICY_URL, LEGAL_TERMS_OF_SERVICE_URL, LOGIN_URL } from "URLConstant";
+import useSignup from "hooks/auth/useSignup";
 
 const ReferralWrapper = styled.div`
   padding-top: 36px;
@@ -96,12 +97,18 @@ const SignupForm: React.FC<Props> = () => {
   const [isKoreanSiteAuthFormChecked, setIsKoreanSiteAuthFormChecked] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState("");
+  const { signup } = useSignup();
 
   const tabLabels = Object.values(BCBANK_USER__TYPE__LABELS());
   const isEmailValid = dirtyFields?.email && errors && !errors.email;
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+    await signup({ data, setLoading });
   };
 
   const handleChangeUserType = (e: React.SyntheticEvent<Element, Event>, value: number): void => {

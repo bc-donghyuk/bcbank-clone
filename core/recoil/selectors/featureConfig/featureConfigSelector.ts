@@ -2,12 +2,12 @@ import { selector } from "recoil";
 
 import { FEATURE_CONFIGS_API_ENDPOINT } from "../../../constants/apiURIs";
 import userService from "../../../services/userService";
-import { featureConfigData, featureConfigState } from "../../../recoil/atoms/featureConfig";
+import { IFeatureConfigData, featureConfigState } from "../../../recoil/atoms/featureConfig";
 
 class FeatureConfigs {
-  readonly data: featureConfigData;
+  readonly data: IFeatureConfigData;
 
-  constructor(featureConfigs: featureConfigData) {
+  constructor(featureConfigs: IFeatureConfigData) {
     this.data = featureConfigs || {};
 
     // TODO : IS_KOREAN_SITE core에서 어떻게 받아올지 고민

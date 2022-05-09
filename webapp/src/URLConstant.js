@@ -7,4 +7,5 @@ export const PASSWORD_CHANGE_PATH = "/password-change";
 export const LEGAL_PRIVACY_POLICY_URL = "/service/privacy_policy";
 export const LEGAL_TERMS_OF_SERVICE_URL = "/service/terms_of_service";
 
+export const HOME_URL = "/";
 export const DASHBOARD_URL = "/dashboard";

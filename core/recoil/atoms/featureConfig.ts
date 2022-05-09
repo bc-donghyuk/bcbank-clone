@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 
-export type featureConfigData = Record<string, number> | {};
+export type IFeatureConfigData = Record<string, number> | {};
 
-export const featureConfigState = atom({
+export const featureConfigState = atom<IFeatureConfigData>({
   key: "featureConfigState",
-  default: {} as featureConfigData,
+  default: {},
 });

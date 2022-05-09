@@ -20,7 +20,7 @@ const loginFormSchema = yup
     recapt: yup.string().nullable(),
   })
   .required();
-interface loginFormMethodsState {
+export interface loginFormMethodsState {
   email: string;
   password: string;
   isHuman: boolean;

@@ -3,11 +3,12 @@ import { useRecoilValue } from "recoil";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import authService, { LoginProps } from "@core/services/authService";
+import authService from "@core/services/authService";
 import { getFeatureConfigSelector } from "@core/recoil/selectors/featureConfig/featureConfigSelector";
 import { FEATURE_CONFIG__SUSPICIOUS_LOGIN } from "@core/constants/featureConfig";
 import { LOGIN_OTP_URL } from "URLConstant";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
+import { loginFormMethodsState } from "containers/LoginContainer";
 
 interface AuthDeviceData {
   type: number;
@@ -15,7 +16,7 @@ interface AuthDeviceData {
 }
 
 interface loginProps {
-  data: LoginProps;
+  data: loginFormMethodsState;
   setValue: UseFormSetValue<FieldValues>;
   setLoading: (value: boolean) => void;
   setShowError: (value: boolean) => void;
@@ -57,9 +58,8 @@ const useLogin = () => {
       }
 
       if (featureConfig?.isEnabled(FEATURE_CONFIG__SUSPICIOUS_LOGIN)) {
+        // TODO : verifycation
       }
-
-      // TODO : verifycation
 
       // TODO : otp
       if (otpEnabled) {

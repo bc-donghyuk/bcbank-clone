@@ -14,7 +14,7 @@ interface signupFormMethodsState {
   email: string;
   password: string;
   passwordConfirmation: string;
-  referralCode: string;
+  referralCode?: string;
   userType: number;
 }
 
@@ -28,7 +28,7 @@ const signupFormSchema = yup.object({
   referralCode: yup
     .string()
     .max(32)
-    .matches(/^[a-zA-Z]*$/),
+    .matches(/^[\w-_\.]+$/, "alphanumeric"),
   userType: yup.number(),
 });
 
