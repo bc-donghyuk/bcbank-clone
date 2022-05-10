@@ -1,7 +1,7 @@
 import React from "react";
 import BaseSnackbar from "@mui/material/Snackbar";
 import { IconButton } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import Close from "@mui/icons-material/Close";
 
 import colors from "styles/colors";
 
