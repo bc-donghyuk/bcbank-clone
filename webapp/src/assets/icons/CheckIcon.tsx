@@ -1,7 +1,12 @@
 import React from "react";
-import { PropTypes } from "prop-types";
 
-const CheckIcon = ({ color, width, height }) => {
+interface Props {
+  width: string;
+  height: string;
+  color: string;
+}
+
+const CheckIcon: React.FC<Props> = ({ width = "24px", height = "24px", color = "#E0E0E0" }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24">
       <g fill="none" fillRule="evenodd">
@@ -12,12 +17,4 @@ const CheckIcon = ({ color, width, height }) => {
   );
 };
 
-CheckIcon.defaultProps = {
-  color: "#E0E0E0",
-  width: "24px",
-  height: "24px",
-};
-CheckIcon.propTypes = {
-  color: PropTypes.string,
-};
 export default CheckIcon;

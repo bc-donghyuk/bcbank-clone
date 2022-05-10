@@ -1,6 +1,5 @@
 {
   "name": "bcbank-clone",
-  "packageManager": "yarn@3.2.0",
   "private": true,
   "workspaces": {
     "packages": [
@@ -13,8 +12,7 @@
     "axios": "^0.26.1",
     "immer": "^9.0.12",
     "lerna": "^4.0.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react": "^18.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -32,5 +30,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }

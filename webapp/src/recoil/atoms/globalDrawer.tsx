@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-interface IGlobalDrawerData {
+interface GlobalDrawerState {
   open: boolean;
   handleClose?: () => void;
   closeEventKey?: string;
@@ -8,7 +8,7 @@ interface IGlobalDrawerData {
   componentProps?: any;
 }
 
-export const globalDrawerState = atom<IGlobalDrawerData>({
+export const globalDrawerState = atom<GlobalDrawerState>({
   key: "globalDrawerState",
   default: {
     open: false,

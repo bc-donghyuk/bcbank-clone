@@ -4,6 +4,7 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const Dotenv = require("dotenv-webpack");
 const path = require("path");
@@ -125,7 +126,7 @@ const buildConfig = {
       babelConfig,
       {
         test: /\.js$/,
-        include: /node_modules/,
+        include: /node_modules\/(react-select|strict-uri-encode|query-string|split-on-first)/,
         use: {
           loader: "babel-loader",
           options: {
@@ -180,32 +181,32 @@ const buildConfig = {
     ],
   },
   plugins: pluginList, // 번들파일 관련 설정
-  // optimization: {
-  //   // 최적화 관련
-  //   minimize: true, // minimizer에 지정된 플러그인을 사용하여 번들을 최소화
-  //   minimizer: [
-  //     new TerserPlugin({
-  //       extractComments: true, // 주석을 별도로 추출할지
-  //       terserOptions: {
-  //         output: {
-  //           comments: false, // 주석 제거
-  //         },
-  //       },
-  //     }),
-  //   ],
-  //   splitChunks: {
-  //     chunks: "all", // 최적화할 청크
-  //     maxInitialRequests: 20, // 엔트리 포인트의 최대 병렬 요청 수 for HTTP2
-  //     maxAsyncRequests: 20, // on-demand 로드 시의 최대 병렬 요청 수 for HTTP2
-  //     cacheGroups: {
-  //       defaultVendors: {
-  //         test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/, // 캐시 그룹에 의해 선택되는 모듈을 제어
-  //         name: "vendor",
-  //         chunks: "all",
-  //       },
-  //     },
-  //   },
-  // },
+  optimization: {
+    // 최적화 관련
+    minimize: true, // minimizer에 지정된 플러그인을 사용하여 번들을 최소화
+    minimizer: [
+      new TerserPlugin({
+        extractComments: true, // 주석을 별도로 추출할지
+        terserOptions: {
+          output: {
+            comments: false, // 주석 제거
+          },
+        },
+      }),
+    ],
+    splitChunks: {
+      chunks: "all", // 최적화할 청크
+      maxInitialRequests: 20, // 엔트리 포인트의 최대 병렬 요청 수 for HTTP2
+      maxAsyncRequests: 20, // on-demand 로드 시의 최대 병렬 요청 수 for HTTP2
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/, // 캐시 그룹에 의해 선택되는 모듈을 제어
+          name: "vendor",
+          chunks: "all",
+        },
+      },
+    },
+  },
   devServer: {
     host: "127.0.0.1",
     disableHostCheck: true,

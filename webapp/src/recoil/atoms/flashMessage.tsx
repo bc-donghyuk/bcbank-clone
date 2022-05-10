@@ -1,8 +1,12 @@
 import { atom } from "recoil";
 
-interface IFlashMessageData {}
+interface FlashMessageState {
+  message: null;
+}
 
-export const flashMessageState = atom<IFlashMessageData>({
+export const flashMessageState = atom<FlashMessageState>({
   key: "flashMessageState",
-  default: {},
+  default: {
+    message: null,
+  },
 });
