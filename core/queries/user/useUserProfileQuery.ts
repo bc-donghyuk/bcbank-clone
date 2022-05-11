@@ -10,7 +10,7 @@ const fetchUserProfile = async () => {
 };
 
 const useUserProfileQuery = () => {
-  return useQuery(userProfileKeys, () => fetchUserProfile());
+  return useQuery(userProfileKeys.all, () => fetchUserProfile());
 };
 
 export default useUserProfileQuery;

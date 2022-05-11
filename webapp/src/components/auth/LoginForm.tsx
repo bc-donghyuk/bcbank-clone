@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 import { useFormContext } from "react-hook-form";
-import { useRecoilValue } from "recoil";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import Input from "components/common/form/Input";
@@ -16,9 +15,8 @@ import { Form, FormGroup, FormControl, FormFooter, FormFooterItem, LinkItem } fr
 import InputAdornment from "components/common/form/InputAdornment";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
 import { LOGIN_OTP_URL, PASSWORD_CHANGE_PATH, SIGNUP_URL } from "URLConstant";
-import { getFeatureConfigSelector } from "@core/recoil/selectors/featureConfig/featureConfigSelector";
 import authService from "@core/services/authService";
-import { FEATURE_CONFIG__SUSPICIOUS_LOGIN } from "@core/constants/featureConfig";
+import { useFetchFeatureConfig } from "@core/hooks/featureConfig/useFetchFeatureConfig";
 
 // Verification container 생성 시, 제거
 interface AuthDeviceData {
@@ -40,7 +38,7 @@ const LoginForm: React.FC = () => {
     setValue,
     handleSubmit,
   } = useFormContext();
-  const featureConfig = useRecoilValue(getFeatureConfigSelector);
+  const featureConfig = useFetchFeatureConfig();
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
@@ -98,9 +96,9 @@ const LoginForm: React.FC = () => {
         }
       }
 
-      if (featureConfig?.isEnabled(FEATURE_CONFIG__SUSPICIOUS_LOGIN)) {
-        // TODO : verifycation
-      }
+      // if (featureConfig?.isEnabled(FEATURE_CONFIG__SUSPICIOUS_LOGIN)) {
+      // TODO : verifycation
+      // }
 
       // TODO : otp
       if (otpEnabled) {

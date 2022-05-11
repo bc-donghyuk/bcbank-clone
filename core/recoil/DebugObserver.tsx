@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRecoilSnapshot } from "recoil";
 
-const DebugObserver = (): React.Node => {
+const DebugObserver = (): React.ReactNode => {
   const snapshot = useRecoilSnapshot();
 
   useEffect(() => {

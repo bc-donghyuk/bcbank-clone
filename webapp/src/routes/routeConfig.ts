@@ -7,7 +7,7 @@ const LoginContainer = customLoadable(() => import("containers/LoginContainer"))
 const SignupContainer = customLoadable(() => import("containers/SignupContainer"));
 const PasswordChangeContainer = customLoadable(() => import("containers/PasswordChangeContainer"));
 const DashboardContainer = customLoadable(() => import("containers/DashboardContainer"));
-interface iRoute {
+interface IRoute {
   type: "public" | "private";
   path?: string;
   component: React.ComponentType;
@@ -20,7 +20,7 @@ const routeComponents = {
   private: PrivateRoute,
 };
 
-const routes: iRoute[] = [
+const routes: IRoute[] = [
   {
     path: "/login/*",
     type: "public",

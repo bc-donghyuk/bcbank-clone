@@ -1,8 +1,7 @@
 import React from "react";
+import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
 
 import Drawer from "./drawer/Drawer";
-
-import useGlobalDrawer from "hooks/useGlobalDrawer";
 
 interface Props {}
 

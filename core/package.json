@@ -6,8 +6,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "react-query": "^3.35.0",
-    "recoil": "^0.7.2"
+    "react-query": "^3.35.0"
   },
   "devDependencies": {
     "@types/react-query": "^1.2.9"

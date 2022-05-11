@@ -4,9 +4,9 @@ import styled from "@emotion/styled";
 import DrawerHeader from "./DrawerHeader";
 import { Container, Divider } from "./commonStyle";
 
-import useGlobalDrawer from "hooks/useGlobalDrawer";
 import { BaseButtonTheme } from "../buttons/BaseButton";
 import Button from "../buttons/Button";
+import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
 
 interface ButtonWrapperProps {
   backgroundColor?: string;

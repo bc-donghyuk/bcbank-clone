@@ -1,6 +1,15 @@
 module.exports = {
   root: true,
-  extends: ["airbnb-base", "plugin:react/recommended"],
+  extends: [
+    "airbnb-base",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react",
+    "prettier/standard",
+    "prettier/unicorn",
+  ],
   plugins: ["eslint-comments", "react", "react-hooks", "jest", "import"],
   env: {
     es6: true,
@@ -13,6 +22,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: "module",
   },
+
   overrides: [
     {
       files: ["*.js", "*.jsx"],

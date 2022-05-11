@@ -7,7 +7,7 @@ import Input from "components/common/form/Input";
 import DrawerContentLayout from "components/common/drawer/DrawerContentLayout";
 
 import colors from "styles/colors";
-import useGlobalDrawer from "hooks/useGlobalDrawer";
+import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
 
 const Wrapper = styled.div`
   margin-bottom: 60px;

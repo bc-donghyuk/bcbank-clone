@@ -29,11 +29,11 @@ import { passwordSchema } from "utils/validationSchema";
 import { passwordRequirements } from "constants/fieldRequirements";
 import useCheckValidity from "hooks/useCheckValidity";
 import colors from "styles/colors";
-import useGlobalBanner from "hooks/useGlobalDrawer";
 import { IS_KOREAN_SITE } from "envConstants";
 import { devices } from "styles/devices";
 import { HOME_URL, LEGAL_PRIVACY_POLICY_URL, LEGAL_TERMS_OF_SERVICE_URL, LOGIN_URL } from "URLConstant";
 import authService from "@core/services/authService";
+import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
 
 const ReferralWrapper = styled.div`
   padding-top: 36px;
@@ -94,7 +94,7 @@ const SignupForm: React.FC<Props> = () => {
     schema: passwordSchema,
     value: watch("password"),
   });
-  const { openGlobalDrawer } = useGlobalBanner();
+  const { openGlobalDrawer } = useGlobalDrawer();
   const [isKoreanSiteAuthFormChecked, setIsKoreanSiteAuthFormChecked] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState("");
