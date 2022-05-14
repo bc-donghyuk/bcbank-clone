@@ -80,8 +80,6 @@ async function signup(email: string, password1: string, password2: string, usert
     usertype,
   });
 
-  console.log(data);
-
   if (referralCode) {
     dispatch({
       type: "onSignedupWithReferralCode",
