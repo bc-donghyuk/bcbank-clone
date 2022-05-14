@@ -49,6 +49,7 @@ interface Props extends Omit<InputProps, "error"> {
   control: Control;
   error?: string;
   label?: string;
+  defaultValue?: string;
   withInputPadding?: boolean;
   withBorderBottom?: boolean;
   withErrorMessage?: boolean;
@@ -60,6 +61,7 @@ const Input: React.FC<Props> = ({
   label,
   type = "text",
   error,
+  defaultValue = "",
   withInputPadding = false,
   withBorderBottom = true,
   withErrorMessage = true,
@@ -75,6 +77,7 @@ const Input: React.FC<Props> = ({
       )}
       <Controller
         name={name}
+        defaultValue={defaultValue}
         control={control}
         render={({ field }) => (
           <BaseInput

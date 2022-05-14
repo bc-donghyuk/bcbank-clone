@@ -34,6 +34,9 @@ import { devices } from "styles/devices";
 import { HOME_URL, LEGAL_PRIVACY_POLICY_URL, LEGAL_TERMS_OF_SERVICE_URL, LOGIN_URL } from "URLConstant";
 import authService from "@core/services/authService";
 import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
+import { useFlashMessage } from "recoil/atoms/flashMessage";
+import { MESSAGE__TYPE__CUSTOM } from "constants/flashMessage";
+import { EmailIcon } from "assets/icons";
 
 const ReferralWrapper = styled.div`
   padding-top: 36px;
@@ -76,6 +79,13 @@ const ButtonWrapper = styled.div`
   padding-bottom: 12px;
 `;
 
+const MessageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  flex: 1;
+`;
+
 interface Props {}
 
 const SignupForm: React.FC<Props> = () => {
@@ -95,26 +105,43 @@ const SignupForm: React.FC<Props> = () => {
     value: watch("password"),
   });
   const { openGlobalDrawer } = useGlobalDrawer();
+  const { addMessage } = useFlashMessage();
   const [isKoreanSiteAuthFormChecked, setIsKoreanSiteAuthFormChecked] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState("");
 
   const tabLabels = Object.values(BCBANK_USER__TYPE__LABELS());
   const isEmailValid = dirtyFields?.email && errors && !errors.email;
-
   const onSubmit = async (data: any) => {
+    console.log(data);
     if (loading) {
       return;
     }
 
     setLoading(true);
-    const { email, password, passwordConfirmation, usertype, referralCode } = data;
+    const { email, password, passwordConfirmation, userType, referralCode } = data;
     try {
       setLoading(false);
-      await authService.signup({ email, password, passwordConfirmation, usertype, referralCode });
+      await authService.signup(email, password, passwordConfirmation, userType, referralCode);
 
       const { state } = location;
-      const targetIUrl = state ? state.from.pathname : HOME_URL;
+      const targetUrl = state ? state.from.pathname : HOME_URL;
+
+      addMessage({
+        body: Object.assign(
+          () => (
+            <MessageWrapper>
+              {t("We've sent a verification email to {{email}}.", { email })}
+              <br />
+              {t("accounts:Please verify your email address to activate your account.")}
+            </MessageWrapper>
+          ),
+          { displayName: "verification_email_sent_message" },
+        ),
+        targetUrl,
+        messageType: MESSAGE__TYPE__CUSTOM,
+        customIcon: <EmailIcon />,
+      });
     } catch (err) {
       setLoading(false);
     }

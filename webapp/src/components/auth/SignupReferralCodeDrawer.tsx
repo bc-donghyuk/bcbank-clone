@@ -50,12 +50,10 @@ const SignupReferralCodeDrawer: React.FC<Props> = ({ handleApply }) => {
       <Wrapper>
         <Title>
           <DummyPlaceholder />
-          <Text data-cy="referral-drawer-close-btn" onClick={handleSubmit(onClick)}>
-            {t("signup.referral_code_done")}
-          </Text>
+          <Text onClick={handleSubmit(onClick)}>{t("signup.referral_code_done")}</Text>
         </Title>
         <Input
-          name="referralCode"
+          name="referralCodeT"
           control={control}
           placeholder={t("Add a referral code here")}
           withErrorMessage={false}

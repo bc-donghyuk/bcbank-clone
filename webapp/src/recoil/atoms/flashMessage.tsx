@@ -1,9 +1,12 @@
-import produce from "immer";
 import { useCallback } from "react";
+import produce from "immer";
 import { atom, useRecoilState } from "recoil";
 
+import { IMessage, Message } from "model/IMessage";
+import { MESSAGE__TYPE__FAILED } from "constants/flashMessage";
+
 interface FlashMessageState {
-  message: null;
+  message: IMessage | null;
 }
 
 export const flashMessageState = atom<FlashMessageState>({
@@ -13,25 +16,56 @@ export const flashMessageState = atom<FlashMessageState>({
   },
 });
 
-interface AddMessage {
-  type: "addMessage";
-  body: React.FC<any> | (() => React.ReactNode) | string;
+interface AddErrorMessage {
+  body: () => React.ReactNode | string;
   targetUrl: string;
-  messageType?: number;
   customIcon?: React.ReactNode;
+}
+
+interface AddMessage extends AddErrorMessage {
+  messageType: number;
 }
 
 export const useFlashMessage = () => {
   const [state, dispatch] = useRecoilState(flashMessageState);
 
-  const addMessage = ({ body, targetUrl, type, customIcon }: AddMessage) =>
+  const addMessage = (payload: AddMessage) =>
     useCallback(() => {
       dispatch(
         produce(draft => {
-          // draft.message = new Message({})
+          draft.message = new Message({
+            body: payload.body,
+            targetUrl: payload.targetUrl,
+            type: payload.messageType,
+            customIcon: payload.customIcon,
+          });
         }),
       );
     }, [dispatch]);
 
-  return { state, addMessage };
+  const addErrorMessage = (payload: AddErrorMessage) =>
+    useCallback(() => {
+      dispatch(
+        produce(draft => {
+          draft.message = new Message({
+            body: payload.body,
+            targetUrl: payload.targetUrl,
+            type: MESSAGE__TYPE__FAILED,
+            customIcon: payload.customIcon,
+          });
+        }),
+      );
+    }, [dispatch]);
+
+  const close = () => {
+    useCallback(() => {
+      dispatch(
+        produce(draft => {
+          draft.message = null;
+        }),
+      );
+    }, [dispatch]);
+  };
+
+  return { state, addMessage, addErrorMessage, close };
 };

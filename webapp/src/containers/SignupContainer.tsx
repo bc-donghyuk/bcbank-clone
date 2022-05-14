@@ -28,7 +28,7 @@ const signupFormSchema = yup.object({
   referralCode: yup
     .string()
     .max(32)
-    .matches(/^[\w-_\.]+$/, "alphanumeric"),
+    .matches(/^[\w-_\.]+$/, { message: "alphanumeric", excludeEmptyString: true }),
   userType: yup.number(),
 });
 

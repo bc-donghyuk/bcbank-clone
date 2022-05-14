@@ -18,9 +18,9 @@ const Svg = styled.svg`
 `;
 
 interface Props {
-  width: string;
-  height: string;
-  color: string;
+  width?: string;
+  height?: string;
+  color?: string;
 }
 
 const CompleteIcon: React.FC<Props> = ({ width = "100", height = "100", color = "#616C7C" }) => {

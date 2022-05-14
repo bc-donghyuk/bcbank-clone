@@ -1,8 +1,8 @@
 import React from "react";
 
 interface Props {
-  className: string;
-  color: string;
+  className?: string;
+  color?: string;
 }
 
 const ErrorIcon: React.FC<Props> = ({ className = "", color = "#F25059" }) => {

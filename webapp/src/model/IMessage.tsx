@@ -1,8 +1,9 @@
-import i18n from "i18n";
+import React from "react";
 
-import { MESSAGE__TYPE__FAILED, MESSAGE__TYPE__SUCCESS } from "constants/flashMessage";
-import colors from "styles/colors";
+import i18n from "i18n";
 import { CompleteIcon, ErrorIcon } from "assets/icons";
+import { MESSAGE__TYPE__SUCCESS, MESSAGE__TYPE__FAILED } from "constants/flashMessage";
+import colors from "styles/colors";
 
 export interface IMessage {
   body: () => React.ReactNode | string;
@@ -10,7 +11,7 @@ export interface IMessage {
   type: number;
   customIcon?: React.ReactNode;
   icon: React.ReactNode;
-  translateMessage: React.ReactNode | string;
+  translatedMessage: string | React.ReactNode;
 }
 
 interface IMessageData {
@@ -33,22 +34,22 @@ export class Message implements IMessage {
     this.customIcon = data.customIcon;
   }
 
-  get icon(): React.ReactNode {
-    if (this.customIcon) return this.customIcon;
-
-    // switch (this.type) {
-    //   case MESSAGE__TYPE__SUCCESS:
-    //     return <CompleteIcon color={colors.brand["100"]} />;
-    //   case MESSAGE__TYPE__FAILED:
-    //     return <ErrorIcon color={colors.state.error.default} />;
-    //   default:
-    //     return null;
-    // }
-  }
-
   get translatedMessage(): string | React.ReactNode {
     if (typeof this.body === "string") return i18n.t(this.body);
     if (typeof this.body === "function") return this.body();
     return "";
+  }
+
+  get icon(): React.ReactNode {
+    if (this.customIcon) return this.customIcon;
+
+    switch (this.type) {
+      case MESSAGE__TYPE__SUCCESS:
+        return <CompleteIcon color={colors.brand["100"]} />;
+      case MESSAGE__TYPE__FAILED:
+        return <ErrorIcon color={colors.state.error.default} />;
+      default:
+        return null;
+    }
   }
 }

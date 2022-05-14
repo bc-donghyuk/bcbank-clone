@@ -69,18 +69,18 @@ function handleLogin(data: any) {
   return true;
 }
 
-async function signup(values: SignupProps) {
+async function signup(email: string, password1: string, password2: string, usertype: number, referralCode?: string) {
   dispatch({ type: "onSignupStart" });
-
-  const { email, password, passwordConfirmation, usertype, referralCode } = values;
 
   const { data } = await http.post(AUTH_SIGNUP_ENDPOINT, {
     email,
-    password,
-    passwordConfirmation,
-    usertype,
+    password1,
+    password2,
     referral_code: referralCode,
+    usertype,
   });
+
+  console.log(data);
 
   if (referralCode) {
     dispatch({
