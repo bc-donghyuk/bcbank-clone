@@ -2,8 +2,8 @@ import { selector, useRecoilValue } from "recoil";
 
 import { fetchFeatureConfig } from "services/fetchData";
 
-const fetchFeatureConfigSelector = selector({
-  key: "fetchFeatureConfig",
+const featureConfigAsyncState = selector({
+  key: "featureConfigAsyncState",
   get: async () => {
     try {
       const response = await fetchFeatureConfig();
@@ -16,4 +16,4 @@ const fetchFeatureConfigSelector = selector({
   },
 });
 
-export const useFetchFeatureConfig = () => useRecoilValue(fetchFeatureConfigSelector);
+export const useFetchFeatureConfig = () => useRecoilValue(featureConfigAsyncState);
