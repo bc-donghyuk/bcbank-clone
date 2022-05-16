@@ -33,6 +33,7 @@ import { IS_KOREAN_SITE } from "envConstants";
 import { devices } from "styles/devices";
 import { HOME_URL, LEGAL_PRIVACY_POLICY_URL, LEGAL_TERMS_OF_SERVICE_URL, LOGIN_URL } from "URLConstant";
 import authService from "@core/services/authService";
+import { BCBANK_USER__TYPE_PERSONAL } from "@core/constants/user";
 import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
 import { useFlashMessage } from "recoil/atoms/flashMessage";
 import { MESSAGE__TYPE__CUSTOM } from "constants/flashMessage";
@@ -121,12 +122,12 @@ const SignupForm: React.FC<Props> = () => {
     setLoading(true);
     const { email, password, passwordConfirmation, userType, referralCode } = data;
     try {
-      setLoading(false);
       await authService.signup(email, password, passwordConfirmation, userType, referralCode);
 
       const { state } = location;
       const targetUrl = state ? state.from.pathname : HOME_URL;
 
+      // TODO : Add FlashMessage to Dashboard Layout
       addMessage({
         body: Object.assign(
           () => (
@@ -142,6 +143,11 @@ const SignupForm: React.FC<Props> = () => {
         messageType: MESSAGE__TYPE__CUSTOM,
         customIcon: <EmailIcon />,
       });
+
+      // TODO : Add disableNewFeatureTooltip
+
+      if (userType === BCBANK_USER__TYPE_PERSONAL) {
+      }
     } catch (err) {
       setLoading(false);
     }
