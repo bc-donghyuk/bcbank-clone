@@ -1,6 +1,6 @@
 import produce from "immer";
-import { useCallback } from "react";
-import { atom, useRecoilState } from "recoil";
+import { useCallback, useMemo } from "react";
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 interface GlobalDrawerState {
   open: boolean;
@@ -21,35 +21,47 @@ export const globalDrawerState = atom<GlobalDrawerState>({
   },
 });
 
+export const globalDrawerActions = () => {
+  const dispatch = useSetRecoilState(globalDrawerState);
+  return useMemo(
+    () => ({
+      openGlobalDrawer: (params: {
+        component: React.FC<any>;
+        componentProps?: any;
+        closeEventKey?: string;
+        handleClose?: () => void;
+      }) => {
+        dispatch(
+          produce(draft => {
+            draft.open = true;
+            draft.component = params.component;
+            draft.componentProps = params.componentProps;
+            draft.closeEventKey = params.closeEventKey;
+            draft.handleClose = params.handleClose;
+          }),
+        );
+      },
+      closeGlobalDrawer: () => {
+        dispatch(
+          produce(draft => {
+            draft.open = false;
+            draft.component = null;
+            draft.componentProps = null;
+          }),
+        );
+      },
+    }),
+    [dispatch],
+  );
+};
+
 export const useGlobalDrawer = () => {
-  const [state, dispatch] = useRecoilState(globalDrawerState);
+  const state = useRecoilValue(globalDrawerState);
+  const { openGlobalDrawer, closeGlobalDrawer } = globalDrawerActions();
 
-  const openGlobalDrawer = useCallback(
-    (params: { component: React.FC<any>; componentProps?: any; closeEventKey?: string; handleClose?: () => void }) => {
-      dispatch(
-        produce(draft => {
-          draft.open = true;
-          draft.component = params.component;
-          draft.componentProps = params.componentProps;
-          draft.closeEventKey = params.closeEventKey;
-          draft.handleClose = params.handleClose;
-        }),
-      );
-    },
-    [dispatch],
-  );
-
-  const closeGlobalDrawer = useCallback(
-    () =>
-      dispatch(
-        produce(draft => {
-          draft.open = false;
-          draft.component = null;
-          draft.componentProps = null;
-        }),
-      ),
-    [dispatch],
-  );
-
-  return { state, openGlobalDrawer, closeGlobalDrawer };
+  return {
+    state,
+    openGlobalDrawer,
+    closeGlobalDrawer,
+  };
 };
