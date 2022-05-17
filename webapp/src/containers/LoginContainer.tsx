@@ -11,6 +11,7 @@ import LoginFormOtp from "components/auth/LoginFormOtp";
 import { passwordErrorMessages } from "constants/errorMessage";
 import { isLoggedIn } from "utils/auth";
 import { DASHBOARD_URL, OTP_URL } from "URLConstant";
+import { useFetchFeatureConfigSync } from "@core/hooks/featureConfig/useFetchFeatureConfigSync";
 
 const loginFormSchema = yup
   .object({
@@ -38,6 +39,7 @@ const LoginContainer = () => {
     },
     mode: "onChange",
   });
+  useFetchFeatureConfigSync();
 
   return (
     <FormProvider {...methods}>

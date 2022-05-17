@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
@@ -38,6 +38,7 @@ import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
 import { useFlashMessage } from "recoil/atoms/flashMessage";
 import { MESSAGE__TYPE__CUSTOM } from "constants/flashMessage";
 import { EmailIcon } from "assets/icons";
+import { useFeatureConfig } from "@core/recoil/atoms/featureConfigState";
 
 const ReferralWrapper = styled.div`
   padding-top: 36px;
@@ -101,6 +102,7 @@ const SignupForm: React.FC<Props> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+  const featureConfigs = useFeatureConfig();
   const { checkValidityByKey } = useCheckValidity({
     schema: passwordSchema,
     value: watch("password"),
@@ -185,6 +187,10 @@ const SignupForm: React.FC<Props> = () => {
   const handleClickSignin = () => {
     navigate(LOGIN_URL);
   };
+
+  useEffect(() => {
+    console.log(featureConfigs);
+  }, []);
 
   const renderReferralBox = () => {
     if (watch("referralCode")) {

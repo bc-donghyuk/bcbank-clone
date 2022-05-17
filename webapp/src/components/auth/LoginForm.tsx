@@ -16,7 +16,7 @@ import InputAdornment from "components/common/form/InputAdornment";
 import { IS_STAGING_OR_PRODUCTION } from "envConstants";
 import { LOGIN_OTP_URL, PASSWORD_CHANGE_PATH, SIGNUP_URL } from "URLConstant";
 import authService from "@core/services/authService";
-import { useFetchFeatureConfig } from "@core/hooks/featureConfig/useFetchFeatureConfig";
+import { useFeatureConfig } from "@core/recoil/atoms/featureConfigState";
 
 // Verification container 생성 시, 제거
 interface AuthDeviceData {
@@ -38,10 +38,10 @@ const LoginForm: React.FC = () => {
     setValue,
     handleSubmit,
   } = useFormContext();
-  const featureConfig = useFetchFeatureConfig();
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const featureConfig = useFeatureConfig();
   const [loading, setLoading] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [serverErrorMessage, setServerErrorMessage] = useState<string>("");
@@ -87,8 +87,6 @@ const LoginForm: React.FC = () => {
         password,
         authDevices,
       };
-
-      console.log(featureConfig);
 
       if (location.state) {
         if (location.state?.from) {
