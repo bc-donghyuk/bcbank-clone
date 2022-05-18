@@ -31,7 +31,13 @@ import useCheckValidity from "hooks/useCheckValidity";
 import colors from "styles/colors";
 import { IS_KOREAN_SITE } from "envConstants";
 import { devices } from "styles/devices";
-import { HOME_URL, LEGAL_PRIVACY_POLICY_URL, LEGAL_TERMS_OF_SERVICE_URL, LOGIN_URL } from "URLConstant";
+import {
+  HOME_URL,
+  LEGAL_PRIVACY_POLICY_URL,
+  LEGAL_TERMS_OF_SERVICE_URL,
+  LOGIN_URL,
+  REGISTER_PHONE_NUMBER_URL,
+} from "URLConstant";
 import authService from "@core/services/authService";
 import { BCBANK_USER__TYPE_PERSONAL } from "@core/constants/user";
 import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
@@ -39,6 +45,7 @@ import { useFlashMessage } from "recoil/atoms/flashMessage";
 import { MESSAGE__TYPE__CUSTOM } from "constants/flashMessage";
 import { EmailIcon } from "assets/icons";
 import { useFeatureConfig } from "@core/recoil/atoms/featureConfigState";
+import { FEATURE_CONFIG__MOBILE_PHONE_AUTH } from "@core/constants/featureConfig";
 
 const ReferralWrapper = styled.div`
   padding-top: 36px;
@@ -148,10 +155,22 @@ const SignupForm: React.FC<Props> = () => {
 
       // TODO : Add disableNewFeatureTooltip
 
-      if (userType === BCBANK_USER__TYPE_PERSONAL) {
+      if (userType === BCBANK_USER__TYPE_PERSONAL && featureConfigs.isEnabled(FEATURE_CONFIG__MOBILE_PHONE_AUTH)) {
+        navigate(
+          REGISTER_PHONE_NUMBER_URL,
+          // typeof location.state === "object"
+          //   ? { state: { ...location.state, referrer: "signup" } }
+          //   : { state: { referrer: "signup" } },
+        );
+      } else {
+        navigate(targetUrl);
       }
     } catch (err) {
       setLoading(false);
+
+      if (err.response && err.response.status === 400) {
+        alert("400 error");
+      }
     }
   };
 

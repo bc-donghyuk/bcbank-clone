@@ -13,6 +13,7 @@ export const useFeatureConfig = () => useRecoilValue(featureConfigState);
 
 export function useFetchFeatureConfig() {
   const dispatch = useSetRecoilState(featureConfigState);
+
   return useCallback(async () => {
     try {
       const response = await fetchFeatureConfig();

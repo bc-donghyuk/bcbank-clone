@@ -23,6 +23,7 @@ export const globalDrawerState = atom<GlobalDrawerState>({
 
 export const globalDrawerActions = () => {
   const dispatch = useSetRecoilState(globalDrawerState);
+
   return useMemo(
     () => ({
       openGlobalDrawer: (params: {
@@ -41,6 +42,7 @@ export const globalDrawerActions = () => {
           }),
         );
       },
+
       closeGlobalDrawer: () => {
         dispatch(
           produce(draft => {
