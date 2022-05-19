@@ -18,7 +18,7 @@ const onSignupStart = async () => {
   unsetRefCode();
 };
 
-const onSignedupWithReferralCode = async ({
+const onSignedUpWithReferralCode = async ({
   referralCode,
   referralType,
 }: {
@@ -33,7 +33,7 @@ const configure = () => {
   authService.addCallback("onLoggedIn", onLoggedIn);
   authService.addCallback("onLoggedOut", onLoggedOut);
   authService.addCallback("onSignupStart", onSignupStart);
-  authService.addCallback("onSignedupWithReferralCode", onSignedupWithReferralCode);
+  authService.addCallback("onSignUpCompleteWithReferralCode", onSignedUpWithReferralCode);
 };
 
 export default {

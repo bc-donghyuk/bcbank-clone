@@ -39,13 +39,20 @@ import {
   REGISTER_PHONE_NUMBER_URL,
 } from "URLConstant";
 import authService from "@core/services/authService";
-import { BCBANK_USER__TYPE_PERSONAL } from "@core/constants/user";
+import {
+  BCBANK_USER_PASSWORD_VALIDATION_ERROR_CODE__CONTAIN_SEQUENTIAL,
+  BCBANK_USER_PASSWORD_VALIDATION_ERROR_CODE__TOO_COMMON,
+  BCBANK_USER_PASSWORD_VALIDATION_ERROR_CODE__TOO_SIMILAR_EMAIL,
+  BCBANK_USER__TYPE_PERSONAL,
+} from "@core/constants/user";
 import { useGlobalDrawer } from "recoil/atoms/globalDrawer";
 import { useFlashMessage } from "recoil/atoms/flashMessage";
 import { MESSAGE__TYPE__CUSTOM } from "constants/flashMessage";
 import { EmailIcon } from "assets/icons";
 import { useFeatureConfig } from "@core/recoil/atoms/featureConfigState";
 import { FEATURE_CONFIG__MOBILE_PHONE_AUTH } from "@core/constants/featureConfig";
+import { emailErrorMessages, passwordErrorMessages, referralCodeErrorMessage } from "constants/errorMessage";
+import ErrorMessage from "./ErrorMessage";
 
 const ReferralWrapper = styled.div`
   padding-top: 36px;
@@ -95,6 +102,10 @@ const MessageWrapper = styled.div`
   flex: 1;
 `;
 
+const ErrorMessageWrapper = styled.div`
+  margin-top: 20px;
+`;
+
 interface Props {}
 
 const SignupForm: React.FC<Props> = () => {
@@ -123,7 +134,6 @@ const SignupForm: React.FC<Props> = () => {
   const tabLabels = Object.values(BCBANK_USER__TYPE__LABELS());
   const isEmailValid = dirtyFields?.email && errors && !errors.email;
   const onSubmit = async (data: any) => {
-    console.log(data);
     if (loading) {
       return;
     }
@@ -137,21 +147,21 @@ const SignupForm: React.FC<Props> = () => {
       const targetUrl = state ? state.from.pathname : HOME_URL;
 
       // TODO : Add FlashMessage to Dashboard Layout
-      addMessage({
-        body: Object.assign(
-          () => (
-            <MessageWrapper>
-              {t("We've sent a verification email to {{email}}.", { email })}
-              <br />
-              {t("accounts:Please verify your email address to activate your account.")}
-            </MessageWrapper>
-          ),
-          { displayName: "verification_email_sent_message" },
-        ),
-        targetUrl,
-        messageType: MESSAGE__TYPE__CUSTOM,
-        customIcon: <EmailIcon />,
-      });
+      // addMessage({
+      //   body: Object.assign(
+      //     () => (
+      //       <MessageWrapper>
+      //         {t("We've sent a verification email to {{email}}.", { email })}
+      //         <br />
+      //         {t("accounts:Please verify your email address to activate your account.")}
+      //       </MessageWrapper>
+      //     ),
+      //     { displayName: "verification_email_sent_message" },
+      //   ),
+      //   targetUrl,
+      //   messageType: MESSAGE__TYPE__CUSTOM,
+      //   customIcon: <EmailIcon />,
+      // });
 
       // TODO : Add disableNewFeatureTooltip
 
@@ -169,7 +179,22 @@ const SignupForm: React.FC<Props> = () => {
       setLoading(false);
 
       if (err.response && err.response.status === 400) {
-        alert("400 error");
+        const { data } = err.response;
+
+        if (data.email) {
+          setServerError(emailErrorMessages.taken);
+        } else if (data.password1) {
+          const errCodes = data.password1;
+          if (errCodes.includes(BCBANK_USER_PASSWORD_VALIDATION_ERROR_CODE__TOO_SIMILAR_EMAIL)) {
+            setServerError(passwordErrorMessages.tooSimilar);
+          } else if (errCodes.includes(BCBANK_USER_PASSWORD_VALIDATION_ERROR_CODE__TOO_COMMON)) {
+            setServerError(passwordErrorMessages.common);
+          } else if (errCodes.includes(BCBANK_USER_PASSWORD_VALIDATION_ERROR_CODE__CONTAIN_SEQUENTIAL)) {
+            setServerError(passwordErrorMessages.sequential);
+          }
+        } else if (data.referral_code) {
+          setServerError(referralCodeErrorMessage.invalid);
+        }
       }
     }
   };
@@ -206,10 +231,6 @@ const SignupForm: React.FC<Props> = () => {
   const handleClickSignin = () => {
     navigate(LOGIN_URL);
   };
-
-  useEffect(() => {
-    console.log(featureConfigs);
-  }, []);
 
   const renderReferralBox = () => {
     if (watch("referralCode")) {
@@ -295,6 +316,11 @@ const SignupForm: React.FC<Props> = () => {
             />
           </FormControl>
           {renderReferralBox()}
+          {serverError && (
+            <ErrorMessageWrapper>
+              <ErrorMessage message={serverError} />
+            </ErrorMessageWrapper>
+          )}
           {/* TODO : Add server error message  */}
           {/*  */}
           {/* TODO : IS_KOREAN_SITE 어떻게 판별하는지 공부하기  */}

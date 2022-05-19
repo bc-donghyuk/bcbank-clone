@@ -22,14 +22,19 @@ export interface SignupProps {
   referralCode?: string;
 }
 
-type AuthEventType = "onLogInStart" | "onLoggedIn" | "onLoggedOut" | "onSignupStart" | "onSignedupWithReferralCode";
+type AuthEventType =
+  | "onLogInStart"
+  | "onLoggedIn"
+  | "onLoggedOut"
+  | "onSignupStart"
+  | "onSignUpCompleteWithReferralCode";
 
 type AuthEvent =
   | { type: "onLogInStart" }
   | { type: "onLoggedIn" }
   | { type: "onLoggedOut" }
   | { type: "onSignupStart" }
-  | { type: "onSignedupWithReferralCode"; referralCode: string; referralType: number };
+  | { type: "onSignUpCompleteWithReferralCode"; referralCode: string; referralType: number };
 
 const authCallbacks: { type: AuthEventType; callback: Function }[] = [];
 
@@ -82,7 +87,7 @@ async function signup(email: string, password1: string, password2: string, usert
 
   if (referralCode) {
     dispatch({
-      type: "onSignedupWithReferralCode",
+      type: "onSignUpCompleteWithReferralCode",
       referralCode,
       referralType: parseInt(data.referral_type, 10),
     });
