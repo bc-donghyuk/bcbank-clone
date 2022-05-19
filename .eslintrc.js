@@ -15,7 +15,7 @@ module.exports = {
   ],
   // parser를 사용하여 작성된 rule을 포함, packages에 eslint-plugin 접두사 생략 후 작성
   plugins: [
-    "import", // import/export 구문의 린트를 지원하고 파일 경로 및 가져오기 이름의 철자 오류 문제를 방지합니다
+    "import", // import/export 구문의 린트를 지원하고 파일 경로 및 가져오기 이름의 철자 오류 문제를 방지
   ],
   env: {
     es6: true, // 모듈을 제외한 모든 ECMAScript 6 기능을 활성화
@@ -28,7 +28,7 @@ module.exports = {
   overrides: [
     {
       files: ["*.js", "*.jsx"],
-      parser: "@babel/eslint-parser", // ESLint가 환상적으로 모든 바벨코드를 Lint 힐 수 있다.
+      parser: "@babel/eslint-parser", // ESLint가 환상적으로 모든 바벨코드를 Lint
       plugins: ["flowtype"], // ESLint에 대한 Flow 유형 Lint 규칙
       rules: {
         "flowtype/define-flow-type": 1,
