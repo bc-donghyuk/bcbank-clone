@@ -17,7 +17,7 @@ import MuiTheme from "styles/theme";
 import Services from "services";
 import { isLoggedIn } from "utils/auth";
 
-const App = ({ location }) => {
+const App = () => {
   if (smil) {
     return (
       <ErrorBoundary>
@@ -26,11 +26,7 @@ const App = ({ location }) => {
             <RecoilRoot>
               <DebugObserver />
               <Routes>
-                {isLoggedIn() ? (
-                  <Route path="/" element={<Navigate replace to={(DASHBOARD_URL, { state: location.state })} />} />
-                ) : (
-                  <Route path="/" element={<Navigate replace to={LOGIN_URL} />} />
-                )}
+                <Route path="/" element={<Navigate replace to={isLoggedIn() ? DASHBOARD_URL : LOGIN_URL} />} />
                 {routes.map(route => {
                   const RouteTypeHandler = routeComponents[route.type];
                   const node = <route.component />;

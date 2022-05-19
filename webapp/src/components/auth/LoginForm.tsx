@@ -56,8 +56,7 @@ const LoginForm: React.FC = () => {
       setValue("recapt", "");
       setValue("isHuman", true);
       // TODO : remove temp setState
-      setValue("email", "piouy_@blockcrafters.com");
-      setValue("password", "pqowie001!");
+      setValue("email", "localSignupTest_1_1@ruu.kr");
     }
   };
 

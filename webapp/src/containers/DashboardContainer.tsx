@@ -1,5 +1,7 @@
 import React from "react";
 
+import Dashboard from "components/dashboard/DashBoard";
+
 import useUserProfileQuery from "@core/queries/user/useUserProfileQuery";
 import { setLoggedIn } from "utils/auth";
 
@@ -12,10 +14,11 @@ const DashboardContainer = () => {
   };
 
   return (
-    <div>
-      <div>Dashboard</div>
+    <>
       <button onClick={tempHandleLogout}>Logout</button>
-    </div>
+      <Dashboard />
+      <Dashboard />
+    </>
   );
 };
 
