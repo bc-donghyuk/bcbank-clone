@@ -17,7 +17,6 @@ const DashboardContainer = () => {
     <>
       <button onClick={tempHandleLogout}>Logout</button>
       <Dashboard />
-      <Dashboard />
     </>
   );
 };

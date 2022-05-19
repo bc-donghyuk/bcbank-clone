@@ -1,4 +1,7 @@
-import httpService from "@core/services/httpService";
+import qs from "qs";
+
+import { AUTH_TOKEN_REFRESH_ENDPOINT } from "@core/constants/apiURIs";
+import httpService, { HttpRequestConfig } from "@core/services/httpService";
 
 let globalAccessToken: string | null = null;
 
@@ -9,6 +12,10 @@ httpService.baseAxios.interceptors.request.use(config => {
     config.headers.Authorization = `Bearer ${globalAccessToken}`;
   }
   return config;
+});
+
+httpService.baseAxios.interceptors.response.use(undefined, async error => {
+  const request: HttpRequestConfig = error?.config;
 });
 
 const updateAccessToken = async (accessToken: string) => {
