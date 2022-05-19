@@ -1,151 +1,114 @@
 module.exports = {
   root: true,
   extends: [
-    "airbnb-base",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "prettier",
+    "eslint:recommended",
+    "airbnb-base", // eslint-config-airbnb-base
+    "plugin:react/recommended", // eslint-plugin-react
+    "plugin:react-hooks/recommended", // eslint-plugin-react-hooks
+    "plugin:@typescript-eslint/recommended", // @typescript-eslint/eslint-plugin
+    // for eslint prettier error
+    "plugin:prettier/recommended", // eslint-plugin-prettier
     "prettier/@typescript-eslint",
     "prettier/react",
     "prettier/standard",
     "prettier/unicorn",
   ],
-  plugins: ["eslint-comments", "react", "react-hooks", "jest", "import"],
+  // parser를 사용하여 작성된 rule을 포함, packages에 eslint-plugin 접두사 생략 후 작성
+  plugins: [
+    "import", // import/export 구문의 린트를 지원하고 파일 경로 및 가져오기 이름의 철자 오류 문제를 방지합니다
+  ],
   env: {
-    es6: true,
-    jest: true,
+    es6: true, // 모듈을 제외한 모든 ECMAScript 6 기능을 활성화
   },
+  // ESLint 사용을 위해 지원하려는 Javascript 언어 옵션을 지정
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2020,
-    sourceType: "module",
+    ecmaVersion: 2020, // 사용할 ECMAScript 버전을 설정
+    sourceType: "module", // parser의 export 형태를 설정
   },
-
   overrides: [
     {
       files: ["*.js", "*.jsx"],
-      parser: "babel-eslint",
-      plugins: ["flowtype"],
+      parser: "@babel/eslint-parser", // ESLint가 환상적으로 모든 바벨코드를 Lint 힐 수 있다.
+      plugins: ["flowtype"], // ESLint에 대한 Flow 유형 Lint 규칙
       rules: {
         "flowtype/define-flow-type": 1,
         "flowtype/use-flow-type": 1,
       },
     },
-    {
-      files: ["*.ts", "*.tsx"],
-      parser: "@typescript-eslint/parser",
-      plugins: ["@typescript-eslint/eslint-plugin"],
-      extends: ["plugin:@typescript-eslint/recommended"],
-      rules: {
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/no-empty-interface": "off",
-        "@typescript-eslint/no-inferrable-types": "off",
-        "@typescript-eslint/no-unused-vars": "warn",
-        "@typescript-eslint/camelcase": "off",
-      },
-    },
   ],
-
   rules: {
     /** ******** GENERAL ********* */
-    camelcase: "off",
-    "default-case": "off",
-    "global-require": "warn",
-    "lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
-    "no-plusplus": "off",
-    "no-underscore-dangle": "off",
-    "no-param-reassign": "off",
-    "no-shadow": "off", // -> warn???
-    "no-unused-vars": "warn",
-    "no-use-before-define": "off",
-    "no-useless-escape": "warn",
-    "no-useless-catch": "off",
-    "no-empty": "off",
-    "operator-linebreak": "off",
-    quotes: ["warn", "double"],
+    camelcase: "off", // 변수이름 camelcase로 고정할 것인가
+    "default-case": "off", // switch 문 마지막에 default가 필수인가
+    "lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }], // Class의 각 변수마다 띄어쓰기를 어떻게 제한할 것 인가
+    "no-plusplus": "off", // ++를 제한할 것인가
+    "no-underscore-dangle": "off", // 변수 이름 맨 앞에 _f를 제한할 것인가
+    "no-param-reassign": "off", // 재할당을 제한할 것인가
+    "no-shadow": "off", // 섀도우 변수 선언을 제한할 것인가
+    "no-unused-vars": "warn", // var 선언문을 에러 처리 할 것인가
+    "no-use-before-define": "off", // 변수 정의 전 사용을 에러처리 할 것인가
+    "operator-linebreak": "off", // 연산이 들어간 값에 줄 바꿈이 있을 경우 연산자를 줄바뀜 줄 맨 앞 부분에 선언하도록 할 것인가
+    quotes: ["warn", "double"], // 따옴표가 " 가 아닐 경우 에러처리
 
-    curly: ["error", "all"],
+    curly: ["error", "all"], // if내에 return이 아닌 식이 {}안에 없으면 에러 처리 할 것인가
 
-    // enforce that class methods use "this"
-    // https://eslint.org/docs/rules/class-methods-use-this
-    "class-methods-use-this": "off",
+    "class-methods-use-this": "off", // class 문에 this 사용을 필수로 할 것인가
 
-    // encourages use of dot notation whenever possible
-    // https://eslint.org/docs/rules/dot-notation
-    "dot-notation": "warn",
+    "dot-notation": "warn", // temp["test"]와 같은 표현을 제한할 것인가
 
-    // require the use of === and !==
-    // https://eslint.org/docs/rules/eqeqeq
-    eqeqeq: ["error", "always", { null: "ignore" }],
+    eqeqeq: ["error", "always", { null: "ignore" }], // === 와 !==이 아닌 다른 값 비교 연산자를 어떻게 처리할 것인가
 
-    // make sure for-in loops have an if statement
-    // https://eslint.org/docs/rules/guard-for-in
-    "guard-for-in": "off",
+    "guard-for-in": "off", // for in문을 제한할 것인가
 
-    // enforce a maximum number of classes per file
-    // https://eslint.org/docs/rules/max-classes-per-file
-    "max-classes-per-file": ["warn", 1],
+    "max-classes-per-file": ["warn", 1], // 파일당 최대 Class 수를 정의
 
     /** ******** IMPORT ********* */
 
-    "import/extensions": "off",
-    "import/no-named-as-default": "off",
-    "import/no-extraneous-dependencies": "off",
-    "import/no-unresolved": "off",
+    "import/extensions": "off", // import를 알파벳 순으로 선언하게 제한
+    "import/no-named-as-default": "off", // export한 변수를 다른 이름으로 가져오는 걸 제한
+    "import/no-extraneous-dependencies": "off", // import문이 require문이나 선언문보다 위로 제한
+    "import/no-unresolved": "off", // 경로의 파일이 unresolved하는 일이 없도록 하는 옵션, 정확히는 import로 가져온 파일 혹은 모듈이 unresolved가 되지 않도록 하는 옵션
 
-    "import/prefer-default-export": "warn",
+    "import/prefer-default-export": "warn", // 한 파일에 export default문 없이 export문이 하나 일 경우 제한
 
     /** ******** REACT ********* */
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md
-    "react/jsx-boolean-value": "off",
+    "react/jsx-boolean-value": "off", // <Hello personal={true} /> === <Hello personal /> 를 에러처리 할 것인가
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
     "react/jsx-filename-extension": [
+      // 예를들어 .js파일에 jsx문법을 사용할 경우 에러처리를 해줄 것 인가
       "warn",
       {
         extensions: [".jsx", ".tsx"],
       },
     ],
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-sort-props.md
-    "react/jsx-sort-props": "off",
+    "react/jsx-sort-props": "off", // component에 props를 정렬하지 않을 경우 에러처리를 할 것인가
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-access-state-in-setstate.md
-    "react/no-access-state-in-setstate": "error",
+    "react/no-access-state-in-setstate": "error", // setState내에 this.state나 state 사용을 에러처리 할 것인가
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-mount-set-state.md
-    "react/no-did-mount-set-state": "error",
+    "react/no-did-mount-set-state": "error", // componentDidMount내에 바로 setState하는 걸 에러처리 할 것인가
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-update-set-state.md
-    "react/no-did-update-set-state": "error",
+    "react/no-did-update-set-state": "error", // componentDidUpdate내에 바로 setState하는 걸 에러처리 할 것인가
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md
-    "react/no-multi-comp": "off",
+    "react/no-multi-comp": "off", // 파일 하나에 component를 하나로 제한할 것인가
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unescaped-entities.md
     "react/no-unescaped-entities": [
+      // markup에 잘못된 문자처리가 된 것을 방지할 것인가
       "error",
       {
         forbid: [">", "}"],
       },
     ],
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unknown-property.md
-    "react/no-unknown-property": "error",
+    "react/no-unknown-property": "error", // html attr를 camel case로 작성하지 않았을 경우 에러처리 여부
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
-    "react/prefer-stateless-function": "off",
+    "react/prefer-stateless-function": "off", // createReactClass 사용을 제한할 것인지
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md
-    "react/prop-types": "off",
+    "react/prop-types": "off", // propsTypes를 에러처리 할 것인지
 
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md
     "react/self-closing-comp": [
+      // 내용없는 태그 처리 제한 ex) <Hello></Hello> => <Hello />
       "error",
       {
         component: true,
@@ -155,8 +118,7 @@ module.exports = {
 
     /** ******** REACT HOOKS ********* */
 
-    // https://reactjs.org/docs/hooks-rules.html
-    "react-hooks/exhaustive-deps": "off",
-    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off", // useEffect내에 사용하고 있는 state를 배열안에 추가시킬 것인가
+    "react-hooks/rules-of-hooks": "off", // 컴포넌트 앞 글자를 대문자로 네이밍 하는게 필수인가
   },
 };
