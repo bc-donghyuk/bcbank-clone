@@ -11,7 +11,6 @@
   "dependencies": {
     "axios": "^0.26.1",
     "immer": "^9.0.12",
-    "lerna": "^4.0.0",
     "react": "^18.1.0",
     "recoil": "^0.7.3-alpha.2"
   },
