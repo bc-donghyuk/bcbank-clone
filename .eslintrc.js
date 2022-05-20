@@ -25,17 +25,6 @@ module.exports = {
     ecmaVersion: 2020, // 사용할 ECMAScript 버전을 설정
     sourceType: "module", // parser의 export 형태를 설정
   },
-  overrides: [
-    {
-      files: ["*.js", "*.jsx"],
-      parser: "@babel/eslint-parser", // ESLint가 환상적으로 모든 바벨코드를 Lint
-      plugins: ["flowtype"], // ESLint에 대한 Flow 유형 Lint 규칙
-      rules: {
-        "flowtype/define-flow-type": 1,
-        "flowtype/use-flow-type": 1,
-      },
-    },
-  ],
   rules: {
     /** ******** GENERAL ********* */
     camelcase: "off", // 변수이름 camelcase로 고정할 것인가

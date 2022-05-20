@@ -9,7 +9,6 @@ module.exports = {
             corejs: 3,
           },
         ],
-        "@babel/preset-flow",
         "@babel/preset-react",
         "@babel/preset-typescript",
       ],
@@ -23,7 +22,6 @@ module.exports = {
         corejs: 3,
       },
     ],
-    "@babel/preset-flow",
     "@babel/preset-react",
     "@babel/preset-typescript",
     "@emotion/babel-preset-css-prop",
@@ -41,6 +39,5 @@ module.exports = {
       },
     ],
     ["@babel/plugin-proposal-decorators", { legacy: true }],
-    ["@babel/plugin-syntax-flow"],
   ],
 };

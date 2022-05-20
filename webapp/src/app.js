@@ -1,8 +1,9 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import smil from "modernizr-esm/feature/svg/smil";
 import { ThemeProvider } from "@mui/material";
 import { RecoilRoot } from "recoil";
+import { hot } from "react-hot-loader";
 
 import DesktopWrapper from "components/common/desktop/DesktopWrapper";
 import UnsupportBrowserPage from "components/unsupport/UnsupportBrowserPage";
@@ -25,25 +26,27 @@ const App = () => {
           <HaruQueriesClientProvider>
             <RecoilRoot>
               <DebugObserver />
-              <Routes>
-                <Route path="/" element={<Navigate replace to={isLoggedIn() ? DASHBOARD_URL : LOGIN_URL} />} />
-                {routes.map(route => {
-                  const RouteTypeHandler = routeComponents[route.type];
-                  const node = <route.component />;
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Navigate replace to={isLoggedIn() ? DASHBOARD_URL : LOGIN_URL} />} />
+                  {routes.map(route => {
+                    const RouteTypeHandler = routeComponents[route.type];
+                    const node = <route.component />;
 
-                  return (
-                    <Route
-                      key={route.path}
-                      path={route.path}
-                      element={
-                        <RouteTypeHandler>
-                          {route.fullscreen ? node : <DesktopWrapper>{node}</DesktopWrapper>}
-                        </RouteTypeHandler>
-                      }
-                    />
-                  );
-                })}
-              </Routes>
+                    return (
+                      <Route
+                        key={route.path}
+                        path={route.path}
+                        element={
+                          <RouteTypeHandler>
+                            {route.fullscreen ? node : <DesktopWrapper>{node}</DesktopWrapper>}
+                          </RouteTypeHandler>
+                        }
+                      />
+                    );
+                  })}
+                </Routes>
+              </BrowserRouter>
               <GlobalDrawer />
             </RecoilRoot>
           </HaruQueriesClientProvider>
@@ -56,4 +59,4 @@ const App = () => {
 
 Services.configure();
 
-export default App;
+export default hot(module)(App);
