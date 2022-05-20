@@ -15,7 +15,3 @@ const container = document.getElementById("app");
 const root = ReactDOMClient.createRoot(container);
 
 root.render(<App />);
-
-if (module.hot) {
-  module.hot.accept();
-}
