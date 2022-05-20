@@ -1,19 +1,4 @@
 module.exports = {
-  env: {
-    test: {
-      presets: [
-        [
-          "@babel/preset-env",
-          {
-            useBuiltIns: "entry",
-            corejs: 3,
-          },
-        ],
-        "@babel/preset-react",
-        "@babel/preset-typescript",
-      ],
-    },
-  },
   presets: [
     [
       "@babel/preset-env",
@@ -28,7 +13,7 @@ module.exports = {
   ],
   plugins: [
     [
-      "module-resolver",
+      "module-resolver", // 파일에 액세스하기 전에 올라가야 하는 디렉토리 수준을 계산할 필요가 없게 하기 위해 정의
       {
         extensions: ["*", ".ts", ".js", ".tsx", ".jsx"],
         root: ["./src", "../core"],

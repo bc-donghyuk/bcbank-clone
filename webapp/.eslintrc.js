@@ -22,7 +22,7 @@ module.exports = {
   },
   settings: {
     "import/resolver": {
-      // Relative to Project root
+      // import 별칭 에러 관리
       node: {
         paths: ["webapp/src"],
         extensions: [".js", ".jsx", ".ts", ".tsx"],

@@ -1,15 +1,12 @@
 const cors = require("cors");
 const express = require("express");
 const webpack = require("webpack");
-const Dotenv = require("dotenv-webpack");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const middleware = require("webpack-dev-middleware");
 
 const fs = require("fs");
 
 const config = require("./webpack.config").find(config => config.name === "devServer");
-
-require("dotenv").config({ path: ".env" });
 
 (() => {
   const app = express();
@@ -34,7 +31,7 @@ require("dotenv").config({ path: ".env" });
   app.use(
     middleware(compiler, {
       publicPath: config.output.publicPath,
-      writeToDisk: true,
+      writeToDisk: true, // 웹팩에 지정된 대로 디스크의 구성된 위치에 파일을 쓰도록 모듈에 지시
     }),
   );
 
