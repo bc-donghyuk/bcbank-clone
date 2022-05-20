@@ -18,7 +18,7 @@ const entries = ["./src/index.js"];
 
 const output = {
   path: path.resolve("dist", "static"),
-  filename: "js/filename-[name]-[contenthash].js", // 번들 이름
+  filename: "js/[name]-[contenthash].js", // 번들 이름
   chunkFilename: "js/[name]-[chunkhash].js", // 청크 파일 이름
   publicPath: `${PUBLIC_PATH}/static/`, // 브라우저 리소스 경로
 };
