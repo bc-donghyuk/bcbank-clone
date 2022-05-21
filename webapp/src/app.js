@@ -19,7 +19,6 @@ import Services from "services";
 import { isLoggedIn } from "utils/auth";
 
 const App = () => {
-  console.log(process.env.NODE_ENV);
   if (smil) {
     return (
       <ErrorBoundary>
