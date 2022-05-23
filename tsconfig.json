@@ -18,5 +18,5 @@
     "skipLibCheck": true // d.ts 와 선언파일의 type 검사를 피한다.
   },
   "include": [".*.js"], // vscode에서 "configure excludes" 에러를 막기위함
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
