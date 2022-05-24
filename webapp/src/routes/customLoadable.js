@@ -1,5 +1,6 @@
 import React from "react";
 import loadable from "@loadable/component";
+
 import Fallback from "./Fallback";
 
 export default importFunc => {

@@ -12,6 +12,7 @@ import GlobalDrawer from "components/common/GlobalDrawer";
 
 import HaruQueriesClientProvider from "@core/queries/HaruQueriesClientProvider";
 import DebugObserver from "@core/recoil/DebugObserver";
+import { useFetchFeatureConfigSync } from "@core/hooks/featureConfig/useFetchFeatureConfigSync";
 import { routes, routeComponents } from "routes/routeConfig";
 import { DASHBOARD_URL, LOGIN_URL } from "URLConstant";
 import MuiTheme from "styles/theme";
@@ -20,6 +21,8 @@ import { isLoggedIn } from "utils/auth";
 
 const App = () => {
   if (smil) {
+    useFetchFeatureConfigSync();
+
     return (
       <ErrorBoundary>
         <ThemeProvider theme={MuiTheme}>

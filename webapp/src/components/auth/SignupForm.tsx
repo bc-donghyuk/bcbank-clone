@@ -199,7 +199,7 @@ const SignupForm: React.FC<Props> = () => {
     }
   };
 
-  const handleChangeUserType = (e: React.SyntheticEvent<Element, Event>, value: number): void => {
+  const handleUserTypeChange = (e: React.SyntheticEvent<Element, Event>, value: number): void => {
     setValue("userType", value);
   };
 
@@ -276,7 +276,7 @@ const SignupForm: React.FC<Props> = () => {
   return (
     <AuthLayout title={t("Create account")}>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <SignupTabs tabIndex={watch("userType")} tabItems={tabLabels} onChange={handleChangeUserType} />
+        <SignupTabs tabIndex={watch("userType")} tabItems={tabLabels} onChange={handleUserTypeChange} />
         <FormGroup>
           <FormControl>
             <Input

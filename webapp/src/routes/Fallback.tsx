@@ -8,6 +8,7 @@ const Fallback = () => {
       hideSpinner();
     };
   }, []);
+
   return null;
 };
 

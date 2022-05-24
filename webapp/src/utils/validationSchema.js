@@ -1,7 +1,7 @@
 import { emailErrorMessages, passwordErrorMessages } from "constants/errorMessage";
 import * as yup from "yup";
 
-export const EmailSchema = yup
+export const emailSchema = yup
   .string()
   .email(emailErrorMessages["string.email"])
   .matches(/^(?!.*@(daum.net|hanmail.net)$).*$/)

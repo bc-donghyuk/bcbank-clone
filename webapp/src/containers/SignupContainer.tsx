@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import SignupForm from "components/auth/SignupForm";
 import { BCBANK_USER__TYPE_PERSONAL } from "@core/constants/user";
-import { EmailSchema, passwordSchema } from "utils/validationSchema";
+import { emailSchema, passwordSchema } from "utils/validationSchema";
 import { passwordConfirmErrorMessages } from "constants/errorMessage";
 
 interface Props {}
@@ -19,7 +19,7 @@ interface signupFormMethodsState {
 }
 
 const signupFormSchema = yup.object({
-  email: EmailSchema,
+  email: emailSchema,
   password: passwordSchema,
   passwordConfirmation: yup
     .string()

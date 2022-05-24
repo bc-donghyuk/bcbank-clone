@@ -55,8 +55,6 @@ const LoginForm: React.FC = () => {
     if (!IS_STAGING_OR_PRODUCTION) {
       setValue("recapt", "");
       setValue("isHuman", true);
-      // TODO : remove temp setState
-      setValue("email", "localSignupTest_1_1@ruu.kr");
     }
   };
 

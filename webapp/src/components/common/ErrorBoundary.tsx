@@ -19,13 +19,15 @@ class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, info: any) {
     if (IS_DEV) {
       console.error(error);
+    } else {
+      // logService.error(error);
     }
-    // logService.error(error);
     this.setState({ hasError: true });
   }
 
   render() {
     const { hasError } = this.state;
+
     return <>{hasError ? <LoadError /> : <div>{this.props.children}</div>}</>;
   }
 }

@@ -7,6 +7,7 @@ const LoginContainer = customLoadable(() => import("containers/LoginContainer"))
 const SignupContainer = customLoadable(() => import("containers/SignupContainer"));
 const PasswordChangeContainer = customLoadable(() => import("containers/PasswordChangeContainer"));
 const DashboardContainer = customLoadable(() => import("containers/DashboardContainer"));
+
 interface IRoute {
   type: "public" | "private";
   path?: string;

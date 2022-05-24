@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 `;
 
 interface Props {
-  onChange: (token: string) => void;
+  onChange: any;
 }
 
 const Recaptcha: React.FC<Props> = ({ onChange }) => {
